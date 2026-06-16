@@ -114,7 +114,7 @@
  {
   "id": 15,
   "english": "idempotent",
-  "japanese": "冪等（何度実行しても結果が同じになる性質）",
+  "japanese": "何度実行しても結果が同じ（べき等）",
   "category": "API Docs",
   "example_en": "This operation is idempotent.",
   "example_ja": "この操作は冪等です。"
@@ -514,7 +514,7 @@
  {
   "id": 65,
   "english": "URL-encoded",
-  "japanese": "URL エンコードされた",
+  "japanese": "URL エンコードされた（記号を %xx 形式に変換した状態）",
   "category": "API Docs",
   "example_en": "The value must be URL-encoded.",
   "example_ja": "値は URL エンコードされている必要があります。"
@@ -738,7 +738,7 @@
  {
   "id": 93,
   "english": "the response contains",
-  "japanese": "レスポンスには〜が含まれる",
+  "japanese": "応答に〜が含まれる（レスポンスの中身）",
   "category": "API Docs",
   "example_en": "The response contains an access token.",
   "example_ja": "レスポンスにはアクセストークンが含まれます。"
@@ -794,7 +794,7 @@
  {
   "id": 100,
   "english": "the response body",
-  "japanese": "レスポンスボディ",
+  "japanese": "レスポンスボディ（応答の本体データ）",
   "category": "API Docs",
   "example_en": "Parse the response body as JSON.",
   "example_ja": "レスポンスボディを JSON として解析します。"
@@ -802,7 +802,7 @@
  {
   "id": 101,
   "english": "HTTP method",
-  "japanese": "HTTP メソッド",
+  "japanese": "HTTP メソッド（GET / POST など通信の種類）",
   "category": "API Docs",
   "example_en": "Each route maps to one HTTP method.",
   "example_ja": "各ルートは1つの HTTP メソッドに対応します。"
@@ -842,7 +842,7 @@
  {
   "id": 106,
   "english": "serialize",
-  "japanese": "シリアライズする（直列化）",
+  "japanese": "シリアライズする（オブジェクトを保存・送信できる形に変換すること）",
   "category": "API Docs",
   "example_en": "Serialize the object before sending it.",
   "example_ja": "送信前にオブジェクトをシリアライズします。"
@@ -850,7 +850,7 @@
  {
   "id": 107,
   "english": "deserialize",
-  "japanese": "デシリアライズする",
+  "japanese": "デシリアライズする（データを元のオブジェクトに戻すこと）",
   "category": "API Docs",
   "example_en": "Deserialize the response into a struct.",
   "example_ja": "レスポンスを構造体にデシリアライズします。"
@@ -970,7 +970,7 @@
  {
   "id": 122,
   "english": "list endpoint",
-  "japanese": "一覧取得エンドポイント",
+  "japanese": "一覧取得エンドポイント（複数件をまとめて取得する API）",
   "category": "API Docs",
   "example_en": "The list endpoint supports pagination.",
   "example_ja": "一覧取得エンドポイントはページネーションに対応します。"
@@ -978,7 +978,7 @@
  {
   "id": 123,
   "english": "create endpoint",
-  "japanese": "作成エンドポイント",
+  "japanese": "作成エンドポイント（新規作成する API）",
   "category": "API Docs",
   "example_en": "The create endpoint returns a 201.",
   "example_ja": "作成エンドポイントは 201 を返します。"
@@ -986,7 +986,7 @@
  {
   "id": 124,
   "english": "delete endpoint",
-  "japanese": "削除エンドポイント",
+  "japanese": "削除エンドポイント（削除する API）",
   "category": "API Docs",
   "example_en": "The delete endpoint returns a 204.",
   "example_ja": "削除エンドポイントは 204 を返します。"
@@ -1050,7 +1050,7 @@
  {
   "id": 132,
   "english": "rate limit window",
-  "japanese": "レート制限の時間枠",
+  "japanese": "レート制限の時間枠（回数を数える一定の時間）",
   "category": "API Docs",
   "example_en": "The rate limit window is 60 seconds.",
   "example_ja": "レート制限の時間枠は60秒です。"
@@ -1066,7 +1066,7 @@
  {
   "id": 134,
   "english": "idempotency key",
-  "japanese": "冪等キー（再送しても二重処理を防ぐための識別子）",
+  "japanese": "べき等キー（再送しても二重に処理されないようにする識別子）",
   "category": "API Docs",
   "example_en": "Pass an idempotency key to avoid duplicates.",
   "example_ja": "重複を避けるには冪等キーを渡します。"
@@ -1146,7 +1146,7 @@
  {
   "id": 144,
   "english": "supported locales",
-  "japanese": "対応ロケール",
+  "japanese": "対応ロケール（対応する言語・地域の設定）",
   "category": "API Docs",
   "example_en": "See the list of supported locales.",
   "example_ja": "対応ロケールの一覧を参照してください。"
@@ -1154,7 +1154,7 @@
  {
   "id": 145,
   "english": "localized",
-  "japanese": "ローカライズされた",
+  "japanese": "ローカライズされた（言語・地域に合わせて変換された）",
   "category": "API Docs",
   "example_en": "The message is localized by the Accept-Language header.",
   "example_ja": "メッセージは Accept-Language ヘッダーでローカライズされます。"
@@ -1170,7 +1170,7 @@
  {
   "id": 147,
   "english": "server-side",
-  "japanese": "サーバー側",
+  "japanese": "サーバー側（処理がサーバーで行われること）",
   "category": "API Docs",
   "example_en": "Validation happens server-side.",
   "example_ja": "バリデーションはサーバー側で行われます。"
@@ -1178,7 +1178,7 @@
  {
   "id": 148,
   "english": "client-side",
-  "japanese": "クライアント側",
+  "japanese": "クライアント側（処理が利用者の端末で行われること）",
   "category": "API Docs",
   "example_en": "Do not rely on client-side checks alone.",
   "example_ja": "クライアント側のチェックだけに頼らないでください。"
@@ -1186,7 +1186,7 @@
  {
   "id": 149,
   "english": "rate of requests",
-  "japanese": "リクエストの頻度",
+  "japanese": "リクエストの頻度（一定時間あたりの送信回数）",
   "category": "API Docs",
   "example_en": "Reduce the rate of requests to avoid throttling.",
   "example_ja": "スロットリングを避けるためリクエストの頻度を下げます。"
@@ -1218,7 +1218,7 @@
  {
   "id": 153,
   "english": "rotate the key",
-  "japanese": "鍵をローテーションする",
+  "japanese": "鍵をローテーション（鍵を定期的に新しく入れ替えること）",
   "category": "API Docs",
   "example_en": "Rotate the key periodically.",
   "example_ja": "鍵は定期的にローテーションしてください。"
@@ -1258,7 +1258,7 @@
  {
   "id": 158,
   "english": "comma-separated",
-  "japanese": "カンマ区切り",
+  "japanese": "カンマ区切り（, で区切って並べる形式）",
   "category": "API Docs",
   "example_en": "Pass a comma-separated list of ids.",
   "example_ja": "id をカンマ区切りのリストで渡します。"
@@ -1370,7 +1370,7 @@
  {
   "id": 172,
   "english": "concurrent requests",
-  "japanese": "並行リクエスト",
+  "japanese": "並行リクエスト（同時に送られる複数のリクエスト）",
   "category": "API Docs",
   "example_en": "Concurrent requests may be limited.",
   "example_ja": "並行リクエストは制限される場合があります。"
@@ -1394,7 +1394,7 @@
  {
   "id": 175,
   "english": "cache invalidation",
-  "japanese": "キャッシュ無効化",
+  "japanese": "キャッシュ無効化（古いキャッシュを破棄して作り直すこと）",
   "category": "API Docs",
   "example_en": "Updates trigger cache invalidation.",
   "example_ja": "更新によりキャッシュ無効化が起こります。"
@@ -1402,7 +1402,7 @@
  {
   "id": 176,
   "english": "stale data",
-  "japanese": "古いデータ",
+  "japanese": "古いデータ（更新前の、最新でないデータ）",
   "category": "API Docs",
   "example_en": "You may receive stale data briefly.",
   "example_ja": "一時的に古いデータが返ることがあります。"
@@ -1426,7 +1426,7 @@
  {
   "id": 179,
   "english": "conditional request",
-  "japanese": "条件付きリクエスト",
+  "japanese": "条件付きリクエスト（前回から変化があるときだけ取得する要求）",
   "category": "API Docs",
   "example_en": "Use a conditional request to save bandwidth.",
   "example_ja": "帯域を節約するには条件付きリクエストを使います。"
@@ -1474,7 +1474,7 @@
  {
   "id": 185,
   "english": "wrapper",
-  "japanese": "ラッパー",
+  "japanese": "ラッパー（別の機能を包んで使いやすくしたもの）",
   "category": "API Docs",
   "example_en": "The library is a thin wrapper over the REST API.",
   "example_ja": "このライブラリは REST API の薄いラッパーです。"
@@ -1482,7 +1482,7 @@
  {
   "id": 186,
   "english": "code sample",
-  "japanese": "コードサンプル",
+  "japanese": "コードサンプル（実際に動くコード例）",
   "category": "API Docs",
   "example_en": "See the code sample in your language.",
   "example_ja": "お使いの言語のコードサンプルを参照してください。"
@@ -1490,7 +1490,7 @@
  {
   "id": 187,
   "english": "quickstart",
-  "japanese": "クイックスタート",
+  "japanese": "クイックスタート（最短で始めるための手引き）",
   "category": "API Docs",
   "example_en": "Follow the quickstart to make your first call.",
   "example_ja": "クイックスタートに沿って最初の呼び出しを行います。"
@@ -1530,7 +1530,7 @@
  {
   "id": 192,
   "english": "troubleshooting",
-  "japanese": "トラブルシューティング",
+  "japanese": "トラブルシューティング（不具合の対処法）",
   "category": "API Docs",
   "example_en": "Check the troubleshooting guide.",
   "example_ja": "トラブルシューティングガイドを確認してください。"
@@ -1578,7 +1578,7 @@
  {
   "id": 198,
   "english": "sunset",
-  "japanese": "提供終了（サンセット）",
+  "japanese": "提供終了",
   "category": "API Docs",
   "example_en": "The legacy API has a sunset date.",
   "example_ja": "旧 API には提供終了日があります。"
@@ -1594,7 +1594,7 @@
  {
   "id": 200,
   "english": "release notes",
-  "japanese": "リリースノート",
+  "japanese": "リリースノート（更新内容をまとめた文書）",
   "category": "API Docs",
   "example_en": "Read the release notes for v2.1.",
   "example_ja": "v2.1 のリリースノートを読んでください。"
@@ -1602,7 +1602,7 @@
  {
   "id": 201,
   "english": "rate limit headers",
-  "japanese": "レート制限ヘッダー",
+  "japanese": "レート制限ヘッダー（残り回数などを伝える応答情報）",
   "category": "API Docs",
   "example_en": "Inspect the rate limit headers to pace requests.",
   "example_ja": "リクエスト頻度を調整するためレート制限ヘッダーを確認します。"
@@ -1898,7 +1898,7 @@
  {
   "id": 238,
   "english": "gateway timeout",
-  "japanese": "ゲートウェイタイムアウト",
+  "japanese": "ゲートウェイタイムアウト（中継サーバーが応答待ちで時間切れ）",
   "category": "Error Messages",
   "example_en": "504 Gateway Timeout.",
   "example_ja": "504 ゲートウェイタイムアウト。"
@@ -1914,7 +1914,7 @@
  {
   "id": 240,
   "english": "broken pipe",
-  "japanese": "パイプが壊れた",
+  "japanese": "パイプが壊れた（送信先が切れて書き込めない状態）",
   "category": "Error Messages",
   "example_en": "write: broken pipe.",
   "example_ja": "write: パイプが壊れています。"
@@ -1922,7 +1922,7 @@
  {
   "id": 241,
   "english": "host unreachable",
-  "japanese": "ホストに到達できない",
+  "japanese": "ホストに到達できない（相手のサーバーに繋がらない）",
   "category": "Error Messages",
   "example_en": "No route to host: host unreachable.",
   "example_ja": "ホストへの経路がありません: 到達不能。"
@@ -1946,7 +1946,7 @@
  {
   "id": 244,
   "english": "handshake failed",
-  "japanese": "ハンドシェイク失敗",
+  "japanese": "ハンドシェイク失敗（通信開始時の取り決めに失敗）",
   "category": "Error Messages",
   "example_en": "TLS handshake failed.",
   "example_ja": "TLS ハンドシェイクに失敗しました。"
@@ -2738,7 +2738,7 @@
  {
   "id": 343,
   "english": "gateway error",
-  "japanese": "ゲートウェイエラー",
+  "japanese": "ゲートウェイエラー（中継サーバーでの不正な応答）",
   "category": "Error Messages",
   "example_en": "502 Bad Gateway.",
   "example_ja": "502 不正なゲートウェイ。"

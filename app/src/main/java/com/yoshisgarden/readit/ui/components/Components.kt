@@ -183,11 +183,23 @@ fun StatPill(value: String, label: String, modifier: Modifier = Modifier) {
     }
 }
 
-/** Returns the term part of "用語（意味）", or the whole string if no parenthetical. */
-fun termOnly(japanese: String): String {
-    val i = japanese.indexOf('（')
-    return if (i >= 0) japanese.substring(0, i).trim() else japanese
+/**
+ * Splits "用語（意味）残り" into term ("用語残り") and meaning ("意味").
+ * Handles the parenthetical anywhere in the string, so no stray "）" is left behind.
+ * Returns (text, "") when there is no "（…）".
+ */
+fun splitMeaning(text: String): Pair<String, String> {
+    val open = text.indexOf('（')
+    if (open < 0) return text to ""
+    val close = text.indexOf('）', open + 1)
+    if (close < 0) return text to ""
+    val term = (text.substring(0, open) + text.substring(close + 1)).trim()
+    val meaning = text.substring(open + 1, close).trim()
+    return term to meaning
 }
+
+/** Returns the term part of "用語（意味）", or the whole string if no parenthetical. */
+fun termOnly(japanese: String): String = splitMeaning(japanese).first
 
 /**
  * Japanese text that may carry a "（meaning）" note. When it does, only the term is
@@ -200,13 +212,11 @@ fun JapaneseMeaning(
     style: TextStyle,
     color: Color = Color.Unspecified,
 ) {
-    val idx = text.indexOf('（')
-    if (idx < 0) {
+    val (term, meaning) = splitMeaning(text)
+    if (meaning.isEmpty()) {
         Text(text, style = style, color = color)
         return
     }
-    val term = text.substring(0, idx)
-    val meaning = text.substring(idx).trim('（', '）')
     var show by remember(text) { mutableStateOf(false) }
 
     // Inline reveal (no floating Popup, so it never intercepts other taps such as
