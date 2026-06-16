@@ -28,6 +28,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
+import com.yoshisgarden.readit.ui.components.JapaneseMeaning
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -85,7 +86,7 @@ fun PhraseDetailScreen(
                 color = MaterialTheme.colorScheme.primary,
             )
             Spacer(Modifier.height(4.dp))
-            Text(p.japanese, style = MaterialTheme.typography.titleMedium)
+            JapaneseMeaning(p.japanese, MaterialTheme.typography.titleMedium)
 
             Spacer(Modifier.height(20.dp))
             Text("例文", style = MaterialTheme.typography.titleMedium)
