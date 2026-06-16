@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.horizontalScroll
@@ -18,9 +19,9 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -44,26 +45,25 @@ fun DictionaryScreen(
 
     Column(Modifier.fillMaxSize().padding(horizontal = 16.dp)) {
         Spacer(Modifier.height(8.dp))
-        OutlinedTextField(
-            value = filter.query,
-            onValueChange = vm::setQuery,
-            modifier = Modifier.fillMaxWidth(),
-            singleLine = true,
-            leadingIcon = { Icon(Icons.Filled.Search, null) },
-            trailingIcon = {
-                if (filter.query.isNotEmpty()) {
-                    TextButton(onClick = {
-                        vm.setQuery("")
-                        keyboard?.hide()
-                    }) {
-                        Text("CLR")
-                    }
-                }
-            },
-            placeholder = { Text("英語・日本語・例文で検索") },
-            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-            keyboardActions = KeyboardActions(onSearch = { keyboard?.hide() }),
-        )
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            OutlinedTextField(
+                value = filter.query,
+                onValueChange = vm::setQuery,
+                modifier = Modifier.weight(1f),
+                singleLine = true,
+                leadingIcon = { Icon(Icons.Filled.Search, null) },
+                placeholder = { Text("英語・日本語・例文で検索") },
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+                keyboardActions = KeyboardActions(onSearch = { keyboard?.hide() }),
+            )
+            Spacer(Modifier.width(8.dp))
+            OutlinedButton(onClick = {
+                vm.setQuery("")
+                keyboard?.hide()
+            }) {
+                Text("CLR")
+            }
+        }
         Spacer(Modifier.height(10.dp))
         Row(Modifier.horizontalScroll(rememberScrollState())) {
             CategoryFilterChip(

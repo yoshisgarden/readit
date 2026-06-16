@@ -14,7 +14,7 @@ enum class AppTheme(val id: String, val displayName: String, val tagline: String
     SAKURA("sakura", "さくらパステル", "やさしいピンク × ラベンダー"),
     MINT("mint", "ミントパステル", "さわやかなミント × アクア"),
     CHARCOAL("charcoal", "シック", "落ち着いたスレート × ベージュ"),
-    INDIGO("indigo", "クール", "かっこいいインディゴ × シアン");
+    INDIGO("indigo", "クール", "インディゴ × シアン");
 
     companion object {
         fun fromId(id: String?): AppTheme = entries.firstOrNull { it.id == id } ?: SAKURA
