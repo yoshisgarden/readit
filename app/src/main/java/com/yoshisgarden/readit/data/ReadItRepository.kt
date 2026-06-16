@@ -4,6 +4,7 @@ import android.content.Context
 import com.yoshisgarden.readit.srs.Sm2
 import com.yoshisgarden.readit.srs.Sm2Rating
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import java.time.LocalDate
 import java.time.ZoneId
 import java.time.temporal.ChronoUnit
@@ -92,6 +93,10 @@ class ReadItRepository(
 
     // ---- flashcards / SRS -------------------------------------------------
     fun dueCount(): Flow<Int> = flashcardDao.observeDueCount(System.currentTimeMillis())
+
+    /** Cards to study today (due + new), capped at a daily session size. */
+    fun studyableCount(limit: Int = 20): Flow<Int> =
+        flashcardDao.observeStudyableCount(System.currentTimeMillis()).map { it.coerceAtMost(limit) }
     fun studiedCount(): Flow<Int> = flashcardDao.observeStudiedCount()
 
     /** Returns due cards' phrases, topping up with new phrases when few are due. */
@@ -117,6 +122,8 @@ class ReadItRepository(
 
     // ---- quiz -------------------------------------------------------------
     suspend fun quizPhrases(n: Int): List<Phrase> = phraseDao.randomPhrases(n)
+    suspend fun quizPhrasesByCategories(categories: List<String>, n: Int): List<Phrase> =
+        phraseDao.randomByCategories(categories, n)
     fun recentQuizzes(limit: Int = 20): Flow<List<QuizResult>> = quizDao.recent(limit)
 
     suspend fun saveQuizResult(mode: String, score: Int, total: Int, weak: List<Long>) {

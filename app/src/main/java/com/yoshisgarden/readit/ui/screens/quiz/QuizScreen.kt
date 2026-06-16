@@ -60,8 +60,8 @@ fun QuizScreen(
 
 private fun questionLabel(mode: QuizMode): String = when (mode) {
     QuizMode.FILL_BLANK -> "空欄に入るフレーズは？"
-    QuizMode.ERROR_ANALYSIS -> "このエラーの意味は？"
-    QuizMode.DOC_READING -> "この英文の意味は？"
+    QuizMode.ERROR_ANALYSIS -> "このエラー・コマンドの意味は？"
+    QuizMode.DOC_READING -> "この英語表現の意味は？"
 }
 
 @Composable

@@ -27,7 +27,7 @@ class HomeViewModel(private val repo: ReadItRepository) : ViewModel() {
     val state: StateFlow<HomeUiState> =
         combine(
             repo.progress(),
-            repo.dueCount(),
+            repo.studyableCount(),
             repo.recentLogs(1),
             repo.allPhrases(),
         ) { progress, due, logs, phrases ->

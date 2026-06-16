@@ -11,9 +11,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 enum class QuizMode(val id: String, val title: String, val description: String) {
-    FILL_BLANK("fill_blank", "穴埋め", "メッセージ文の空欄に入るフレーズを選ぶ"),
-    ERROR_ANALYSIS("error_analysis", "エラー解析", "このエラーの意味は？を3択で"),
-    DOC_READING("doc_reading", "読解", "短い英文の意味を選ぶ"),
+    FILL_BLANK("fill_blank", "穴埋め", "英文の空欄に入るフレーズを選ぶ"),
+    ERROR_ANALYSIS("error_analysis", "エラー・コマンド解析", "エラーやコマンドの意味を3択で選ぶ"),
+    DOC_READING("doc_reading", "読解", "短い英語表現の意味を選ぶ"),
 }
 
 data class QuizQuestion(
@@ -48,16 +48,21 @@ class QuizViewModel(private val repo: ReadItRepository) : ViewModel() {
         viewModelScope.launch {
             val pool = when (mode) {
                 QuizMode.ERROR_ANALYSIS ->
-                    repo.phrasesByCategory(Categories.ERROR_MESSAGES).let { repo.quizPhrases(40) }
+                    repo.quizPhrasesByCategories(
+                        listOf(Categories.ERROR_MESSAGES, Categories.CLI_TERMINAL), 40,
+                    )
                 else -> repo.quizPhrases(40)
             }
-            val distractPool = repo.quizPhrases(40)
+            val distractPool = repo.quizPhrases(200)
             val questions = pool.shuffled().take(count).map { buildQuestion(mode, it, distractPool) }
             _state.value = QuizUiState(mode = mode, questions = questions)
         }
     }
 
     private fun buildQuestion(mode: QuizMode, p: Phrase, pool: List<Phrase>): QuizQuestion {
+        // Draw distractors from the same category so options aren't obviously wrong.
+        val sameCat = pool.filter { it.category == p.category && it.id != p.id }
+        val distractSource = sameCat.ifEmpty { pool.filter { it.id != p.id } }
         return when (mode) {
             QuizMode.FILL_BLANK -> {
                 val contains = p.exampleEn.contains(p.english, ignoreCase = true)
@@ -66,7 +71,10 @@ class QuizViewModel(private val repo: ReadItRepository) : ViewModel() {
                 } else {
                     "______ — ${p.exampleJa}"
                 }
-                val opts = optionsFrom(p.english, pool.map { it.english })
+                // Capitalize options when the blank sits at the start of the sentence.
+                val atStart = contains &&
+                    p.exampleEn.trimStart().startsWith(p.english, ignoreCase = true)
+                val opts = optionsFrom(p.english, distractSource.map { it.english }, capitalize = atStart)
                 QuizQuestion(
                     phraseId = p.id,
                     prompt = blanked,
@@ -79,7 +87,7 @@ class QuizViewModel(private val repo: ReadItRepository) : ViewModel() {
                 )
             }
             QuizMode.ERROR_ANALYSIS, QuizMode.DOC_READING -> {
-                val opts = optionsFrom(p.japanese, pool.map { it.japanese })
+                val opts = optionsFrom(p.japanese, distractSource.map { it.japanese })
                 QuizQuestion(
                     phraseId = p.id,
                     prompt = if (mode == QuizMode.ERROR_ANALYSIS) p.exampleEn else p.english,
@@ -92,11 +100,21 @@ class QuizViewModel(private val repo: ReadItRepository) : ViewModel() {
         }
     }
 
-    /** Builds a 4-option list including [correct] and returns (options, correctIndex). */
-    private fun optionsFrom(correct: String, others: List<String>): Pair<List<String>, Int> {
+    /** Builds a 3-option list including [correct] and returns (options, correctIndex). */
+    private fun optionsFrom(
+        correct: String,
+        others: List<String>,
+        capitalize: Boolean = false,
+    ): Pair<List<String>, Int> {
         val distractors = others.filter { it != correct }.distinct().shuffled().take(2)
         val all = (distractors + correct).shuffled()
-        return all to all.indexOf(correct)
+        val idx = all.indexOf(correct)
+        val display = if (capitalize) {
+            all.map { it.replaceFirstChar { c -> c.uppercase() } }
+        } else {
+            all
+        }
+        return display to idx
     }
 
     fun select(i: Int) {

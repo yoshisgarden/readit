@@ -57,6 +57,10 @@ fun FlashcardScreen(
     }
 }
 
+/** Put a "（meaning）" parenthetical on its own line so long cards read clearly. */
+private fun breakBeforeParen(s: String): String =
+    s.replace("（", "\n（").trimStart('\n')
+
 @Composable
 private fun CardView(s: FlashcardUiState, vm: FlashcardViewModel) {
     val card = s.cards[s.index]
@@ -64,9 +68,9 @@ private fun CardView(s: FlashcardUiState, vm: FlashcardViewModel) {
     val front: String
     val back: String
     if (s.direction == CardDirection.EN_TO_JA) {
-        front = card.english; back = card.japanese
+        front = breakBeforeParen(card.english); back = breakBeforeParen(card.japanese)
     } else {
-        front = card.japanese; back = card.english
+        front = breakBeforeParen(card.japanese); back = breakBeforeParen(card.english)
     }
 
     Column(Modifier.fillMaxSize().padding(20.dp)) {
@@ -137,32 +141,37 @@ private fun CardView(s: FlashcardUiState, vm: FlashcardViewModel) {
         }
 
         Spacer(Modifier.height(12.dp))
-        if (!s.flipped) {
-            Text(
-                "カードをタップして答えを表示",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.outline,
-                modifier = Modifier.fillMaxWidth(),
-                textAlign = TextAlign.Center,
-            )
-            Spacer(Modifier.height(16.dp))
-        } else {
-            Row(
-                Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-            ) {
-                RateButton("知らない", MaterialTheme.colorScheme.error, Modifier.weight(1f)) {
-                    vm.rate(Sm2Rating.UNKNOWN)
-                }
-                RateButton("うっすら", MaterialTheme.colorScheme.tertiary, Modifier.weight(1f)) {
-                    vm.rate(Sm2Rating.VAGUE)
-                }
-                RateButton("知ってる", MaterialTheme.colorScheme.primary, Modifier.weight(1f)) {
-                    vm.rate(Sm2Rating.KNOWN)
+        // Fixed-height area so flipping (hint <-> rate buttons) never shifts the card.
+        Box(
+            modifier = Modifier.fillMaxWidth().height(56.dp),
+            contentAlignment = Alignment.Center,
+        ) {
+            if (!s.flipped) {
+                Text(
+                    "カードをタップして答えを表示",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.outline,
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center,
+                )
+            } else {
+                Row(
+                    Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    RateButton("知らない", MaterialTheme.colorScheme.error, Modifier.weight(1f)) {
+                        vm.rate(Sm2Rating.UNKNOWN)
+                    }
+                    RateButton("うっすら", MaterialTheme.colorScheme.tertiary, Modifier.weight(1f)) {
+                        vm.rate(Sm2Rating.VAGUE)
+                    }
+                    RateButton("知ってる", MaterialTheme.colorScheme.primary, Modifier.weight(1f)) {
+                        vm.rate(Sm2Rating.KNOWN)
+                    }
                 }
             }
-            Spacer(Modifier.height(8.dp))
         }
+        Spacer(Modifier.height(8.dp))
     }
 }
 

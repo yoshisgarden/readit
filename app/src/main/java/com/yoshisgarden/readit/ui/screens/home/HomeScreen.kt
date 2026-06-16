@@ -103,12 +103,13 @@ fun HomeScreen(
                 Spacer(Modifier.height(0.dp))
                 Column(Modifier.weight(1f).padding(start = 14.dp)) {
                     Text(
-                        "今日の復習: ${s.dueCount} 枚",
+                        if (s.dueCount > 0) "今日の学習: ${s.dueCount} 枚" else "今日のカードは完了！🎉",
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.onSecondaryContainer,
                     )
                     Text(
-                        "単語帳をめくって記憶を定着させよう",
+                        if (s.dueCount > 0) "復習＋新しいカードをめくって記憶を定着させよう"
+                        else "また明日、復習カードが届きます",
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSecondaryContainer,
                     )

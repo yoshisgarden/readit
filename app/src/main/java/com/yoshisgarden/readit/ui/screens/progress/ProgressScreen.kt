@@ -89,10 +89,18 @@ private fun BarChart(logs: List<StudyLog>) {
             )
             return@Card
         }
+        Column {
+        // Scale label: bars are normalized to the largest value (adaptive scale).
+        Text(
+            "上限 ${max} 分（最大値に合わせて自動調整）",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.outline,
+            modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 12.dp),
+        )
         Row(
-            Modifier.fillMaxWidth().height(160.dp).padding(16.dp),
+            Modifier.fillMaxWidth().height(180.dp).padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
             verticalAlignment = Alignment.Bottom,
-            horizontalArrangement = Arrangement.spacedBy(6.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             logs.takeLast(14).forEach { log ->
                 val frac = log.durationMin.toFloat() / max
@@ -101,9 +109,17 @@ private fun BarChart(logs: List<StudyLog>) {
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Bottom,
                 ) {
+                    // minutes value above the bar
+                    Text(
+                        "${log.durationMin}",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                    Spacer(Modifier.height(2.dp))
+                    // fixed-width bar so a single day doesn't fill the whole card
                     Box(
                         Modifier
-                            .fillMaxWidth()
+                            .width(20.dp)
                             .height((120 * frac).dp.coerceAtLeast(4.dp))
                             .clip(RoundedCornerShape(6.dp))
                             .background(MaterialTheme.colorScheme.primary),
@@ -116,6 +132,7 @@ private fun BarChart(logs: List<StudyLog>) {
                     )
                 }
             }
+        }
         }
     }
 }

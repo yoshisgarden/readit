@@ -5402,7 +5402,7 @@
  {
   "id": 676,
   "english": "please rebase",
-  "japanese": "リベースしてください",
+  "japanese": "リベースしてください（自分の変更を、最新の取り込み先の上に積み直してください）",
   "category": "PR Review",
   "example_en": "Please rebase; there are conflicts.",
   "example_ja": "競合があるのでリベースしてください。"
@@ -7562,7 +7562,7 @@
  {
   "id": 946,
   "english": "Accomplishing",
-  "japanese": "成し遂げ中（処理を進めている）",
+  "japanese": "仕上げ中（あと少しで完了）",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Accomplishing…\" while it works.",
   "example_ja": "Claude Code は作業中に「Accomplishing…」と表示します。"
@@ -7570,7 +7570,7 @@
  {
   "id": 947,
   "english": "Actualizing",
-  "japanese": "具現化中（形にして実現させている）",
+  "japanese": "形にしている（実現させている）",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Actualizing…\" while it works.",
   "example_ja": "Claude Code は作業中に「Actualizing…」と表示します。"
@@ -7578,7 +7578,7 @@
  {
   "id": 948,
   "english": "Forming",
-  "japanese": "形にしている（組み立て中）",
+  "japanese": "組み立て中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Forming…\" while it works.",
   "example_ja": "Claude Code は作業中に「Forming…」と表示します。"
@@ -7586,7 +7586,7 @@
  {
   "id": 949,
   "english": "Brewing",
-  "japanese": "仕込み中（じっくり準備している）",
+  "japanese": "じっくり準備中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Brewing…\" while it works.",
   "example_ja": "Claude Code は作業中に「Brewing…」と表示します。"
@@ -7594,7 +7594,7 @@
  {
   "id": 950,
   "english": "Baking",
-  "japanese": "焼き上げ中（作っている）",
+  "japanese": "作成中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Baking…\" while it works.",
   "example_ja": "Claude Code は作業中に「Baking…」と表示します。"
@@ -7602,7 +7602,7 @@
  {
   "id": 951,
   "english": "Cooking",
-  "japanese": "調理中（作成している）",
+  "japanese": "作成中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Cooking…\" while it works.",
   "example_ja": "Claude Code は作業中に「Cooking…」と表示します。"
@@ -7610,7 +7610,7 @@
  {
   "id": 952,
   "english": "Crafting",
-  "japanese": "丹念に作成中",
+  "japanese": "丁寧に作成中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Crafting…\" while it works.",
   "example_ja": "Claude Code は作業中に「Crafting…」と表示します。"
@@ -7618,7 +7618,7 @@
  {
   "id": 953,
   "english": "Concocting",
-  "japanese": "練り上げ中（あれこれ調合している）",
+  "japanese": "練り上げ中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Concocting…\" while it works.",
   "example_ja": "Claude Code は作業中に「Concocting…」と表示します。"
@@ -7626,7 +7626,7 @@
  {
   "id": 954,
   "english": "Conjuring",
-  "japanese": "呼び出し中（魔法のように生み出している）",
+  "japanese": "生成中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Conjuring…\" while it works.",
   "example_ja": "Claude Code は作業中に「Conjuring…」と表示します。"
@@ -7634,7 +7634,7 @@
  {
   "id": 955,
   "english": "Crunching",
-  "japanese": "データを処理中（計算をこなしている）",
+  "japanese": "データを計算中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Crunching…\" while it works.",
   "example_ja": "Claude Code は作業中に「Crunching…」と表示します。"
@@ -7658,7 +7658,7 @@
  {
   "id": 958,
   "english": "Cogitating",
-  "japanese": "熟考中（じっくり考えている）",
+  "japanese": "じっくり思考中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Cogitating…\" while it works.",
   "example_ja": "Claude Code は作業中に「Cogitating…」と表示します。"
@@ -7666,7 +7666,7 @@
  {
   "id": 959,
   "english": "Deliberating",
-  "japanese": "検討中（よく考えている）",
+  "japanese": "検討中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Deliberating…\" while it works.",
   "example_ja": "Claude Code は作業中に「Deliberating…」と表示します。"
@@ -7674,7 +7674,7 @@
  {
   "id": 960,
   "english": "Determining",
-  "japanese": "判断中（見極めている）",
+  "japanese": "見極め中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Determining…\" while it works.",
   "example_ja": "Claude Code は作業中に「Determining…」と表示します。"
@@ -7682,7 +7682,7 @@
  {
   "id": 961,
   "english": "Distilling",
-  "japanese": "要点を抽出中（煮詰めている）",
+  "japanese": "要点を抽出中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Distilling…\" while it works.",
   "example_ja": "Claude Code は作業中に「Distilling…」と表示します。"
@@ -7690,7 +7690,7 @@
  {
   "id": 962,
   "english": "Envisioning",
-  "japanese": "思い描いている（構想中）",
+  "japanese": "構想中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Envisioning…\" while it works.",
   "example_ja": "Claude Code は作業中に「Envisioning…」と表示します。"
@@ -7698,7 +7698,7 @@
  {
   "id": 963,
   "english": "Forging",
-  "japanese": "鍛え上げ中（作り込んでいる）",
+  "japanese": "作り込み中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Forging…\" while it works.",
   "example_ja": "Claude Code は作業中に「Forging…」と表示します。"
@@ -7714,7 +7714,7 @@
  {
   "id": 965,
   "english": "Hatching",
-  "japanese": "生み出し中（孵化させている）",
+  "japanese": "生み出し中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Hatching…\" while it works.",
   "example_ja": "Claude Code は作業中に「Hatching…」と表示します。"
@@ -7722,7 +7722,7 @@
  {
   "id": 966,
   "english": "Ideating",
-  "japanese": "アイデアを練り中",
+  "japanese": "発想を練り中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Ideating…\" while it works.",
   "example_ja": "Claude Code は作業中に「Ideating…」と表示します。"
@@ -7730,7 +7730,7 @@
  {
   "id": 967,
   "english": "Incubating",
-  "japanese": "温め中（育てている）",
+  "japanese": "アイデアを温め中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Incubating…\" while it works.",
   "example_ja": "Claude Code は作業中に「Incubating…」と表示します。"
@@ -7738,7 +7738,7 @@
  {
   "id": 968,
   "english": "Inferring",
-  "japanese": "推論中（推し量っている）",
+  "japanese": "推論中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Inferring…\" while it works.",
   "example_ja": "Claude Code は作業中に「Inferring…」と表示します。"
@@ -7746,7 +7746,7 @@
  {
   "id": 969,
   "english": "Manifesting",
-  "japanese": "具現化中（実体化させている）",
+  "japanese": "形にしている",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Manifesting…\" while it works.",
   "example_ja": "Claude Code は作業中に「Manifesting…」と表示します。"
@@ -7754,7 +7754,7 @@
  {
   "id": 970,
   "english": "Marinating",
-  "japanese": "寝かせ中（じっくり熟成させている）",
+  "japanese": "寝かせて熟考中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Marinating…\" while it works.",
   "example_ja": "Claude Code は作業中に「Marinating…」と表示します。"
@@ -7762,7 +7762,7 @@
  {
   "id": 971,
   "english": "Mulling",
-  "japanese": "じっくり考え中（思いを巡らせている）",
+  "japanese": "思いを巡らせ中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Mulling…\" while it works.",
   "example_ja": "Claude Code は作業中に「Mulling…」と表示します。"
@@ -7770,7 +7770,7 @@
  {
   "id": 972,
   "english": "Musing",
-  "japanese": "思案中（あれこれ考えている）",
+  "japanese": "思案中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Musing…\" while it works.",
   "example_ja": "Claude Code は作業中に「Musing…」と表示します。"
@@ -7778,7 +7778,7 @@
  {
   "id": 973,
   "english": "Noodling",
-  "japanese": "あれこれ試行中（気ままに考えている）",
+  "japanese": "あれこれ模索中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Noodling…\" while it works.",
   "example_ja": "Claude Code は作業中に「Noodling…」と表示します。"
@@ -7786,7 +7786,7 @@
  {
   "id": 974,
   "english": "Percolating",
-  "japanese": "じわじわ考え中（浸透させている）",
+  "japanese": "考えを巡らせ中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Percolating…\" while it works.",
   "example_ja": "Claude Code は作業中に「Percolating…」と表示します。"
@@ -7794,7 +7794,7 @@
  {
   "id": 975,
   "english": "Pondering",
-  "japanese": "熟考中（深く考えている）",
+  "japanese": "熟考中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Pondering…\" while it works.",
   "example_ja": "Claude Code は作業中に「Pondering…」と表示します。"
@@ -7810,7 +7810,7 @@
  {
   "id": 977,
   "english": "Puzzling",
-  "japanese": "頭をひねって考え中",
+  "japanese": "解き方を思案中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Puzzling…\" while it works.",
   "example_ja": "Claude Code は作業中に「Puzzling…」と表示します。"
@@ -7818,7 +7818,7 @@
  {
   "id": 978,
   "english": "Reticulating",
-  "japanese": "組み上げ中（細かくつなぎ合わせている）",
+  "japanese": "つなぎ合わせ中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Reticulating…\" while it works.",
   "example_ja": "Claude Code は作業中に「Reticulating…」と表示します。"
@@ -7826,7 +7826,7 @@
  {
   "id": 979,
   "english": "Ruminating",
-  "japanese": "反芻して考え中（何度も考え直している）",
+  "japanese": "じっくり考え中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Ruminating…\" while it works.",
   "example_ja": "Claude Code は作業中に「Ruminating…」と表示します。"
@@ -7834,7 +7834,7 @@
  {
   "id": 980,
   "english": "Simmering",
-  "japanese": "コトコト処理中（じっくり進めている）",
+  "japanese": "じっくり進行中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Simmering…\" while it works.",
   "example_ja": "Claude Code は作業中に「Simmering…」と表示します。"
@@ -7842,7 +7842,7 @@
  {
   "id": 981,
   "english": "Spinning",
-  "japanese": "ぐるぐる処理中（回して進めている）",
+  "japanese": "鋭意処理中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Spinning…\" while it works.",
   "example_ja": "Claude Code は作業中に「Spinning…」と表示します。"
@@ -7850,7 +7850,7 @@
  {
   "id": 982,
   "english": "Stewing",
-  "japanese": "じっくり煮込み中（思案している）",
+  "japanese": "じっくり思案中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Stewing…\" while it works.",
   "example_ja": "Claude Code は作業中に「Stewing…」と表示します。"
@@ -7858,7 +7858,7 @@
  {
   "id": 983,
   "english": "Synthesizing",
-  "japanese": "統合・合成中（まとめ上げている）",
+  "japanese": "情報を統合中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Synthesizing…\" while it works.",
   "example_ja": "Claude Code は作業中に「Synthesizing…」と表示します。"
@@ -7866,7 +7866,7 @@
  {
   "id": 984,
   "english": "Thinking",
-  "japanese": "思考中（考えている）",
+  "japanese": "思考中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Thinking…\" while it works.",
   "example_ja": "Claude Code は作業中に「Thinking…」と表示します。"
@@ -7874,7 +7874,7 @@
  {
   "id": 985,
   "english": "Transmuting",
-  "japanese": "変換中（作り替えている）",
+  "japanese": "変換中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Transmuting…\" while it works.",
   "example_ja": "Claude Code は作業中に「Transmuting…」と表示します。"
@@ -7882,7 +7882,7 @@
  {
   "id": 986,
   "english": "Crystallizing",
-  "japanese": "結晶化中（考えを固めている）",
+  "japanese": "考えをまとめ中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Crystallizing…\" while it works.",
   "example_ja": "Claude Code は作業中に「Crystallizing…」と表示します。"
@@ -7890,7 +7890,7 @@
  {
   "id": 987,
   "english": "Coalescing",
-  "japanese": "まとまりつつある（一つにしている）",
+  "japanese": "まとめ中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Coalescing…\" while it works.",
   "example_ja": "Claude Code は作業中に「Coalescing…」と表示します。"
@@ -7906,7 +7906,7 @@
  {
   "id": 989,
   "english": "Wrangling",
-  "japanese": "調整中（手なずけて扱っている）",
+  "japanese": "調整中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Wrangling…\" while it works.",
   "example_ja": "Claude Code は作業中に「Wrangling…」と表示します。"
@@ -7914,7 +7914,7 @@
  {
   "id": 990,
   "english": "Vibing",
-  "japanese": "ノリで進行中（調子よく進めている）",
+  "japanese": "快調に進行中",
   "category": "Claude Code",
   "example_en": "Claude Code shows \"Vibing…\" while it works.",
   "example_ja": "Claude Code は作業中に「Vibing…」と表示します。"

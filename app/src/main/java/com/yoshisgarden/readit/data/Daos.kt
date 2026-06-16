@@ -59,6 +59,9 @@ interface PhraseDao {
     @Query("SELECT * FROM phrases ORDER BY RANDOM() LIMIT :n")
     suspend fun randomPhrases(n: Int): List<Phrase>
 
+    @Query("SELECT * FROM phrases WHERE category IN (:categories) ORDER BY RANDOM() LIMIT :n")
+    suspend fun randomByCategories(categories: List<String>, n: Int): List<Phrase>
+
     @Query("SELECT * FROM phrases WHERE id IN (:ids)")
     suspend fun getByIds(ids: List<Long>): List<Phrase>
 }
@@ -78,6 +81,13 @@ interface FlashcardDao {
 
     @Query("SELECT COUNT(*) FROM flashcards WHERE dueDate <= :now")
     fun observeDueCount(now: Long): Flow<Int>
+
+    /** Cards available to study now: due flashcards + phrases never studied yet. */
+    @Query(
+        "SELECT (SELECT COUNT(*) FROM flashcards WHERE dueDate <= :now) " +
+            "+ (SELECT COUNT(*) FROM phrases WHERE id NOT IN (SELECT phraseId FROM flashcards))",
+    )
+    fun observeStudyableCount(now: Long): Flow<Int>
 
     @Query("SELECT COUNT(*) FROM flashcards WHERE reviewCount > 0")
     fun observeStudiedCount(): Flow<Int>
