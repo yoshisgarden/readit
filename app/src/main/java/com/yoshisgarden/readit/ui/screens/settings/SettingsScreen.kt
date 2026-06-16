@@ -53,8 +53,6 @@ import com.yoshisgarden.readit.ui.theme.DarkModePref
 import com.yoshisgarden.readit.ui.theme.colorSchemeFor
 
 private const val STRIPE_URL = "https://buy.stripe.com/6oU7sEgo3ehH01F2kO8g002"
-private const val SPONSOR_URL = "https://github.com/sponsors/yoshisgarden"
-private const val REPO_URL = "https://github.com/yoshisgarden/readit"
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -165,16 +163,11 @@ fun SettingsScreen(
                 Text("☕ 開発を支援する（Stripe）")
             }
             Text(
-                "カード / Apple Pay / Google Pay 対応・アカウント不要",
+                "カード / Google Pay 対応・アカウント不要",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.outline,
                 modifier = Modifier.padding(top = 4.dp),
             )
-            Spacer(Modifier.height(10.dp))
-            OutlinedButton(
-                onClick = { context.openUrl(REPO_URL) },
-                modifier = Modifier.fillMaxWidth(),
-            ) { Text("GitHub リポジトリを開く") }
 
             Spacer(Modifier.height(24.dp))
             Text(

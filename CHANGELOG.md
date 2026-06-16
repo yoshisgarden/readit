@@ -1,5 +1,8 @@
 # 変更履歴
 
+## v1.1.3
+- 設定の開発支援セクションから「GitHub リポジトリを開く」ボタンを削除（Stripe 支援ボタンのみに整理）
+
 ## v1.1.2
 - 辞書を **990 件**に拡充
 - git 用語（squash / rebase / cherry-pick / fast-forward / detached HEAD など）の和訳を「用語＋かんたんな意味」に改善し、意味が分かるように
