@@ -52,6 +52,7 @@ import com.yoshisgarden.readit.ui.theme.AppTheme
 import com.yoshisgarden.readit.ui.theme.DarkModePref
 import com.yoshisgarden.readit.ui.theme.colorSchemeFor
 
+private const val STRIPE_URL = "https://buy.stripe.com/6oU7sEgo3ehH01F2kO8g002"
 private const val SPONSOR_URL = "https://github.com/sponsors/yoshisgarden"
 private const val REPO_URL = "https://github.com/yoshisgarden/readit"
 
@@ -150,20 +151,26 @@ fun SettingsScreen(
             Spacer(Modifier.height(20.dp))
             SectionTitle("開発支援（任意）")
             Text(
-                "ReadIT は個人が無料で開発・配布しています。応援いただける方は GitHub から支援できます。支援は完全に任意で、機能には一切影響しません。",
+                "ReadIT は個人が無料・広告なしで開発・配布しています。応援いただける方は下記から支援できます。金額は自由・完全に任意で、アプリの機能には一切影響しません。",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
             Spacer(Modifier.height(12.dp))
             FilledTonalButton(
-                onClick = { context.openUrl(SPONSOR_URL) },
+                onClick = { context.openUrl(STRIPE_URL) },
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 Icon(Icons.Filled.Favorite, null)
                 Spacer(Modifier.size(8.dp))
-                Text("GitHub で開発を支援する")
+                Text("☕ 開発を支援する（Stripe）")
             }
-            Spacer(Modifier.height(8.dp))
+            Text(
+                "カード / Apple Pay / Google Pay 対応・アカウント不要",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.outline,
+                modifier = Modifier.padding(top = 4.dp),
+            )
+            Spacer(Modifier.height(10.dp))
             OutlinedButton(
                 onClick = { context.openUrl(REPO_URL) },
                 modifier = Modifier.fillMaxWidth(),

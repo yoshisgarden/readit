@@ -2,15 +2,21 @@ package com.yoshisgarden.readit.ui.screens.quiz
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Cancel
+import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -113,7 +119,24 @@ private fun QuestionView(
         }
 
         if (s.answered) {
-            Spacer(Modifier.height(12.dp))
+            val correct = s.selected == q.correctIndex
+            Spacer(Modifier.height(14.dp))
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    if (correct) Icons.Filled.CheckCircle else Icons.Filled.Cancel,
+                    contentDescription = null,
+                    tint = if (correct) MaterialTheme.colorScheme.primary
+                    else MaterialTheme.colorScheme.error,
+                )
+                Spacer(Modifier.size(8.dp))
+                Text(
+                    if (correct) "正解！" else "不正解",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = if (correct) MaterialTheme.colorScheme.primary
+                    else MaterialTheme.colorScheme.error,
+                )
+            }
+            Spacer(Modifier.height(10.dp))
             Card(
                 Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(14.dp),

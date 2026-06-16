@@ -25,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
@@ -59,12 +60,6 @@ fun FlashcardScreen(
 @Composable
 private fun CardView(s: FlashcardUiState, vm: FlashcardViewModel) {
     val card = s.cards[s.index]
-    val rotation by animateFloatAsState(
-        targetValue = if (s.flipped) 180f else 0f,
-        animationSpec = tween(400),
-        label = "flip",
-    )
-    val showBack = rotation > 90f
 
     val front: String
     val back: String
@@ -88,6 +83,15 @@ private fun CardView(s: FlashcardUiState, vm: FlashcardViewModel) {
         Spacer(Modifier.height(8.dp))
 
         Box(Modifier.weight(1f).fillMaxWidth(), contentAlignment = Alignment.Center) {
+            // key(index): reset the flip animation per card so the next card's
+            // answer never flashes during the flip-back transition.
+            key(s.index) {
+            val rotation by animateFloatAsState(
+                targetValue = if (s.flipped) 180f else 0f,
+                animationSpec = tween(400),
+                label = "flip",
+            )
+            val showBack = rotation > 90f
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -128,6 +132,7 @@ private fun CardView(s: FlashcardUiState, vm: FlashcardViewModel) {
                         )
                     }
                 }
+            }
             }
         }
 

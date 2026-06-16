@@ -8,15 +8,25 @@ import java.time.LocalDate
 import java.time.ZoneId
 import java.time.temporal.ChronoUnit
 
-/** Phrase categories used across the app (design doc 5.2). */
+/** Phrase categories used across the app. Order = dictionary filter order. */
 object Categories {
-    const val CLAUDE_CODE = "Claude Code"
-    const val GITHUB = "GitHub"
     const val API_DOCS = "API Docs"
     const val ERROR_MESSAGES = "Error Messages"
+    const val CLI_TERMINAL = "CLI / Terminal"
+    const val ABBREVIATIONS = "Abbreviations"
     const val PR_REVIEW = "PR Review"
+    const val CLAUDE_CODE = "Claude Code"
+    const val GITHUB = "GitHub"
 
-    val ALL = listOf(CLAUDE_CODE, GITHUB, API_DOCS, ERROR_MESSAGES, PR_REVIEW)
+    val ALL = listOf(
+        API_DOCS,
+        ERROR_MESSAGES,
+        CLI_TERMINAL,
+        ABBREVIATIONS,
+        PR_REVIEW,
+        CLAUDE_CODE,
+        GITHUB,
+    )
 }
 
 /** Phase thresholds (total mastered phrases) for promotion. */
@@ -50,8 +60,15 @@ class ReadItRepository(
 
     // ---- seeding ----------------------------------------------------------
     suspend fun ensureSeeded() {
-        if (phraseDao.count() == 0) {
-            phraseDao.insertAll(PhraseSeed.load(context))
+        val bundled = PhraseSeed.load(context)
+        val current = phraseDao.count()
+        // Re-seed when the bundled phrase set changes (e.g. app update adds phrases).
+        // Favorites are carried over by matching the English text.
+        if (current != bundled.size) {
+            val favorites = if (current > 0) phraseDao.favoriteEnglishes() else emptyList()
+            phraseDao.clearAll()
+            phraseDao.insertAll(bundled)
+            if (favorites.isNotEmpty()) phraseDao.markFavoritesByEnglish(favorites)
         }
         if (progressDao.get() == null) {
             progressDao.upsert(

@@ -16,6 +16,15 @@ interface PhraseDao {
     @Query("SELECT COUNT(*) FROM phrases")
     suspend fun count(): Int
 
+    @Query("SELECT english FROM phrases WHERE isFavorite = 1")
+    suspend fun favoriteEnglishes(): List<String>
+
+    @Query("UPDATE phrases SET isFavorite = 1 WHERE english IN (:englishes)")
+    suspend fun markFavoritesByEnglish(englishes: List<String>)
+
+    @Query("DELETE FROM phrases")
+    suspend fun clearAll()
+
     @Query("SELECT * FROM phrases ORDER BY id")
     fun observeAll(): Flow<List<Phrase>>
 
