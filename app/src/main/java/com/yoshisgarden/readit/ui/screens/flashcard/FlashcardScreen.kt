@@ -20,6 +20,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -33,6 +34,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.yoshisgarden.readit.srs.Sm2Rating
+import com.yoshisgarden.readit.ui.components.splitMeaning
 
 @Composable
 fun FlashcardScreen(
@@ -57,20 +59,20 @@ fun FlashcardScreen(
     }
 }
 
-/** Put a "（meaning）" parenthetical on its own line so long cards read clearly. */
-private fun breakBeforeParen(s: String): String =
-    s.replace("（", "\n（").trimStart('\n')
-
 @Composable
 private fun CardView(s: FlashcardUiState, vm: FlashcardViewModel) {
     val card = s.cards[s.index]
 
     val front: String
     val back: String
+    val frontJa: Boolean
+    val backJa: Boolean
     if (s.direction == CardDirection.EN_TO_JA) {
-        front = breakBeforeParen(card.english); back = breakBeforeParen(card.japanese)
+        front = card.english; back = card.japanese
+        frontJa = false; backJa = true
     } else {
-        front = breakBeforeParen(card.japanese); back = breakBeforeParen(card.english)
+        front = card.japanese; back = card.english
+        frontJa = true; backJa = false
     }
 
     Column(Modifier.fillMaxSize().padding(20.dp)) {
@@ -113,23 +115,19 @@ private fun CardView(s: FlashcardUiState, vm: FlashcardViewModel) {
             ) {
                 Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                     if (!showBack) {
-                        Text(
-                            front,
-                            style = MaterialTheme.typography.titleLarge.copy(
-                                fontFamily = if (s.direction == CardDirection.EN_TO_JA) FontFamily.Monospace else FontFamily.Default,
-                            ),
+                        CardFace(
+                            text = front,
+                            japanese = frontJa,
+                            mono = s.direction == CardDirection.EN_TO_JA,
                             color = MaterialTheme.colorScheme.onPrimaryContainer,
-                            textAlign = TextAlign.Center,
                             modifier = Modifier.padding(24.dp),
                         )
                     } else {
-                        Text(
-                            back,
-                            style = MaterialTheme.typography.titleLarge.copy(
-                                fontFamily = if (s.direction == CardDirection.JA_TO_EN) FontFamily.Monospace else FontFamily.Default,
-                            ),
+                        CardFace(
+                            text = back,
+                            japanese = backJa,
+                            mono = s.direction == CardDirection.JA_TO_EN,
                             color = MaterialTheme.colorScheme.onSecondaryContainer,
-                            textAlign = TextAlign.Center,
                             modifier = Modifier
                                 .padding(24.dp)
                                 .graphicsLayer { rotationY = 180f },
@@ -172,6 +170,51 @@ private fun CardView(s: FlashcardUiState, vm: FlashcardViewModel) {
             }
         }
         Spacer(Modifier.height(8.dp))
+    }
+}
+
+/**
+ * One face of the flip card. For a Japanese face that carries a "（meaning）" note,
+ * the term is shown large and the meaning appears in a soft bubble below it — so
+ * katakana jargon is understandable right on the card (same idea as the dictionary).
+ */
+@Composable
+private fun CardFace(
+    text: String,
+    japanese: Boolean,
+    mono: Boolean,
+    color: androidx.compose.ui.graphics.Color,
+    modifier: Modifier = Modifier,
+) {
+    val (term, meaning) = if (japanese) splitMeaning(text) else text to ""
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+    ) {
+        Text(
+            term,
+            style = MaterialTheme.typography.titleLarge.copy(
+                fontFamily = if (mono) FontFamily.Monospace else FontFamily.Default,
+            ),
+            color = color,
+            textAlign = TextAlign.Center,
+        )
+        if (meaning.isNotEmpty()) {
+            Spacer(Modifier.height(14.dp))
+            Surface(
+                shape = RoundedCornerShape(12.dp),
+                color = color.copy(alpha = 0.12f),
+            ) {
+                Text(
+                    meaning,
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = color,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(horizontal = 14.dp, vertical = 8.dp),
+                )
+            }
+        }
     }
 }
 

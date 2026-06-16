@@ -23,6 +23,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -71,12 +72,73 @@ fun ProgressScreen(
                 StatPill("🔥 ${s.progress.streakDays}", "連続日数", Modifier.weight(1f))
                 StatPill("${s.totalMinutes}分", "直近の学習", Modifier.weight(1f))
             }
+            Spacer(Modifier.height(20.dp))
+            GoalCard(
+                todayMinutes = s.todayMinutes,
+                goalMin = s.dailyGoalMin,
+                achievedDays = s.achievedDays,
+                recordedDays = s.recordedDays,
+            )
             Spacer(Modifier.height(24.dp))
             Text("学習時間（分・直近14日）", style = MaterialTheme.typography.titleMedium)
             Spacer(Modifier.height(12.dp))
             BarChart(s.logs, s.dailyGoalMin)
             Spacer(Modifier.height(24.dp))
             Text("習得フレーズ: ${s.progress.totalPhrases}", style = MaterialTheme.typography.bodyLarge)
+        }
+    }
+}
+
+@Composable
+private fun GoalCard(
+    todayMinutes: Int,
+    goalMin: Int,
+    achievedDays: Int,
+    recordedDays: Int,
+) {
+    val achieved = todayMinutes >= goalMin
+    val remaining = (goalMin - todayMinutes).coerceAtLeast(0)
+    val frac = if (goalMin > 0) (todayMinutes.toFloat() / goalMin).coerceIn(0f, 1f) else 1f
+    val goalColor = Color(0xFFE53935)
+    val doneColor = MaterialTheme.colorScheme.primary
+
+    Card(
+        Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(16.dp),
+        colors = androidx.compose.material3.CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f),
+        ),
+    ) {
+        Column(Modifier.padding(16.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text("今日の目標", style = MaterialTheme.typography.titleMedium)
+                Spacer(Modifier.weight(1f))
+                Text(
+                    if (achieved) "達成！🌸" else "あと ${remaining}分",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = if (achieved) doneColor else goalColor,
+                )
+            }
+            Spacer(Modifier.height(10.dp))
+            LinearProgressIndicator(
+                progress = { frac },
+                modifier = Modifier.fillMaxWidth().height(10.dp).clip(RoundedCornerShape(6.dp)),
+                color = if (achieved) doneColor else goalColor,
+            )
+            Spacer(Modifier.height(8.dp))
+            Text(
+                "今日 ${todayMinutes} / ${goalMin}分",
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurface,
+            )
+            if (recordedDays > 0) {
+                Spacer(Modifier.height(2.dp))
+                Text(
+                    "直近 ${recordedDays}日のうち ${achievedDays}日 目標達成",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
         }
     }
 }

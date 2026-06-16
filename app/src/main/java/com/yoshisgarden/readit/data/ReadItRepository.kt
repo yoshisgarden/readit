@@ -144,6 +144,9 @@ class ReadItRepository(
     fun progress(): Flow<UserProgress?> = progressDao.observe()
     fun recentLogs(limit: Int = 14): Flow<List<StudyLog>> = studyLogDao.recent(limit)
 
+    /** Today's date as "yyyy-MM-dd" in the device's zone (matches study-log keys). */
+    fun today(): String = LocalDate.now(ZoneId.systemDefault()).toString()
+
     /** Records study activity for today and recomputes streak / phase. */
     suspend fun recordStudy(durationMin: Int, phrasesStudied: Int) {
         val zone = ZoneId.systemDefault()
