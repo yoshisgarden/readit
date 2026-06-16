@@ -11,6 +11,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Search
@@ -18,11 +20,14 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.yoshisgarden.readit.data.Categories
 import com.yoshisgarden.readit.ui.components.CategoryFilterChip
@@ -35,6 +40,7 @@ fun DictionaryScreen(
 ) {
     val phrases by vm.phrases.collectAsState()
     val filter by vm.filter.collectAsState()
+    val keyboard = LocalSoftwareKeyboardController.current
 
     Column(Modifier.fillMaxSize().padding(horizontal = 16.dp)) {
         Spacer(Modifier.height(8.dp))
@@ -44,7 +50,19 @@ fun DictionaryScreen(
             modifier = Modifier.fillMaxWidth(),
             singleLine = true,
             leadingIcon = { Icon(Icons.Filled.Search, null) },
+            trailingIcon = {
+                if (filter.query.isNotEmpty()) {
+                    TextButton(onClick = {
+                        vm.setQuery("")
+                        keyboard?.hide()
+                    }) {
+                        Text("CLR")
+                    }
+                }
+            },
             placeholder = { Text("英語・日本語・例文で検索") },
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+            keyboardActions = KeyboardActions(onSearch = { keyboard?.hide() }),
         )
         Spacer(Modifier.height(10.dp))
         Row(Modifier.horizontalScroll(rememberScrollState())) {

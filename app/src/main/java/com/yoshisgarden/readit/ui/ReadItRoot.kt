@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.MenuBook
@@ -97,6 +98,10 @@ fun ReadItRoot() {
         },
     ) {
         Scaffold(
+            // Lift the whole scaffold above the soft keyboard so the bottom
+            // navigation (Home etc.) stays tappable while searching. Fixes
+            // the keyboard covering the nav bar on some devices (e.g. AQUOS sense7).
+            modifier = Modifier.imePadding(),
             topBar = {
                 if (showBars) {
                     TopAppBar(
