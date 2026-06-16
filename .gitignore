@@ -1,0 +1,19 @@
+*.iml
+.gradle/
+.kotlin/
+/local.properties
+/.idea/
+.DS_Store
+build/
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+keystore.properties
+*.jks
+*.keystore
+/_docx_extract/
+*.docx
+*.log
+# 署名パスワードを含む個人メモ（コミット禁止）
+あなたがやること.md

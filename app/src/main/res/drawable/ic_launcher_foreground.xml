@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Open book: left page -->
+    <path
+        android:pathData="M54,40 C48,35 39,33 31,34 C28,34.3 26,36.5 26,39.4 L26,71 C26,73.6 28.2,75.6 30.8,75.3 C38,74.5 48,76 54,80 Z"
+        android:fillColor="#FFFFFFFF" />
+    <!-- Open book: right page -->
+    <path
+        android:pathData="M54,40 C60,35 69,33 77,34 C80,34.3 82,36.5 82,39.4 L82,71 C82,73.6 79.8,75.6 77.2,75.3 C70,74.5 60,76 54,80 Z"
+        android:fillColor="#FFF3EEFF" />
+    <!-- Book spine -->
+    <path
+        android:pathData="M52.5,40 L55.5,40 L55.5,80 L52.5,80 Z"
+        android:fillColor="#FFC9B6EC" />
+    <!-- Code brackets and slash on the pages -->
+    <path
+        android:strokeColor="#FF7C5CD6" android:strokeWidth="3.2"
+        android:strokeLineCap="round" android:strokeLineJoin="round"
+        android:fillColor="#00000000"
+        android:pathData="M44,50 L38,57 L44,64" />
+    <path
+        android:strokeColor="#FFE0729E" android:strokeWidth="3.2"
+        android:strokeLineCap="round" android:strokeLineJoin="round"
+        android:fillColor="#00000000"
+        android:pathData="M64,50 L70,57 L64,64" />
+    <path
+        android:strokeColor="#FF7C5CD6" android:strokeWidth="3.2"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000"
+        android:pathData="M57,48 L51,66" />
+    <!-- Sparkle -->
+    <path
+        android:fillColor="#FFFFE08A"
+        android:pathData="M54,22 L56,28 L62,30 L56,32 L54,38 L52,32 L46,30 L52,28 Z" />
+</vector>
