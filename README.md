@@ -8,7 +8,7 @@
 
 | 機能 | 概要 |
 |---|---|
-| 📖 フレーズ辞書 | IT 英語フレーズ集（約 945 件）。カテゴリ（API Docs / Error Messages / CLI / Terminal / Abbreviations / PR Review / Claude Code / GitHub）・全文検索・お気に入り・例文＆和訳付き |
+| 📖 フレーズ辞書 | IT 英語フレーズ集（約 990 件）。カテゴリ（API Docs / Error Messages / CLI / Terminal / Abbreviations / PR Review / Claude Code / GitHub）・全文検索・お気に入り・例文＆和訳付き |
 | 🗂 単語帳（SRS） | SM-2 間隔反復アルゴリズムで効率記憶。英→日 / 日→英 のフリップカード、3 段階評価 |
 | ✏️ 練習テスト | 穴埋め・エラー解析・読解の 3 モード。正答率を記録 |
 | 📊 進捗管理 | フェーズ進捗リング・連続学習日数（ストリーク）・学習時間グラフ |
@@ -43,7 +43,7 @@
 
 ## フレーズデータについて
 
-初期フレーズは `app/src/main/assets/phrases_v1.json` に同梱しています（約 945 フレーズ）。
+初期フレーズは `app/src/main/assets/phrases_v1.json` に同梱しています（約 990 フレーズ）。
 同 JSON に追記するだけで拡張でき、フレーズ件数が変わるとアプリ更新時に自動で再取り込みされます（お気に入りは英語テキストで引き継がれます）。
 
 ## 開発支援（ドネーション）

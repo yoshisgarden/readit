@@ -1,5 +1,10 @@
 # 変更履歴
 
+## v1.1.2
+- 辞書を **990 件**に拡充
+- git 用語（squash / rebase / cherry-pick / fast-forward / detached HEAD など）の和訳を「用語＋かんたんな意味」に改善し、意味が分かるように
+- Claude Code が作業中に表示する進行中ワード（Accomplishing / Forming / Actualizing / Pondering など 45 語）を追加
+
 ## v1.1.1
 - 辞書の検索ボックスに「クリア（×）」ボタンを追加（タップで入力を消去＋キーボードを閉じる）
 - 一部端末（AQUOS sense7 など）で、検索時にソフトキーボードが下部ナビ（ホーム等）を覆ってタップできない問題に対応

@@ -34,7 +34,7 @@
  {
   "id": 5,
   "english": "rate limit",
-  "japanese": "レート制限",
+  "japanese": "レート制限（一定時間あたりのリクエスト数の上限）",
   "category": "API Docs",
   "example_en": "You may hit the rate limit at 100 requests per minute.",
   "example_ja": "毎分100リクエストでレート制限に達することがあります。"
@@ -106,7 +106,7 @@
  {
   "id": 14,
   "english": "throttled",
-  "japanese": "制限された／間引かれた",
+  "japanese": "スロットリング（リクエストが多すぎて間引かれること）",
   "category": "API Docs",
   "example_en": "Requests may be throttled under heavy load.",
   "example_ja": "高負荷時にはリクエストが制限されることがあります。"
@@ -114,7 +114,7 @@
  {
   "id": 15,
   "english": "idempotent",
-  "japanese": "冪等（何度実行しても同じ）",
+  "japanese": "冪等（何度実行しても結果が同じになる性質）",
   "category": "API Docs",
   "example_en": "This operation is idempotent.",
   "example_ja": "この操作は冪等です。"
@@ -138,7 +138,7 @@
  {
   "id": 18,
   "english": "pagination",
-  "japanese": "ページネーション",
+  "japanese": "ページネーション（結果を複数ページに分けて返す仕組み）",
   "category": "API Docs",
   "example_en": "Use the cursor for pagination.",
   "example_ja": "ページネーションには cursor を使います。"
@@ -146,7 +146,7 @@
  {
   "id": 19,
   "english": "cursor",
-  "japanese": "カーソル（次ページ取得用の目印）",
+  "japanese": "カーソル（次のページを取得するための目印）",
   "category": "API Docs",
   "example_en": "Pass the next_cursor to fetch the following page.",
   "example_ja": "次のページを取得するには next_cursor を渡します。"
@@ -186,7 +186,7 @@
  {
   "id": 24,
   "english": "payload",
-  "japanese": "ペイロード（本体データ）",
+  "japanese": "ペイロード（やり取りの本体となるデータ）",
   "category": "API Docs",
   "example_en": "The webhook delivers a JSON payload.",
   "example_ja": "Webhook は JSON ペイロードを送信します。"
@@ -194,7 +194,7 @@
  {
   "id": 25,
   "english": "webhook",
-  "japanese": "Webhook（イベント通知）",
+  "japanese": "Webhook（イベント発生時にサーバーから通知が送られる仕組み）",
   "category": "API Docs",
   "example_en": "Register a webhook to receive events.",
   "example_ja": "イベントを受け取るには Webhook を登録します。"
@@ -210,7 +210,7 @@
  {
   "id": 27,
   "english": "scope",
-  "japanese": "スコープ（権限範囲）",
+  "japanese": "スコープ（トークンに許可された操作の範囲）",
   "category": "API Docs",
   "example_en": "This token requires the read scope.",
   "example_ja": "このトークンには read スコープが必要です。"
@@ -530,7 +530,7 @@
  {
   "id": 67,
   "english": "enum",
-  "japanese": "列挙型（決まった値の集合）",
+  "japanese": "列挙型（あらかじめ決まった値の中から選ぶ型）",
   "category": "API Docs",
   "example_en": "The status field is an enum.",
   "example_ja": "status フィールドは列挙型です。"
@@ -554,7 +554,7 @@
  {
   "id": 70,
   "english": "quota",
-  "japanese": "クォータ（割り当て上限）",
+  "japanese": "クォータ（利用できる量の上限・割り当て）",
   "category": "API Docs",
   "example_en": "You have exceeded your monthly quota.",
   "example_ja": "月間クォータを超過しました。"
@@ -586,7 +586,7 @@
  {
   "id": 74,
   "english": "polling",
-  "japanese": "ポーリング（定期的な問い合わせ）",
+  "japanese": "ポーリング（変化がないか定期的に問い合わせること）",
   "category": "API Docs",
   "example_en": "Avoid aggressive polling; use webhooks instead.",
   "example_ja": "過度なポーリングは避け、代わりに Webhook を使ってください。"
@@ -594,7 +594,7 @@
  {
   "id": 75,
   "english": "retry with backoff",
-  "japanese": "バックオフして再試行",
+  "japanese": "バックオフして再試行（失敗時、待ち時間を延ばしながら再試行すること）",
   "category": "API Docs",
   "example_en": "On a 429, retry with exponential backoff.",
   "example_ja": "429 のときは指数バックオフで再試行してください。"
@@ -642,7 +642,7 @@
  {
   "id": 81,
   "english": "MIME type",
-  "japanese": "MIME タイプ",
+  "japanese": "MIME タイプ（ファイルの種類を表す識別子。例: image/png）",
   "category": "API Docs",
   "example_en": "Set the correct MIME type for uploads.",
   "example_ja": "アップロードには正しい MIME タイプを設定します。"
@@ -658,7 +658,7 @@
  {
   "id": 83,
   "english": "field mask",
-  "japanese": "フィールドマスク（更新対象の指定）",
+  "japanese": "フィールドマスク（更新したい項目だけを指定する仕組み）",
   "category": "API Docs",
   "example_en": "Use a field mask to update only the name.",
   "example_ja": "name だけ更新するにはフィールドマスクを使います。"
@@ -762,7 +762,7 @@
  {
   "id": 96,
   "english": "bearer token",
-  "japanese": "ベアラートークン",
+  "japanese": "ベアラートークン（持っているだけで認証に使えるトークン）",
   "category": "API Docs",
   "example_en": "Pass the bearer token in the Authorization header.",
   "example_ja": "Authorization ヘッダーにベアラートークンを渡します。"
@@ -1066,7 +1066,7 @@
  {
   "id": 134,
   "english": "idempotency key",
-  "japanese": "冪等キー",
+  "japanese": "冪等キー（再送しても二重処理を防ぐための識別子）",
   "category": "API Docs",
   "example_en": "Pass an idempotency key to avoid duplicates.",
   "example_ja": "重複を避けるには冪等キーを渡します。"
@@ -1354,7 +1354,7 @@
  {
   "id": 170,
   "english": "eventually consistent",
-  "japanese": "結果整合性",
+  "japanese": "結果整合性（少し遅れて、最終的にデータが揃う方式）",
   "category": "API Docs",
   "example_en": "The data store is eventually consistent.",
   "example_ja": "データストアは結果整合性です。"
@@ -1362,7 +1362,7 @@
  {
   "id": 171,
   "english": "atomic",
-  "japanese": "アトミック（不可分）",
+  "japanese": "アトミック（途中で割り込めない、不可分な操作）",
   "category": "API Docs",
   "example_en": "The update is atomic.",
   "example_ja": "この更新はアトミックです。"
@@ -1378,7 +1378,7 @@
  {
   "id": 173,
   "english": "thread-safe",
-  "japanese": "スレッドセーフ",
+  "japanese": "スレッドセーフ（複数スレッドから同時に使っても安全な状態）",
   "category": "API Docs",
   "example_en": "The client is thread-safe.",
   "example_ja": "このクライアントはスレッドセーフです。"
@@ -1410,7 +1410,7 @@
  {
   "id": 177,
   "english": "ETag",
-  "japanese": "ETag（バージョン識別子）",
+  "japanese": "ETag（データの版を表す識別子。変更検出に使う）",
   "category": "API Docs",
   "example_en": "Send the ETag with If-None-Match.",
   "example_ja": "If-None-Match で ETag を送ります。"
@@ -1450,7 +1450,7 @@
  {
   "id": 182,
   "english": "server-sent events",
-  "japanese": "サーバー送信イベント",
+  "japanese": "サーバー送信イベント（サーバーから一方向に送られ続けるデータ通知）",
   "category": "API Docs",
   "example_en": "Streaming uses server-sent events.",
   "example_ja": "ストリーミングはサーバー送信イベントを使います。"
@@ -1458,7 +1458,7 @@
  {
   "id": 183,
   "english": "long polling",
-  "japanese": "ロングポーリング",
+  "japanese": "ロングポーリング（応答を保留し、変化があったら返す通信方式）",
   "category": "API Docs",
   "example_en": "Fall back to long polling if needed.",
   "example_ja": "必要ならロングポーリングにフォールバックします。"
@@ -2970,7 +2970,7 @@
  {
   "id": 372,
   "english": "environment variable",
-  "japanese": "環境変数",
+  "japanese": "環境変数（OS やシェルが持つ設定値。$PATH など）",
   "category": "CLI / Terminal",
   "example_en": "export sets an environment variable.",
   "example_ja": "export は環境変数を設定します。"
@@ -3034,7 +3034,7 @@
  {
   "id": 380,
   "english": "command history",
-  "japanese": "コマンド履歴",
+  "japanese": "コマンド履歴（過去に打ったコマンドの記録）",
   "category": "CLI / Terminal",
   "example_en": "Press the up arrow to browse command history.",
   "example_ja": "上矢印キーでコマンド履歴をたどります。"
@@ -3130,7 +3130,7 @@
  {
   "id": 392,
   "english": "successfully rebased",
-  "japanese": "リベースに成功した",
+  "japanese": "リベースに成功した（変更を最新の上にうまく積み直せた）",
   "category": "CLI / Terminal",
   "example_en": "Successfully rebased and updated refs/heads/main.",
   "example_ja": "リベースに成功し refs/heads/main を更新しました。"
@@ -3138,7 +3138,7 @@
  {
   "id": 393,
   "english": "detached HEAD",
-  "japanese": "切り離された HEAD",
+  "japanese": "切り離された HEAD（どのブランチにも乗っていない、宙ぶらりんの状態）",
   "category": "CLI / Terminal",
   "example_en": "You are in detached HEAD state.",
   "example_ja": "切り離された HEAD の状態です。"
@@ -3146,7 +3146,7 @@
  {
   "id": 394,
   "english": "fast-forward",
-  "japanese": "早送り（fast-forward）",
+  "japanese": "早送り（枝分かれが無いので、ブランチの先端をそのまま前に進めるだけのマージ）",
   "category": "CLI / Terminal",
   "example_en": "Updating abc..def, Fast-forward.",
   "example_ja": "abc..def を更新、早送りです。"
@@ -3154,7 +3154,7 @@
  {
   "id": 395,
   "english": "automatic merge failed",
-  "japanese": "自動マージに失敗",
+  "japanese": "自動マージに失敗（変更がぶつかり、手動で解決が必要）",
   "category": "CLI / Terminal",
   "example_en": "Automatic merge failed; fix conflicts.",
   "example_ja": "自動マージに失敗。競合を解決してください。"
@@ -3162,7 +3162,7 @@
  {
   "id": 396,
   "english": "stash the changes",
-  "japanese": "変更を退避する",
+  "japanese": "変更を一時退避（作業中の変更を棚上げして、あとで戻せるようにすること）",
   "category": "CLI / Terminal",
   "example_en": "git stash saves your changes for later.",
   "example_ja": "git stash は変更を一時退避します。"
@@ -3170,7 +3170,7 @@
  {
   "id": 397,
   "english": "discard local changes",
-  "japanese": "ローカルの変更を破棄する",
+  "japanese": "ローカルの変更を破棄（手元の編集を元に戻すこと）",
   "category": "CLI / Terminal",
   "example_en": "git restore discards local changes.",
   "example_ja": "git restore はローカルの変更を破棄します。"
@@ -3218,7 +3218,7 @@
  {
   "id": 403,
   "english": "merge conflict markers",
-  "japanese": "マージ競合のマーカー",
+  "japanese": "マージ競合マーカー（競合箇所を示す <<<< ==== >>>> の印。解決後に消す）",
   "category": "CLI / Terminal",
   "example_en": "Remove the merge conflict markers before committing.",
   "example_ja": "コミット前にマージ競合のマーカーを取り除きます。"
@@ -3346,7 +3346,7 @@
  {
   "id": 419,
   "english": "absolute path",
-  "japanese": "絶対パス",
+  "japanese": "絶対パス（ルート / から始まる、場所を完全に示すパス）",
   "category": "CLI / Terminal",
   "example_en": "An absolute path starts with a slash.",
   "example_ja": "絶対パスはスラッシュで始まります。"
@@ -3354,7 +3354,7 @@
  {
   "id": 420,
   "english": "relative path",
-  "japanese": "相対パス",
+  "japanese": "相対パス（今いる場所を基準にしたパス）",
   "category": "CLI / Terminal",
   "example_en": "A relative path is based on the current directory.",
   "example_ja": "相対パスはカレントディレクトリを基準にします。"
@@ -3362,7 +3362,7 @@
  {
   "id": 421,
   "english": "wildcard",
-  "japanese": "ワイルドカード",
+  "japanese": "ワイルドカード（「任意の文字」を表す記号。* など）",
   "category": "CLI / Terminal",
   "example_en": "The asterisk is a wildcard for any name.",
   "example_ja": "アスタリスクは任意の名前を表すワイルドカードです。"
@@ -3370,7 +3370,7 @@
  {
   "id": 422,
   "english": "symlink",
-  "japanese": "シンボリックリンク",
+  "japanese": "シンボリックリンク（別の場所を指す「ショートカット」のようなファイル）",
   "category": "CLI / Terminal",
   "example_en": "ln -s creates a symlink.",
   "example_ja": "ln -s はシンボリックリンクを作成します。"
@@ -3378,7 +3378,7 @@
  {
   "id": 423,
   "english": "alias",
-  "japanese": "エイリアス（別名）",
+  "japanese": "エイリアス（長いコマンドに付ける短い別名）",
   "category": "CLI / Terminal",
   "example_en": "Set an alias for the long command.",
   "example_ja": "長いコマンドにエイリアスを設定します。"
@@ -3386,7 +3386,7 @@
  {
   "id": 424,
   "english": "flag",
-  "japanese": "フラグ（オプション）",
+  "japanese": "フラグ（コマンドの動作を変えるオプション。-v など）",
   "category": "CLI / Terminal",
   "example_en": "The -v flag enables verbose output.",
   "example_ja": "-v フラグは詳細出力を有効にします。"
@@ -3394,7 +3394,7 @@
  {
   "id": 425,
   "english": "verbose output",
-  "japanese": "詳細出力",
+  "japanese": "詳細出力（処理内容を細かく表示するモード）",
   "category": "CLI / Terminal",
   "example_en": "Add --verbose for verbose output.",
   "example_ja": "--verbose を付けて詳細出力にします。"
@@ -3402,7 +3402,7 @@
  {
   "id": 426,
   "english": "dry run",
-  "japanese": "ドライラン（試し実行）",
+  "japanese": "ドライラン（実際には変更せず、結果だけ確認する試し実行）",
   "category": "CLI / Terminal",
   "example_en": "Use --dry-run to preview the changes.",
   "example_ja": "--dry-run で変更をプレビューします。"
@@ -3554,7 +3554,7 @@
  {
   "id": 445,
   "english": "lockfile",
-  "japanese": "ロックファイル",
+  "japanese": "ロックファイル（依存の正確なバージョンを固定する記録ファイル）",
   "category": "CLI / Terminal",
   "example_en": "Commit the lockfile to pin versions.",
   "example_ja": "バージョン固定のためロックファイルをコミットします。"
@@ -3802,7 +3802,7 @@
  {
   "id": 476,
   "english": "tarball",
-  "japanese": "tar アーカイブ",
+  "japanese": "tar アーカイブ（複数ファイルを1つにまとめた書庫ファイル）",
   "category": "CLI / Terminal",
   "example_en": "tar -czf creates a gzipped tarball.",
   "example_ja": "tar -czf は gzip 圧縮の tar アーカイブを作ります。"
@@ -3914,7 +3914,7 @@
  {
   "id": 490,
   "english": "command substitution",
-  "japanese": "コマンド置換",
+  "japanese": "コマンド置換（コマンドの出力を、その場の値として埋め込む書き方）",
   "category": "CLI / Terminal",
   "example_en": "Use $(date) for command substitution.",
   "example_ja": "$(date) でコマンド置換を行います。"
@@ -3922,7 +3922,7 @@
  {
   "id": 491,
   "english": "heredoc",
-  "japanese": "ヒアドキュメント",
+  "japanese": "ヒアドキュメント（複数行の文字列をそのままコマンドに渡す書き方）",
   "category": "CLI / Terminal",
   "example_en": "Use a heredoc for multi-line input.",
   "example_ja": "複数行入力にはヒアドキュメントを使います。"
@@ -3994,7 +3994,7 @@
  {
   "id": 500,
   "english": "trap the signal",
-  "japanese": "シグナルを捕捉する",
+  "japanese": "シグナルを捕捉（Ctrl+C などの割り込みを受け取って処理すること）",
   "category": "CLI / Terminal",
   "example_en": "trap catches a signal in a script.",
   "example_ja": "trap はスクリプト内でシグナルを捕捉します。"
@@ -4002,7 +4002,7 @@
  {
   "id": 501,
   "english": "set strict mode",
-  "japanese": "厳格モードを設定する",
+  "japanese": "厳格モード（エラーで即停止させる安全設定。set -euo pipefail）",
   "category": "CLI / Terminal",
   "example_en": "set -euo pipefail enables strict mode.",
   "example_ja": "set -euo pipefail は厳格モードを有効にします。"
@@ -4018,7 +4018,7 @@
  {
   "id": 503,
   "english": "merge conflict",
-  "japanese": "マージ競合",
+  "japanese": "マージ競合（同じ箇所への変更がぶつかり、自動で合体できない状態）",
   "category": "GitHub",
   "example_en": "There's a merge conflict in the README.",
   "example_ja": "README でマージ競合が発生しています。"
@@ -4026,7 +4026,7 @@
  {
   "id": 504,
   "english": "rebase onto main",
-  "japanese": "main にリベースする",
+  "japanese": "main にリベース（自分の変更を、最新の main の上に積み直して履歴を整えること）",
   "category": "GitHub",
   "example_en": "Please rebase onto main before merging.",
   "example_ja": "マージ前に main へリベースしてください。"
@@ -4034,7 +4034,7 @@
  {
   "id": 505,
   "english": "squash and merge",
-  "japanese": "スカッシュしてマージ",
+  "japanese": "スカッシュしてマージ（複数のコミットを1つにまとめてからマージする方式）",
   "category": "GitHub",
   "example_en": "We use squash and merge to keep history clean.",
   "example_ja": "履歴を綺麗に保つためスカッシュマージを使います。"
@@ -4050,7 +4050,7 @@
  {
   "id": 507,
   "english": "draft pull request",
-  "japanese": "下書きプルリク",
+  "japanese": "下書きプルリク（まだレビュー前の、作業中として共有する PR）",
   "category": "GitHub",
   "example_en": "I'll mark it as a draft pull request for now.",
   "example_ja": "ひとまず下書きプルリクにしておきます。"
@@ -4074,7 +4074,7 @@
  {
   "id": 510,
   "english": "fork the repository",
-  "japanese": "リポジトリをフォークする",
+  "japanese": "リポジトリをフォーク（他人のリポジトリを自分用にコピーすること）",
   "category": "GitHub",
   "example_en": "Fork the repository and clone your fork.",
   "example_ja": "リポジトリをフォークして自分のフォークをクローンします。"
@@ -4090,7 +4090,7 @@
  {
   "id": 512,
   "english": "stale branch",
-  "japanese": "古くなったブランチ",
+  "japanese": "古くなったブランチ（更新が止まり、最新から取り残されたブランチ）",
   "category": "GitHub",
   "example_en": "This branch is stale; please update it.",
   "example_ja": "このブランチは古いので更新してください。"
@@ -4106,7 +4106,7 @@
  {
   "id": 514,
   "english": "good first issue",
-  "japanese": "初心者向けの課題",
+  "japanese": "good first issue（初めての貢献におすすめと印が付いた Issue）",
   "category": "GitHub",
   "example_en": "Look for issues labeled good first issue.",
   "example_ja": "good first issue ラベルの課題を探しましょう。"
@@ -4122,7 +4122,7 @@
  {
   "id": 516,
   "english": "force push",
-  "japanese": "強制プッシュ",
+  "japanese": "強制プッシュ（リモートの履歴を上書きして無理やり押し込むこと。共有ブランチでは危険）",
   "category": "GitHub",
   "example_en": "Avoid a force push on shared branches.",
   "example_ja": "共有ブランチでの強制プッシュは避けましょう。"
@@ -4146,7 +4146,7 @@
  {
   "id": 519,
   "english": "default branch",
-  "japanese": "デフォルトブランチ",
+  "japanese": "デフォルトブランチ（リポジトリの基準となる主ブランチ。通常 main）",
   "category": "GitHub",
   "example_en": "The default branch is now main.",
   "example_ja": "デフォルトブランチは現在 main です。"
@@ -4154,7 +4154,7 @@
  {
   "id": 520,
   "english": "protected branch",
-  "japanese": "保護されたブランチ",
+  "japanese": "保護されたブランチ（直接プッシュを禁止し、ルールで守られたブランチ）",
   "category": "GitHub",
   "example_en": "main is a protected branch.",
   "example_ja": "main は保護されたブランチです。"
@@ -4242,7 +4242,7 @@
  {
   "id": 531,
   "english": "code owner",
-  "japanese": "コードオーナー",
+  "japanese": "コードオーナー（そのファイルの責任者。変更時に自動でレビュー依頼される）",
   "category": "GitHub",
   "example_en": "The code owner is auto-requested for review.",
   "example_ja": "コードオーナーは自動でレビュー依頼されます。"
@@ -4282,7 +4282,7 @@
  {
   "id": 536,
   "english": "contribution guidelines",
-  "japanese": "コントリビューションガイドライン",
+  "japanese": "コントリビューションガイドライン（貢献の手順やルールをまとめた文書）",
   "category": "GitHub",
   "example_en": "Follow the contribution guidelines.",
   "example_ja": "コントリビューションガイドラインに従ってください。"
@@ -4290,7 +4290,7 @@
  {
   "id": 537,
   "english": "code of conduct",
-  "japanese": "行動規範",
+  "japanese": "行動規範（コミュニティ参加者が守るべき行動ルール）",
   "category": "GitHub",
   "example_en": "All contributors must follow the code of conduct.",
   "example_ja": "すべての貢献者は行動規範に従う必要があります。"
@@ -4298,7 +4298,7 @@
  {
   "id": 538,
   "english": "sign the CLA",
-  "japanese": "CLA に署名する",
+  "japanese": "CLA に署名（CLA＝Contributor License Agreement／貢献者ライセンス同意書。提供コードの権利に同意する手続き）",
   "category": "GitHub",
   "example_en": "Contributors must sign the CLA.",
   "example_ja": "貢献者は CLA に署名する必要があります。"
@@ -4306,7 +4306,7 @@
  {
   "id": 539,
   "english": "maintainer",
-  "japanese": "メンテナ（維持管理者）",
+  "japanese": "メンテナ（リポジトリを維持管理する責任者）",
   "category": "GitHub",
   "example_en": "A maintainer will review your PR.",
   "example_ja": "メンテナがあなたの PR をレビューします。"
@@ -4314,7 +4314,7 @@
  {
   "id": 540,
   "english": "triage the issue",
-  "japanese": "Issue を仕分けする",
+  "japanese": "Issue を仕分け（緊急度や種類で整理・優先順位付けすること）",
   "category": "GitHub",
   "example_en": "We triage new issues every Monday.",
   "example_ja": "毎週月曜に新しい Issue を仕分けします。"
@@ -4394,7 +4394,7 @@
  {
   "id": 550,
   "english": "pre-release",
-  "japanese": "プレリリース",
+  "japanese": "プレリリース（正式版の前に出す、試験的な公開版）",
   "category": "GitHub",
   "example_en": "This is marked as a pre-release.",
   "example_ja": "これはプレリリースとして公開されています。"
@@ -4402,7 +4402,7 @@
  {
   "id": 551,
   "english": "GitHub Actions workflow",
-  "japanese": "GitHub Actions ワークフロー",
+  "japanese": "GitHub Actions ワークフロー（push などをきっかけに自動実行される処理の定義）",
   "category": "GitHub",
   "example_en": "The GitHub Actions workflow runs the tests.",
   "example_ja": "GitHub Actions ワークフローがテストを実行します。"
@@ -4426,7 +4426,7 @@
  {
   "id": 554,
   "english": "build matrix",
-  "japanese": "ビルドマトリクス",
+  "japanese": "ビルドマトリクス（複数の OS・バージョンの組み合わせで一斉にテストする仕組み）",
   "category": "GitHub",
   "example_en": "The build matrix covers three OSes.",
   "example_ja": "ビルドマトリクスは3つの OS を網羅します。"
@@ -4458,7 +4458,7 @@
  {
   "id": 558,
   "english": "self-hosted runner",
-  "japanese": "セルフホストランナー",
+  "japanese": "セルフホストランナー（自前のマシンで CI を動かす実行環境）",
   "category": "GitHub",
   "example_en": "We use a self-hosted runner for builds.",
   "example_ja": "ビルドにはセルフホストランナーを使います。"
@@ -4466,7 +4466,7 @@
  {
   "id": 559,
   "english": "status check",
-  "japanese": "ステータスチェック",
+  "japanese": "ステータスチェック（マージ前に通す必要がある自動チェック）",
   "category": "GitHub",
   "example_en": "Merging is blocked until the status check passes.",
   "example_ja": "ステータスチェックが通るまでマージはブロックされます。"
@@ -4482,7 +4482,7 @@
  {
   "id": 561,
   "english": "checkout the branch",
-  "japanese": "ブランチをチェックアウトする",
+  "japanese": "ブランチをチェックアウト（作業対象のブランチに切り替えること）",
   "category": "GitHub",
   "example_en": "Checkout the feature branch locally.",
   "example_ja": "feature ブランチをローカルにチェックアウトします。"
@@ -4562,7 +4562,7 @@
  {
   "id": 571,
   "english": "amend the commit",
-  "japanese": "コミットを修正する",
+  "japanese": "コミットを修正（直前のコミットを上書きして作り直すこと）",
   "category": "GitHub",
   "example_en": "Amend the commit to fix the message.",
   "example_ja": "メッセージを直すためコミットを修正します。"
@@ -4570,7 +4570,7 @@
  {
   "id": 572,
   "english": "cherry-pick a commit",
-  "japanese": "コミットをチェリーピックする",
+  "japanese": "コミットをチェリーピック（特定のコミットだけを選んで別ブランチに取り込むこと）",
   "category": "GitHub",
   "example_en": "Cherry-pick the fix onto the release branch.",
   "example_ja": "修正をリリースブランチにチェリーピックします。"
@@ -4578,7 +4578,7 @@
  {
   "id": 573,
   "english": "revert the commit",
-  "japanese": "コミットを取り消す",
+  "japanese": "コミットを取り消す（変更を打ち消す新しいコミットを作ること）",
   "category": "GitHub",
   "example_en": "Revert the commit that broke the build.",
   "example_ja": "ビルドを壊したコミットを取り消します。"
@@ -4586,7 +4586,7 @@
  {
   "id": 574,
   "english": "blame",
-  "japanese": "blame（行ごとの変更者表示）",
+  "japanese": "blame（各行を「誰がいつ変えたか」を一覧表示する機能）",
   "category": "GitHub",
   "example_en": "Use blame to find who changed the line.",
   "example_ja": "blame で誰が行を変えたか調べます。"
@@ -4594,7 +4594,7 @@
  {
   "id": 575,
   "english": "bisect",
-  "japanese": "二分探索でバグ特定",
+  "japanese": "bisect（コミットを半分ずつ試して、不具合の原因コミットを特定する手法）",
   "category": "GitHub",
   "example_en": "git bisect helps find the bad commit.",
   "example_ja": "git bisect は不具合コミットの特定を助けます。"
@@ -4602,7 +4602,7 @@
  {
   "id": 576,
   "english": "submodule",
-  "japanese": "サブモジュール",
+  "japanese": "サブモジュール（リポジトリの中に別のリポジトリを取り込む仕組み）",
   "category": "GitHub",
   "example_en": "Update the submodule to the latest.",
   "example_ja": "サブモジュールを最新に更新します。"
@@ -4610,7 +4610,7 @@
  {
   "id": 577,
   "english": "monorepo",
-  "japanese": "モノレポ",
+  "japanese": "モノレポ（複数のプロジェクトを1つのリポジトリでまとめて管理する方式）",
   "category": "GitHub",
   "example_en": "We keep all packages in a monorepo.",
   "example_ja": "すべてのパッケージをモノレポで管理しています。"
@@ -4674,7 +4674,7 @@
  {
   "id": 585,
   "english": "fork and pull model",
-  "japanese": "フォーク＆プル方式",
+  "japanese": "フォーク＆プル方式（フォークして変更し、本家に PR を送る進め方）",
   "category": "GitHub",
   "example_en": "We follow the fork and pull model.",
   "example_ja": "フォーク＆プル方式を採用しています。"
@@ -4682,7 +4682,7 @@
  {
   "id": 586,
   "english": "upstream repository",
-  "japanese": "上流リポジトリ",
+  "japanese": "上流リポジトリ（フォーク元の本家リポジトリ）",
   "category": "GitHub",
   "example_en": "Sync your fork with the upstream repository.",
   "example_ja": "フォークを上流リポジトリと同期します。"
@@ -4690,7 +4690,7 @@
  {
   "id": 587,
   "english": "sync the fork",
-  "japanese": "フォークを同期する",
+  "japanese": "フォークを同期（本家の最新変更を自分のフォークに取り込むこと）",
   "category": "GitHub",
   "example_en": "Sync the fork before starting work.",
   "example_ja": "作業開始前にフォークを同期します。"
@@ -4722,7 +4722,7 @@
  {
   "id": 591,
   "english": "personal access token",
-  "japanese": "個人アクセストークン",
+  "japanese": "個人アクセストークン（パスワード代わりに使う認証用の文字列）",
   "category": "GitHub",
   "example_en": "Authenticate with a personal access token.",
   "example_ja": "個人アクセストークンで認証します。"
@@ -4730,7 +4730,7 @@
  {
   "id": 592,
   "english": "two-factor authentication",
-  "japanese": "二要素認証",
+  "japanese": "二要素認証（パスワードに加え、もう一つの確認を要求する仕組み）",
   "category": "GitHub",
   "example_en": "Enable two-factor authentication on your account.",
   "example_ja": "アカウントで二要素認証を有効にします。"
@@ -4738,7 +4738,7 @@
  {
   "id": 593,
   "english": "organization",
-  "japanese": "組織（Organization）",
+  "japanese": "組織（Organization。複数のメンバーやリポジトリをまとめる単位）",
   "category": "GitHub",
   "example_en": "The repo belongs to an organization.",
   "example_ja": "このリポジトリは組織に属しています。"
@@ -4754,7 +4754,7 @@
  {
   "id": 595,
   "english": "collaborator",
-  "japanese": "コラボレーター（共同作業者）",
+  "japanese": "コラボレーター（リポジトリに招待された共同作業者）",
   "category": "GitHub",
   "example_en": "Invite a collaborator to the repo.",
   "example_ja": "リポジトリに共同作業者を招待します。"
@@ -4826,7 +4826,7 @@
  {
   "id": 604,
   "english": "GitHub Pages",
-  "japanese": "GitHub Pages（静的ホスティング）",
+  "japanese": "GitHub Pages（リポジトリから静的サイトを無料公開できる機能）",
   "category": "GitHub",
   "example_en": "The docs are hosted on GitHub Pages.",
   "example_ja": "ドキュメントは GitHub Pages でホストしています。"
@@ -4842,7 +4842,7 @@
  {
   "id": 606,
   "english": "topics",
-  "japanese": "トピック（タグ）",
+  "japanese": "トピック（リポジトリに付ける検索用のタグ）",
   "category": "GitHub",
   "example_en": "Add topics to help people find the repo.",
   "example_ja": "見つけてもらいやすいようトピックを追加します。"
@@ -4898,7 +4898,7 @@
  {
   "id": 613,
   "english": "outdated diff",
-  "japanese": "古くなった差分",
+  "japanese": "古くなった差分（その後の変更で対象行が変わった差分）",
   "category": "GitHub",
   "example_en": "This comment is on an outdated diff.",
   "example_ja": "このコメントは古くなった差分に付いています。"
@@ -4906,7 +4906,7 @@
  {
   "id": 614,
   "english": "rebase and merge",
-  "japanese": "リベースしてマージ",
+  "japanese": "リベースしてマージ（履歴を1本の直線に保ったまま取り込む方式）",
   "category": "GitHub",
   "example_en": "Use rebase and merge to keep linear history.",
   "example_ja": "直線的な履歴を保つためリベースしてマージします。"
@@ -4914,7 +4914,7 @@
  {
   "id": 615,
   "english": "merge commit",
-  "japanese": "マージコミット",
+  "japanese": "マージコミット（2つの流れを合流させた記録のコミット）",
   "category": "GitHub",
   "example_en": "This creates a merge commit.",
   "example_ja": "これはマージコミットを作成します。"
@@ -4922,7 +4922,7 @@
  {
   "id": 616,
   "english": "linear history",
-  "japanese": "直線的な履歴",
+  "japanese": "直線的な履歴（枝分かれのない、1本道のコミット履歴）",
   "category": "GitHub",
   "example_en": "We require a linear history.",
   "example_ja": "直線的な履歴を必須にしています。"
@@ -4930,7 +4930,7 @@
  {
   "id": 617,
   "english": "auto-merge",
-  "japanese": "自動マージ",
+  "japanese": "自動マージ（チェックが通ったら自動でマージする設定）",
   "category": "GitHub",
   "example_en": "Enable auto-merge once checks pass.",
   "example_ja": "チェック通過後に自動マージを有効にします。"
@@ -4954,7 +4954,7 @@
  {
   "id": 620,
   "english": "dependabot",
-  "japanese": "Dependabot（依存更新ボット）",
+  "japanese": "Dependabot（依存ライブラリの更新を自動で提案する GitHub のボット）",
   "category": "GitHub",
   "example_en": "Dependabot opened a PR to bump the version.",
   "example_ja": "Dependabot がバージョン更新の PR を作成しました。"
@@ -4970,7 +4970,7 @@
  {
   "id": 622,
   "english": "nit",
-  "japanese": "些細な指摘",
+  "japanese": "nit（直さなくても良いレベルの、細かい指摘）",
   "category": "PR Review",
   "example_en": "Nit: trailing whitespace on line 12.",
   "example_ja": "些細な点: 12行目に末尾の空白があります。"
@@ -5034,7 +5034,7 @@
  {
   "id": 630,
   "english": "let's revert this",
-  "japanese": "これを取り消そう",
+  "japanese": "これを取り消そう（変更を元に戻そう）",
   "category": "PR Review",
   "example_en": "Let's revert this and rethink the approach.",
   "example_ja": "これを取り消して方針を考え直しましょう。"
@@ -5266,7 +5266,7 @@
  {
   "id": 659,
   "english": "off-by-one",
-  "japanese": "1つずれている",
+  "japanese": "off-by-one（境界を1つ間違える、ありがちなズレのバグ）",
   "category": "PR Review",
   "example_en": "Looks like an off-by-one error.",
   "example_ja": "1つずれているエラーのようです。"
@@ -5314,7 +5314,7 @@
  {
   "id": 665,
   "english": "N plus one query",
-  "japanese": "N+1 クエリ問題",
+  "japanese": "N+1 クエリ問題（1件ごとに追加クエリが走り、件数分だけ遅くなる問題）",
   "category": "PR Review",
   "example_en": "This causes an N+1 query problem.",
   "example_ja": "これは N+1 クエリ問題を引き起こします。"
@@ -5410,7 +5410,7 @@
  {
   "id": 677,
   "english": "squash the commits",
-  "japanese": "コミットをまとめて",
+  "japanese": "コミットをまとめる（複数のコミットを1つに統合すること）",
   "category": "PR Review",
   "example_en": "Squash the commits before merging.",
   "example_ja": "マージ前にコミットをまとめてください。"
@@ -5434,7 +5434,7 @@
  {
   "id": 680,
   "english": "scope creep",
-  "japanese": "スコープの肥大化",
+  "japanese": "スコープの肥大化（当初の目的を超えて変更が膨らむこと）",
   "category": "PR Review",
   "example_en": "This PR has some scope creep.",
   "example_ja": "この PR はスコープが肥大化しています。"
@@ -5530,7 +5530,7 @@
  {
   "id": 692,
   "english": "happy path",
-  "japanese": "正常系（ハッピーパス）",
+  "japanese": "正常系（エラーが起きない、想定どおりの流れ）",
   "category": "PR Review",
   "example_en": "You only test the happy path here.",
   "example_ja": "ここでは正常系しかテストしていません。"
@@ -5722,7 +5722,7 @@
  {
   "id": 716,
   "english": "stamp",
-  "japanese": "形式的な承認（スタンプ）",
+  "japanese": "スタンプ承認（軽く目を通しての形式的な承認）",
   "category": "PR Review",
   "example_en": "Quick stamp; the change is trivial.",
   "example_ja": "形式的な承認です、変更は些細なので。"
@@ -5834,7 +5834,7 @@
  {
   "id": 730,
   "english": "leaky abstraction",
-  "japanese": "漏れのある抽象化",
+  "japanese": "漏れのある抽象化（内部の都合が外に漏れてしまう設計）",
   "category": "PR Review",
   "example_en": "This is a bit of a leaky abstraction.",
   "example_ja": "これは少し漏れのある抽象化です。"
@@ -5842,7 +5842,7 @@
  {
   "id": 731,
   "english": "tight coupling",
-  "japanese": "密結合",
+  "japanese": "密結合（部品どうしが強く依存し、変更しにくい状態）",
   "category": "PR Review",
   "example_en": "There's tight coupling to the database here.",
   "example_ja": "ここはデータベースと密結合しています。"
@@ -7558,5 +7558,365 @@
   "category": "Abbreviations",
   "example_en": "Write an RFC for the new design.",
   "example_ja": "新設計の RFC を書きます。"
+ },
+ {
+  "id": 946,
+  "english": "Accomplishing",
+  "japanese": "成し遂げ中（処理を進めている）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Accomplishing…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Accomplishing…」と表示します。"
+ },
+ {
+  "id": 947,
+  "english": "Actualizing",
+  "japanese": "具現化中（形にして実現させている）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Actualizing…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Actualizing…」と表示します。"
+ },
+ {
+  "id": 948,
+  "english": "Forming",
+  "japanese": "形にしている（組み立て中）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Forming…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Forming…」と表示します。"
+ },
+ {
+  "id": 949,
+  "english": "Brewing",
+  "japanese": "仕込み中（じっくり準備している）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Brewing…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Brewing…」と表示します。"
+ },
+ {
+  "id": 950,
+  "english": "Baking",
+  "japanese": "焼き上げ中（作っている）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Baking…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Baking…」と表示します。"
+ },
+ {
+  "id": 951,
+  "english": "Cooking",
+  "japanese": "調理中（作成している）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Cooking…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Cooking…」と表示します。"
+ },
+ {
+  "id": 952,
+  "english": "Crafting",
+  "japanese": "丹念に作成中",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Crafting…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Crafting…」と表示します。"
+ },
+ {
+  "id": 953,
+  "english": "Concocting",
+  "japanese": "練り上げ中（あれこれ調合している）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Concocting…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Concocting…」と表示します。"
+ },
+ {
+  "id": 954,
+  "english": "Conjuring",
+  "japanese": "呼び出し中（魔法のように生み出している）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Conjuring…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Conjuring…」と表示します。"
+ },
+ {
+  "id": 955,
+  "english": "Crunching",
+  "japanese": "データを処理中（計算をこなしている）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Crunching…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Crunching…」と表示します。"
+ },
+ {
+  "id": 956,
+  "english": "Computing",
+  "japanese": "計算中",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Computing…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Computing…」と表示します。"
+ },
+ {
+  "id": 957,
+  "english": "Churning",
+  "japanese": "せっせと処理中",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Churning…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Churning…」と表示します。"
+ },
+ {
+  "id": 958,
+  "english": "Cogitating",
+  "japanese": "熟考中（じっくり考えている）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Cogitating…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Cogitating…」と表示します。"
+ },
+ {
+  "id": 959,
+  "english": "Deliberating",
+  "japanese": "検討中（よく考えている）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Deliberating…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Deliberating…」と表示します。"
+ },
+ {
+  "id": 960,
+  "english": "Determining",
+  "japanese": "判断中（見極めている）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Determining…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Determining…」と表示します。"
+ },
+ {
+  "id": 961,
+  "english": "Distilling",
+  "japanese": "要点を抽出中（煮詰めている）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Distilling…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Distilling…」と表示します。"
+ },
+ {
+  "id": 962,
+  "english": "Envisioning",
+  "japanese": "思い描いている（構想中）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Envisioning…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Envisioning…」と表示します。"
+ },
+ {
+  "id": 963,
+  "english": "Forging",
+  "japanese": "鍛え上げ中（作り込んでいる）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Forging…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Forging…」と表示します。"
+ },
+ {
+  "id": 964,
+  "english": "Generating",
+  "japanese": "生成中",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Generating…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Generating…」と表示します。"
+ },
+ {
+  "id": 965,
+  "english": "Hatching",
+  "japanese": "生み出し中（孵化させている）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Hatching…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Hatching…」と表示します。"
+ },
+ {
+  "id": 966,
+  "english": "Ideating",
+  "japanese": "アイデアを練り中",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Ideating…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Ideating…」と表示します。"
+ },
+ {
+  "id": 967,
+  "english": "Incubating",
+  "japanese": "温め中（育てている）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Incubating…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Incubating…」と表示します。"
+ },
+ {
+  "id": 968,
+  "english": "Inferring",
+  "japanese": "推論中（推し量っている）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Inferring…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Inferring…」と表示します。"
+ },
+ {
+  "id": 969,
+  "english": "Manifesting",
+  "japanese": "具現化中（実体化させている）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Manifesting…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Manifesting…」と表示します。"
+ },
+ {
+  "id": 970,
+  "english": "Marinating",
+  "japanese": "寝かせ中（じっくり熟成させている）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Marinating…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Marinating…」と表示します。"
+ },
+ {
+  "id": 971,
+  "english": "Mulling",
+  "japanese": "じっくり考え中（思いを巡らせている）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Mulling…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Mulling…」と表示します。"
+ },
+ {
+  "id": 972,
+  "english": "Musing",
+  "japanese": "思案中（あれこれ考えている）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Musing…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Musing…」と表示します。"
+ },
+ {
+  "id": 973,
+  "english": "Noodling",
+  "japanese": "あれこれ試行中（気ままに考えている）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Noodling…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Noodling…」と表示します。"
+ },
+ {
+  "id": 974,
+  "english": "Percolating",
+  "japanese": "じわじわ考え中（浸透させている）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Percolating…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Percolating…」と表示します。"
+ },
+ {
+  "id": 975,
+  "english": "Pondering",
+  "japanese": "熟考中（深く考えている）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Pondering…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Pondering…」と表示します。"
+ },
+ {
+  "id": 976,
+  "english": "Processing",
+  "japanese": "処理中",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Processing…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Processing…」と表示します。"
+ },
+ {
+  "id": 977,
+  "english": "Puzzling",
+  "japanese": "頭をひねって考え中",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Puzzling…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Puzzling…」と表示します。"
+ },
+ {
+  "id": 978,
+  "english": "Reticulating",
+  "japanese": "組み上げ中（細かくつなぎ合わせている）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Reticulating…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Reticulating…」と表示します。"
+ },
+ {
+  "id": 979,
+  "english": "Ruminating",
+  "japanese": "反芻して考え中（何度も考え直している）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Ruminating…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Ruminating…」と表示します。"
+ },
+ {
+  "id": 980,
+  "english": "Simmering",
+  "japanese": "コトコト処理中（じっくり進めている）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Simmering…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Simmering…」と表示します。"
+ },
+ {
+  "id": 981,
+  "english": "Spinning",
+  "japanese": "ぐるぐる処理中（回して進めている）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Spinning…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Spinning…」と表示します。"
+ },
+ {
+  "id": 982,
+  "english": "Stewing",
+  "japanese": "じっくり煮込み中（思案している）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Stewing…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Stewing…」と表示します。"
+ },
+ {
+  "id": 983,
+  "english": "Synthesizing",
+  "japanese": "統合・合成中（まとめ上げている）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Synthesizing…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Synthesizing…」と表示します。"
+ },
+ {
+  "id": 984,
+  "english": "Thinking",
+  "japanese": "思考中（考えている）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Thinking…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Thinking…」と表示します。"
+ },
+ {
+  "id": 985,
+  "english": "Transmuting",
+  "japanese": "変換中（作り替えている）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Transmuting…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Transmuting…」と表示します。"
+ },
+ {
+  "id": 986,
+  "english": "Crystallizing",
+  "japanese": "結晶化中（考えを固めている）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Crystallizing…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Crystallizing…」と表示します。"
+ },
+ {
+  "id": 987,
+  "english": "Coalescing",
+  "japanese": "まとまりつつある（一つにしている）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Coalescing…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Coalescing…」と表示します。"
+ },
+ {
+  "id": 988,
+  "english": "Working",
+  "japanese": "作業中",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Working…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Working…」と表示します。"
+ },
+ {
+  "id": 989,
+  "english": "Wrangling",
+  "japanese": "調整中（手なずけて扱っている）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Wrangling…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Wrangling…」と表示します。"
+ },
+ {
+  "id": 990,
+  "english": "Vibing",
+  "japanese": "ノリで進行中（調子よく進めている）",
+  "category": "Claude Code",
+  "example_en": "Claude Code shows \"Vibing…\" while it works.",
+  "example_ja": "Claude Code は作業中に「Vibing…」と表示します。"
  }
 ]
