@@ -58,6 +58,12 @@ fun QuizScreen(
     }
 }
 
+private fun questionLabel(mode: QuizMode): String = when (mode) {
+    QuizMode.FILL_BLANK -> "空欄に入るフレーズは？"
+    QuizMode.ERROR_ANALYSIS -> "このエラーの意味は？"
+    QuizMode.DOC_READING -> "この英文の意味は？"
+}
+
 @Composable
 private fun QuestionView(
     s: QuizUiState,
@@ -66,6 +72,12 @@ private fun QuestionView(
 ) {
     val q = s.questions[s.index]
     Column(Modifier.fillMaxSize().padding(20.dp)) {
+        Text(
+            s.mode.title,
+            style = MaterialTheme.typography.titleLarge,
+            color = MaterialTheme.colorScheme.primary,
+        )
+        Spacer(Modifier.height(8.dp))
         LinearProgressIndicator(
             progress = { (s.index + 1f) / s.questions.size },
             modifier = Modifier.fillMaxWidth(),
@@ -77,6 +89,12 @@ private fun QuestionView(
             color = MaterialTheme.colorScheme.outline,
         )
         Spacer(Modifier.height(16.dp))
+
+        Text(
+            questionLabel(s.mode),
+            style = MaterialTheme.typography.titleMedium,
+        )
+        Spacer(Modifier.height(8.dp))
 
         Card(
             Modifier.fillMaxWidth(),

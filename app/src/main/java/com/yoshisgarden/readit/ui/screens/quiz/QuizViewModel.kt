@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 
 enum class QuizMode(val id: String, val title: String, val description: String) {
     FILL_BLANK("fill_blank", "穴埋め", "メッセージ文の空欄に入るフレーズを選ぶ"),
-    ERROR_ANALYSIS("error_analysis", "エラー解析", "このエラーの意味は？を4択で"),
+    ERROR_ANALYSIS("error_analysis", "エラー解析", "このエラーの意味は？を3択で"),
     DOC_READING("doc_reading", "読解", "短い英文の意味を選ぶ"),
 }
 
@@ -60,7 +60,8 @@ class QuizViewModel(private val repo: ReadItRepository) : ViewModel() {
     private fun buildQuestion(mode: QuizMode, p: Phrase, pool: List<Phrase>): QuizQuestion {
         return when (mode) {
             QuizMode.FILL_BLANK -> {
-                val blanked = if (p.exampleEn.contains(p.english, ignoreCase = true)) {
+                val contains = p.exampleEn.contains(p.english, ignoreCase = true)
+                val blanked = if (contains) {
                     p.exampleEn.replace(p.english, "______", ignoreCase = true)
                 } else {
                     "______ — ${p.exampleJa}"
@@ -73,7 +74,8 @@ class QuizViewModel(private val repo: ReadItRepository) : ViewModel() {
                     options = opts.first,
                     correctIndex = opts.second,
                     explanation = "${p.english} = ${p.japanese}",
-                    hint = "ヒント: ${p.japanese}",
+                    // Show the sentence's Japanese translation under the English prompt.
+                    hint = if (contains) p.exampleJa else "",
                 )
             }
             QuizMode.ERROR_ANALYSIS, QuizMode.DOC_READING -> {

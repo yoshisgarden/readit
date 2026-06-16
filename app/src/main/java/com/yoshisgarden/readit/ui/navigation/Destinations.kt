@@ -24,6 +24,6 @@ object Routes {
 enum class BottomTab(val route: String, val label: String, val icon: ImageVector) {
     HOME(Routes.HOME, "ホーム", Icons.Filled.Home),
     DICTIONARY(Routes.DICTIONARY, "辞書", Icons.Outlined.MenuBook),
-    QUIZ(Routes.QUIZ_SELECT, "テスト", Icons.Filled.Quiz),
+    QUIZ(Routes.QUIZ_SELECT, "クイズ", Icons.Filled.Quiz),
     FLASHCARD(Routes.FLASHCARD, "単語帳", Icons.Filled.Style),
 }

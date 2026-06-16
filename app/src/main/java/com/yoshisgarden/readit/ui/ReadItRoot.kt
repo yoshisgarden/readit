@@ -218,7 +218,7 @@ fun ReadItRoot() {
 private fun currentTitle(route: String?): String = when (route) {
     Routes.HOME -> "ReadIT"
     Routes.DICTIONARY -> "フレーズ辞書"
-    Routes.QUIZ_SELECT -> "練習テスト"
+    Routes.QUIZ_SELECT -> "クイズ"
     Routes.FLASHCARD -> "単語帳"
     else -> "ReadIT"
 }

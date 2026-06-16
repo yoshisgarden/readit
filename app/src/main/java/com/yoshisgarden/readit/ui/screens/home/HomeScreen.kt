@@ -122,7 +122,7 @@ fun HomeScreen(
         Spacer(Modifier.height(8.dp))
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             HomeAction("辞書", Icons.AutoMirrored.Filled.MenuBook, Modifier.weight(1f), onOpenDictionary)
-            HomeAction("テスト", Icons.Filled.Quiz, Modifier.weight(1f), onOpenQuiz)
+            HomeAction("クイズ", Icons.Filled.Quiz, Modifier.weight(1f), onOpenQuiz)
             HomeAction("進捗", Icons.Filled.LocalFireDepartment, Modifier.weight(1f), onOpenProgress)
         }
 
