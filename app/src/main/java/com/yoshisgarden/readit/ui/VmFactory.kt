@@ -23,7 +23,7 @@ object ReadItViewModels {
         initializer { DictionaryViewModel(app().container.repository) }
         initializer { QuizViewModel(app().container.repository) }
         initializer { FlashcardViewModel(app().container.repository) }
-        initializer { ProgressViewModel(app().container.repository) }
+        initializer { ProgressViewModel(app().container.repository, app().container.settingsStore) }
         initializer { SettingsViewModel(app().container.settingsStore) }
     }
 }

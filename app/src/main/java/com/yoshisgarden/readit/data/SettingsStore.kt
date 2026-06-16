@@ -22,6 +22,7 @@ data class AppSettings(
     val reminderEnabled: Boolean = false,
     val reminderHour: Int = 21,
     val reminderMinute: Int = 0,
+    val dailyGoalMin: Int = 10,
 )
 
 class SettingsStore(private val context: Context) {
@@ -32,6 +33,7 @@ class SettingsStore(private val context: Context) {
         val REMINDER_ON = booleanPreferencesKey("reminder_enabled")
         val REMINDER_HOUR = intPreferencesKey("reminder_hour")
         val REMINDER_MIN = intPreferencesKey("reminder_minute")
+        val DAILY_GOAL = intPreferencesKey("daily_goal_min")
     }
 
     val settings: Flow<AppSettings> = context.dataStore.data.map { p ->
@@ -43,6 +45,7 @@ class SettingsStore(private val context: Context) {
             reminderEnabled = p[Keys.REMINDER_ON] ?: false,
             reminderHour = p[Keys.REMINDER_HOUR] ?: 21,
             reminderMinute = p[Keys.REMINDER_MIN] ?: 0,
+            dailyGoalMin = p[Keys.DAILY_GOAL] ?: 10,
         )
     }
 
@@ -61,4 +64,7 @@ class SettingsStore(private val context: Context) {
             it[Keys.REMINDER_HOUR] = hour
             it[Keys.REMINDER_MIN] = minute
         }
+
+    suspend fun setDailyGoal(min: Int) =
+        context.dataStore.edit { it[Keys.DAILY_GOAL] = min }
 }

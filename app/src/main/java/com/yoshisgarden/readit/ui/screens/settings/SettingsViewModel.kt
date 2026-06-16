@@ -21,4 +21,5 @@ class SettingsViewModel(private val store: SettingsStore) : ViewModel() {
     fun setDynamicColor(on: Boolean) = viewModelScope.launch { store.setDynamicColor(on) }
     fun setReminder(enabled: Boolean, hour: Int, minute: Int) =
         viewModelScope.launch { store.setReminder(enabled, hour, minute) }
+    fun setDailyGoal(min: Int) = viewModelScope.launch { store.setDailyGoal(min) }
 }

@@ -5,9 +5,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -31,6 +33,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.yoshisgarden.readit.data.StudyLog
 import com.yoshisgarden.readit.ui.components.StatPill
@@ -68,9 +72,9 @@ fun ProgressScreen(
                 StatPill("${s.totalMinutes}分", "直近の学習", Modifier.weight(1f))
             }
             Spacer(Modifier.height(24.dp))
-            Text("学習時間（直近14日）", style = MaterialTheme.typography.titleMedium)
+            Text("学習時間（分・直近14日）", style = MaterialTheme.typography.titleMedium)
             Spacer(Modifier.height(12.dp))
-            BarChart(s.logs)
+            BarChart(s.logs, s.dailyGoalMin)
             Spacer(Modifier.height(24.dp))
             Text("習得フレーズ: ${s.progress.totalPhrases}", style = MaterialTheme.typography.bodyLarge)
         }
@@ -78,8 +82,7 @@ fun ProgressScreen(
 }
 
 @Composable
-private fun BarChart(logs: List<StudyLog>) {
-    val max = (logs.maxOfOrNull { it.durationMin } ?: 1).coerceAtLeast(1)
+private fun BarChart(logs: List<StudyLog>, goalMin: Int) {
     Card(Modifier.fillMaxWidth(), shape = RoundedCornerShape(16.dp)) {
         if (logs.isEmpty()) {
             Text(
@@ -89,50 +92,114 @@ private fun BarChart(logs: List<StudyLog>) {
             )
             return@Card
         }
-        Column {
-        // Scale label: bars are normalized to the largest value (adaptive scale).
-        Text(
-            "上限 ${max} 分（最大値に合わせて自動調整）",
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.outline,
-            modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 12.dp),
-        )
-        Row(
-            Modifier.fillMaxWidth().height(180.dp).padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
-            verticalAlignment = Alignment.Bottom,
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
-            logs.takeLast(14).forEach { log ->
-                val frac = log.durationMin.toFloat() / max
-                Column(
-                    Modifier.weight(1f),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Bottom,
-                ) {
-                    // minutes value above the bar
-                    Text(
-                        "${log.durationMin}",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                    Spacer(Modifier.height(2.dp))
-                    // fixed-width bar so a single day doesn't fill the whole card
+        val maxVal = logs.maxOf { it.durationMin }
+        val scaleMax = niceMax(maxOf(maxVal, goalMin, 1))
+        val chartHeight = 160.dp
+        val gridValues = listOf(scaleMax, scaleMax / 2, 0)
+        val gridColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)
+        val goalColor = Color(0xFFE53935)
+        val goalFrac = (goalMin.toFloat() / scaleMax).coerceIn(0f, 1f)
+        val days = logs.takeLast(14)
+
+        Column(Modifier.padding(16.dp)) {
+            Row(Modifier.fillMaxWidth().height(chartHeight)) {
+                // Y axis: minute labels at each gridline
+                Box(Modifier.fillMaxHeight().width(28.dp)) {
+                    gridValues.forEach { v ->
+                        val frac = v.toFloat() / scaleMax
+                        Text(
+                            "$v",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.outline,
+                            modifier = Modifier
+                                .align(Alignment.TopEnd)
+                                .offset(y = (chartHeight * (1f - frac) - 9.dp).coerceIn(0.dp, chartHeight - 16.dp))
+                                .padding(end = 4.dp),
+                        )
+                    }
+                }
+                // Plot area: gridlines + goal line + bars
+                Box(Modifier.weight(1f).fillMaxHeight()) {
+                    gridValues.forEach { v ->
+                        val frac = v.toFloat() / scaleMax
+                        Box(
+                            Modifier
+                                .fillMaxWidth()
+                                .height(1.dp)
+                                .align(Alignment.TopStart)
+                                .offset(y = chartHeight * (1f - frac))
+                                .background(gridColor),
+                        )
+                    }
+                    // red goal line
                     Box(
                         Modifier
-                            .width(20.dp)
-                            .height((120 * frac).dp.coerceAtLeast(4.dp))
-                            .clip(RoundedCornerShape(6.dp))
-                            .background(MaterialTheme.colorScheme.primary),
+                            .fillMaxWidth()
+                            .height(2.dp)
+                            .align(Alignment.TopStart)
+                            .offset(y = chartHeight * (1f - goalFrac))
+                            .background(goalColor),
                     )
-                    Spacer(Modifier.height(4.dp))
-                    Text(
-                        log.date.takeLast(2),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.outline,
-                    )
+                    Row(
+                        Modifier.fillMaxSize(),
+                        verticalAlignment = Alignment.Bottom,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    ) {
+                        days.forEach { log ->
+                            val frac = (log.durationMin.toFloat() / scaleMax).coerceIn(0f, 1f)
+                            Box(
+                                Modifier.weight(1f).fillMaxHeight(),
+                                contentAlignment = Alignment.BottomCenter,
+                            ) {
+                                if (log.durationMin > 0) {
+                                    Box(
+                                        Modifier
+                                            .width(18.dp)
+                                            .fillMaxHeight(frac.coerceAtLeast(0.02f))
+                                            .clip(RoundedCornerShape(topStart = 6.dp, topEnd = 6.dp))
+                                            .background(MaterialTheme.colorScheme.primary),
+                                    )
+                                }
+                            }
+                        }
+                    }
                 }
             }
-        }
+            // X axis: dates aligned under the bars
+            Spacer(Modifier.height(4.dp))
+            Row(Modifier.fillMaxWidth()) {
+                Spacer(Modifier.width(28.dp))
+                Row(
+                    Modifier.weight(1f),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    days.forEach { log ->
+                        Text(
+                            log.date.takeLast(2),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.outline,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.weight(1f),
+                        )
+                    }
+                }
+            }
+            Spacer(Modifier.height(10.dp))
+            Text(
+                "赤線＝目標 ${goalMin}分／日（縦軸の数字は分）",
+                style = MaterialTheme.typography.bodyMedium,
+                color = goalColor,
+            )
         }
     }
+}
+
+/** Round a max value up to a clean axis maximum. */
+private fun niceMax(v: Int): Int = when {
+    v <= 5 -> 5
+    v <= 10 -> 10
+    v <= 20 -> 20
+    v <= 30 -> 30
+    v <= 60 -> 60
+    else -> ((v + 29) / 30) * 30
 }

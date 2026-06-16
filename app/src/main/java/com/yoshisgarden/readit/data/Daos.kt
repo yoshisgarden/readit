@@ -32,9 +32,15 @@ interface PhraseDao {
     fun observeByCategory(category: String): Flow<List<Phrase>>
 
     @Query(
-        "SELECT * FROM phrases WHERE english LIKE '%' || :q || '%' " +
+        "SELECT * FROM phrases " +
+            "WHERE english LIKE '%' || :q || '%' " +
             "OR japanese LIKE '%' || :q || '%' " +
-            "OR exampleEn LIKE '%' || :q || '%' ORDER BY id",
+            "OR exampleEn LIKE '%' || :q || '%' " +
+            "ORDER BY CASE " +
+            "WHEN english LIKE :q || '%' THEN 0 " +
+            "WHEN english LIKE '%' || :q || '%' THEN 1 " +
+            "WHEN japanese LIKE :q || '%' THEN 2 " +
+            "ELSE 3 END, id",
     )
     fun search(q: String): Flow<List<Phrase>>
 

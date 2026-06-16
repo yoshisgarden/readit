@@ -147,6 +147,24 @@ fun SettingsScreen(
             }
 
             Spacer(Modifier.height(20.dp))
+            SectionTitle("学習目標")
+            Text(
+                "1日の学習時間の目標です。進捗グラフに赤い目標ラインとして表示されます。",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            Spacer(Modifier.height(8.dp))
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                listOf(5, 10, 15, 30).forEach { g ->
+                    FilterChip(
+                        selected = s.dailyGoalMin == g,
+                        onClick = { vm.setDailyGoal(g) },
+                        label = { Text("${g}分") },
+                    )
+                }
+            }
+
+            Spacer(Modifier.height(20.dp))
             SectionTitle("開発支援（任意）")
             Text(
                 "ReadIT は個人が無料・広告なしで開発・配布しています。応援いただける方は下記から支援できます。金額は自由・完全に任意で、アプリの機能には一切影響しません。",
