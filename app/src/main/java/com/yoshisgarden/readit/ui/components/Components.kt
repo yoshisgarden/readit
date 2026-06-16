@@ -208,9 +208,10 @@ fun JapaneseMeaning(
     val term = text.substring(0, idx)
     val meaning = text.substring(idx).trim('（', '）')
     var show by remember(text) { mutableStateOf(false) }
-    val density = LocalDensity.current
 
-    Box {
+    // Inline reveal (no floating Popup, so it never intercepts other taps such as
+    // the bottom navigation). Tap the term to toggle the meaning bubble.
+    Column {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
@@ -229,25 +230,20 @@ fun JapaneseMeaning(
             )
         }
         if (show) {
-            Popup(
-                alignment = Alignment.TopStart,
-                offset = IntOffset(0, with(density) { 34.dp.roundToPx() }),
-                onDismissRequest = { show = false },
+            Spacer(Modifier.size(4.dp))
+            Surface(
+                shape = RoundedCornerShape(10.dp),
+                color = MaterialTheme.colorScheme.inverseSurface,
+                shadowElevation = 4.dp,
             ) {
-                Surface(
-                    shape = RoundedCornerShape(10.dp),
-                    color = MaterialTheme.colorScheme.inverseSurface,
-                    shadowElevation = 6.dp,
-                ) {
-                    Text(
-                        meaning,
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.inverseOnSurface,
-                        modifier = Modifier
-                            .widthIn(max = 260.dp)
-                            .padding(horizontal = 12.dp, vertical = 8.dp),
-                    )
-                }
+                Text(
+                    meaning,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.inverseOnSurface,
+                    modifier = Modifier
+                        .widthIn(max = 280.dp)
+                        .padding(horizontal = 12.dp, vertical = 8.dp),
+                )
             }
         }
     }

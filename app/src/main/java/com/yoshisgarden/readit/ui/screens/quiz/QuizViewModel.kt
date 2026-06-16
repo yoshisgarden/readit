@@ -82,8 +82,13 @@ class QuizViewModel(private val repo: ReadItRepository) : ViewModel() {
                     options = opts.first,
                     correctIndex = opts.second,
                     explanation = "${p.english} = ${p.japanese}",
-                    // Show the sentence's Japanese translation under the English prompt.
-                    hint = if (contains) p.exampleJa else "",
+                    // Japanese translation as a hint, but mask the answer term if it
+                    // appears verbatim in the translation (e.g. acronyms like "GUI").
+                    hint = if (contains) {
+                        p.exampleJa.replace(p.english, "______", ignoreCase = true)
+                    } else {
+                        ""
+                    },
                 )
             }
             QuizMode.ERROR_ANALYSIS, QuizMode.DOC_READING -> {

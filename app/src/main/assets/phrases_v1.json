@@ -10,7 +10,7 @@
  {
   "id": 2,
   "english": "required parameter",
-  "japanese": "必須パラメータ",
+  "japanese": "必須パラメータ（必ず指定する入力値）",
   "category": "API Docs",
   "example_en": "The id is a required parameter.",
   "example_ja": "id は必須パラメータです。"
@@ -26,7 +26,7 @@
  {
   "id": 4,
   "english": "default value",
-  "japanese": "デフォルト値",
+  "japanese": "デフォルト値（指定しないときに使われる既定の値）",
   "category": "API Docs",
   "example_en": "If omitted, the default value is 10.",
   "example_ja": "省略時のデフォルト値は 10 です。"
@@ -42,7 +42,7 @@
  {
   "id": 6,
   "english": "endpoint",
-  "japanese": "エンドポイント",
+  "japanese": "エンドポイント（API の接続先 URL）",
   "category": "API Docs",
   "example_en": "Send a POST request to this endpoint.",
   "example_ja": "このエンドポイントに POST リクエストを送ります。"
@@ -50,7 +50,7 @@
  {
   "id": 7,
   "english": "request body",
-  "japanese": "リクエストボディ",
+  "japanese": "リクエストボディ（送信する本体データ）",
   "category": "API Docs",
   "example_en": "The request body must be valid JSON.",
   "example_ja": "リクエストボディは正しい JSON である必要があります。"
@@ -58,7 +58,7 @@
  {
   "id": 8,
   "english": "authentication token",
-  "japanese": "認証トークン",
+  "japanese": "認証トークン（本人確認に使う文字列）",
   "category": "API Docs",
   "example_en": "Include your authentication token in the header.",
   "example_ja": "ヘッダーに認証トークンを含めてください。"
@@ -90,7 +90,7 @@
  {
   "id": 12,
   "english": "query parameter",
-  "japanese": "クエリパラメータ",
+  "japanese": "クエリパラメータ（URL に ?key=value で付ける入力）",
   "category": "API Docs",
   "example_en": "Pass the filter as a query parameter.",
   "example_ja": "フィルターはクエリパラメータとして渡します。"
@@ -122,7 +122,7 @@
  {
   "id": 16,
   "english": "response schema",
-  "japanese": "レスポンススキーマ",
+  "japanese": "レスポンススキーマ（応答データの構造の定義）",
   "category": "API Docs",
   "example_en": "The response schema is described below.",
   "example_ja": "レスポンススキーマは以下に記載しています。"
@@ -130,7 +130,7 @@
  {
   "id": 17,
   "english": "status code",
-  "japanese": "ステータスコード",
+  "japanese": "ステータスコード（処理結果を表す番号。200・404 など）",
   "category": "API Docs",
   "example_en": "A status code of 200 indicates success.",
   "example_ja": "ステータスコード 200 は成功を示します。"
@@ -170,7 +170,7 @@
  {
   "id": 22,
   "english": "base URL",
-  "japanese": "ベース URL",
+  "japanese": "ベース URL（全リクエストに共通する先頭の URL）",
   "category": "API Docs",
   "example_en": "All requests share the same base URL.",
   "example_ja": "すべてのリクエストは同じベース URL を使います。"
@@ -178,7 +178,7 @@
  {
   "id": 23,
   "english": "header",
-  "japanese": "ヘッダー",
+  "japanese": "ヘッダー（本文とは別に送る付加情報）",
   "category": "API Docs",
   "example_en": "Set the Content-Type header to application/json.",
   "example_ja": "Content-Type ヘッダーを application/json に設定します。"
@@ -202,7 +202,7 @@
  {
   "id": 26,
   "english": "API key",
-  "japanese": "API キー",
+  "japanese": "API キー（利用者を識別する鍵となる文字列）",
   "category": "API Docs",
   "example_en": "Keep your API key secret.",
   "example_ja": "API キーは秘密に保ってください。"
@@ -562,7 +562,7 @@
  {
   "id": 71,
   "english": "sandbox environment",
-  "japanese": "サンドボックス環境",
+  "japanese": "サンドボックス環境（試験用の隔離された環境）",
   "category": "API Docs",
   "example_en": "Test your integration in the sandbox environment.",
   "example_ja": "連携はサンドボックス環境でテストしてください。"
@@ -674,7 +674,7 @@
  {
   "id": 85,
   "english": "resource",
-  "japanese": "リソース",
+  "japanese": "リソース（API が扱う対象データ）",
   "category": "API Docs",
   "example_en": "Each user is a separate resource.",
   "example_ja": "各ユーザーは個別のリソースです。"
@@ -682,7 +682,7 @@
  {
   "id": 86,
   "english": "object reference",
-  "japanese": "オブジェクト参照",
+  "japanese": "オブジェクト参照（実体ではなく場所を指す値）",
   "category": "API Docs",
   "example_en": "The response contains an object reference, not the full object.",
   "example_ja": "レスポンスには完全なオブジェクトではなく参照が含まれます。"
@@ -746,7 +746,7 @@
  {
   "id": 94,
   "english": "access token",
-  "japanese": "アクセストークン",
+  "japanese": "アクセストークン（API 利用を許可する一時的な鍵）",
   "category": "API Docs",
   "example_en": "Exchange the code for an access token.",
   "example_ja": "認可コードをアクセストークンに交換します。"
@@ -754,7 +754,7 @@
  {
   "id": 95,
   "english": "refresh token",
-  "japanese": "リフレッシュトークン",
+  "japanese": "リフレッシュトークン（アクセストークンを再発行する鍵）",
   "category": "API Docs",
   "example_en": "Use the refresh token to get a new access token.",
   "example_ja": "新しいアクセストークンを得るにはリフレッシュトークンを使います。"
@@ -770,7 +770,7 @@
  {
   "id": 97,
   "english": "grant type",
-  "japanese": "グラントタイプ（認可方式）",
+  "japanese": "グラントタイプ（OAuth の認可方式）",
   "category": "API Docs",
   "example_en": "Set the grant type to authorization_code.",
   "example_ja": "grant type を authorization_code に設定します。"
@@ -778,7 +778,7 @@
  {
   "id": 98,
   "english": "redirect URI",
-  "japanese": "リダイレクト URI",
+  "japanese": "リダイレクト URI（認証後に戻ってくる URL）",
   "category": "API Docs",
   "example_en": "The redirect URI must match exactly.",
   "example_ja": "リダイレクト URI は完全に一致する必要があります。"
@@ -786,7 +786,7 @@
  {
   "id": 99,
   "english": "client secret",
-  "japanese": "クライアントシークレット",
+  "japanese": "クライアントシークレット（アプリの秘密の合言葉）",
   "category": "API Docs",
   "example_en": "Never expose the client secret in the browser.",
   "example_ja": "クライアントシークレットをブラウザに露出させてはいけません。"
@@ -810,7 +810,7 @@
  {
   "id": 102,
   "english": "path parameter",
-  "japanese": "パスパラメータ",
+  "japanese": "パスパラメータ（URL の一部として渡す値）",
   "category": "API Docs",
   "example_en": "The id is a path parameter.",
   "example_ja": "id はパスパラメータです。"
@@ -818,7 +818,7 @@
  {
   "id": 103,
   "english": "request header",
-  "japanese": "リクエストヘッダー",
+  "japanese": "リクエストヘッダー（リクエストに添える付加情報）",
   "category": "API Docs",
   "example_en": "Include the API version in a request header.",
   "example_ja": "API バージョンをリクエストヘッダーに含めます。"
@@ -826,7 +826,7 @@
  {
   "id": 104,
   "english": "response header",
-  "japanese": "レスポンスヘッダー",
+  "japanese": "レスポンスヘッダー（応答に添えられる付加情報）",
   "category": "API Docs",
   "example_en": "The rate limit is shown in a response header.",
   "example_ja": "レート制限はレスポンスヘッダーに表示されます。"
@@ -834,7 +834,7 @@
  {
   "id": 105,
   "english": "content type",
-  "japanese": "コンテンツタイプ",
+  "japanese": "コンテンツタイプ（データ形式の指定。application/json 等）",
   "category": "API Docs",
   "example_en": "The content type must be application/json.",
   "example_ja": "コンテンツタイプは application/json でなければなりません。"
@@ -858,7 +858,7 @@
  {
   "id": 108,
   "english": "nested object",
-  "japanese": "ネストしたオブジェクト",
+  "japanese": "ネストしたオブジェクト（入れ子になったデータ）",
   "category": "API Docs",
   "example_en": "The address is a nested object.",
   "example_ja": "address はネストしたオブジェクトです。"
@@ -874,7 +874,7 @@
  {
   "id": 110,
   "english": "key-value pair",
-  "japanese": "キーと値の組",
+  "japanese": "キーと値の組（名前と中身のペア）",
   "category": "API Docs",
   "example_en": "Metadata is a set of key-value pairs.",
   "example_ja": "metadata はキーと値の組の集合です。"
@@ -882,7 +882,7 @@
  {
   "id": 111,
   "english": "unique identifier",
-  "japanese": "一意の識別子",
+  "japanese": "一意の識別子（重複しない ID）",
   "category": "API Docs",
   "example_en": "Each object has a unique identifier.",
   "example_ja": "各オブジェクトには一意の識別子があります。"
@@ -890,7 +890,7 @@
  {
   "id": 112,
   "english": "timestamp",
-  "japanese": "タイムスタンプ",
+  "japanese": "タイムスタンプ（日時を表す値）",
   "category": "API Docs",
   "example_en": "The created timestamp is in ISO 8601.",
   "example_ja": "作成タイムスタンプは ISO 8601 形式です。"
@@ -898,7 +898,7 @@
  {
   "id": 113,
   "english": "boolean flag",
-  "japanese": "真偽値フラグ",
+  "japanese": "真偽値フラグ（true / false の切り替え値）",
   "category": "API Docs",
   "example_en": "active is a boolean flag.",
   "example_ja": "active は真偽値フラグです。"
@@ -930,7 +930,7 @@
  {
   "id": 117,
   "english": "validation error",
-  "japanese": "バリデーションエラー",
+  "japanese": "バリデーションエラー（入力チェックで弾かれたエラー）",
   "category": "API Docs",
   "example_en": "A 422 indicates a validation error.",
   "example_ja": "422 はバリデーションエラーを示します。"
@@ -938,7 +938,7 @@
  {
   "id": 118,
   "english": "error response",
-  "japanese": "エラーレスポンス",
+  "japanese": "エラーレスポンス（失敗時に返ってくる応答）",
   "category": "API Docs",
   "example_en": "The error response includes a message and code.",
   "example_ja": "エラーレスポンスにはメッセージとコードが含まれます。"
@@ -946,7 +946,7 @@
  {
   "id": 119,
   "english": "error code",
-  "japanese": "エラーコード",
+  "japanese": "エラーコード（エラーの種類を表す値）",
   "category": "API Docs",
   "example_en": "Check the error code to handle failures.",
   "example_ja": "失敗を処理するにはエラーコードを確認します。"
@@ -1082,7 +1082,7 @@
  {
   "id": 136,
   "english": "secret key",
-  "japanese": "シークレットキー",
+  "japanese": "シークレットキー（署名などに使う秘密の鍵）",
   "category": "API Docs",
   "example_en": "Sign the request with your secret key.",
   "example_ja": "シークレットキーでリクエストに署名します。"
@@ -1090,7 +1090,7 @@
  {
   "id": 137,
   "english": "public key",
-  "japanese": "公開鍵",
+  "japanese": "公開鍵（検証に使う、公開してよい鍵）",
   "category": "API Docs",
   "example_en": "Verify the token with the public key.",
   "example_ja": "公開鍵でトークンを検証します。"
@@ -1434,7 +1434,7 @@
  {
   "id": 180,
   "english": "streaming response",
-  "japanese": "ストリーミングレスポンス",
+  "japanese": "ストリーミングレスポンス（少しずつ流れてくる応答）",
   "category": "API Docs",
   "example_en": "This endpoint returns a streaming response.",
   "example_ja": "このエンドポイントはストリーミングレスポンスを返します。"
@@ -1658,7 +1658,7 @@
  {
   "id": 208,
   "english": "null pointer exception",
-  "japanese": "ヌル参照例外",
+  "japanese": "ヌル参照例外（null を参照して起きるエラー）",
   "category": "Error Messages",
   "example_en": "NullPointerException at line 42.",
   "example_ja": "42行目でヌル参照例外。"
@@ -1706,7 +1706,7 @@
  {
   "id": 214,
   "english": "stack trace",
-  "japanese": "スタックトレース",
+  "japanese": "スタックトレース（エラー時の呼び出し履歴）",
   "category": "Error Messages",
   "example_en": "See the stack trace for details.",
   "example_ja": "詳細はスタックトレースを参照してください。"
@@ -1802,7 +1802,7 @@
  {
   "id": 226,
   "english": "segmentation fault",
-  "japanese": "セグメンテーション違反",
+  "japanese": "セグメンテーション違反（不正なメモリ参照による異常終了）",
   "category": "Error Messages",
   "example_en": "Segmentation fault (core dumped).",
   "example_ja": "セグメンテーション違反（コアダンプ）。"
@@ -1810,7 +1810,7 @@
  {
   "id": 227,
   "english": "stack overflow",
-  "japanese": "スタックオーバーフロー",
+  "japanese": "スタックオーバーフロー（再帰が深すぎてメモリを使い果たすエラー）",
   "category": "Error Messages",
   "example_en": "StackOverflowError: too much recursion.",
   "example_ja": "スタックオーバーフロー: 再帰が深すぎます。"
@@ -1818,7 +1818,7 @@
  {
   "id": 228,
   "english": "deadlock detected",
-  "japanese": "デッドロックを検出",
+  "japanese": "デッドロックを検出（互いに待ち合って処理が進まない状態）",
   "category": "Error Messages",
   "example_en": "Deadlock detected between two threads.",
   "example_ja": "2つのスレッド間でデッドロックを検出しました。"
@@ -2042,7 +2042,7 @@
  {
   "id": 256,
   "english": "parse error",
-  "japanese": "解析エラー",
+  "japanese": "解析エラー（データの読み取りに失敗するエラー）",
   "category": "Error Messages",
   "example_en": "JSON parse error at position 12.",
   "example_ja": "JSON 解析エラー（位置 12）。"
@@ -2106,7 +2106,7 @@
  {
   "id": 264,
   "english": "deadlock found",
-  "japanese": "デッドロックを発見",
+  "japanese": "デッドロックを発見（互いに待ち合って処理が進まない状態）",
   "category": "Error Messages",
   "example_en": "Deadlock found when trying to get lock.",
   "example_ja": "ロック取得時にデッドロックを発見しました。"
@@ -2218,7 +2218,7 @@
  {
   "id": 278,
   "english": "compilation error",
-  "japanese": "コンパイルエラー",
+  "japanese": "コンパイルエラー（ソースを機械語に変換できないエラー）",
   "category": "Error Messages",
   "example_en": "Compilation error: 3 errors found.",
   "example_ja": "コンパイルエラー: 3件のエラー。"
@@ -2314,7 +2314,7 @@
  {
   "id": 290,
   "english": "linker error",
-  "japanese": "リンカエラー",
+  "japanese": "リンカエラー（プログラムを結合する段階で起きるエラー）",
   "category": "Error Messages",
   "example_en": "Linker error: undefined symbol.",
   "example_ja": "リンカエラー: 未定義のシンボル。"
@@ -4010,7 +4010,7 @@
  {
   "id": 502,
   "english": "pull request",
-  "japanese": "プルリクエスト",
+  "japanese": "プルリクエスト（変更の取り込みを依頼する仕組み）",
   "category": "GitHub",
   "example_en": "I've opened a pull request for review.",
   "example_ja": "レビュー用にプルリクエストを作成しました。"
@@ -4018,7 +4018,7 @@
  {
   "id": 503,
   "english": "merge conflict",
-  "japanese": "マージ競合（同じ箇所への変更がぶつかり、自動で合体できない状態）",
+  "japanese": "マージ競合（同じ箇所への変更がぶつかり自動で合体できない状態）",
   "category": "GitHub",
   "example_en": "There's a merge conflict in the README.",
   "example_ja": "README でマージ競合が発生しています。"
@@ -4490,7 +4490,7 @@
  {
   "id": 562,
   "english": "feature branch",
-  "japanese": "フィーチャーブランチ",
+  "japanese": "フィーチャーブランチ（機能開発用に切るブランチ）",
   "category": "GitHub",
   "example_en": "Do the work on a feature branch.",
   "example_ja": "作業はフィーチャーブランチで行います。"
@@ -4530,7 +4530,7 @@
  {
   "id": 567,
   "english": "diff view",
-  "japanese": "差分ビュー",
+  "japanese": "差分ビュー（変更箇所を見る表示）",
   "category": "GitHub",
   "example_en": "Switch to the unified diff view.",
   "example_ja": "統合差分ビューに切り替えます。"
@@ -4538,7 +4538,7 @@
  {
   "id": 568,
   "english": "inline comment",
-  "japanese": "インラインコメント",
+  "japanese": "インラインコメント（コードの特定行に付けるコメント）",
   "category": "GitHub",
   "example_en": "Leave an inline comment on that line.",
   "example_ja": "その行にインラインコメントを残します。"
@@ -4698,7 +4698,7 @@
  {
   "id": 588,
   "english": "remote",
-  "japanese": "リモート",
+  "japanese": "リモート（ネット上のリポジトリ）",
   "category": "GitHub",
   "example_en": "Add the upstream as a second remote.",
   "example_ja": "upstream を2つ目のリモートとして追加します。"
@@ -4954,7 +4954,7 @@
  {
   "id": 620,
   "english": "dependabot",
-  "japanese": "Dependabot（依存ライブラリの更新を自動で提案する GitHub のボット）",
+  "japanese": "Dependabot（依存ライブラリの更新を自動提案する GitHub のボット）",
   "category": "GitHub",
   "example_en": "Dependabot opened a PR to bump the version.",
   "example_ja": "Dependabot がバージョン更新の PR を作成しました。"
@@ -5122,7 +5122,7 @@
  {
   "id": 641,
   "english": "edge case",
-  "japanese": "エッジケース",
+  "japanese": "エッジケース（端や例外的な条件のこと）",
   "category": "PR Review",
   "example_en": "What happens in the empty edge case?",
   "example_ja": "空のエッジケースではどうなりますか？"
