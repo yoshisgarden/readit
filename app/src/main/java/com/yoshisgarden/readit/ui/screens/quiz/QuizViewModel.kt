@@ -23,6 +23,7 @@ data class QuizQuestion(
     val options: List<String>,
     val correctIndex: Int,
     val explanation: String,
+    val hint: String = "",
 )
 
 data class QuizUiState(
@@ -42,7 +43,7 @@ class QuizViewModel(private val repo: ReadItRepository) : ViewModel() {
     private val _state = MutableStateFlow(QuizUiState())
     val state: StateFlow<QuizUiState> = _state.asStateFlow()
 
-    fun start(mode: QuizMode, count: Int = 8) {
+    fun start(mode: QuizMode, count: Int = 6) {
         _state.value = QuizUiState(mode = mode, loading = true)
         viewModelScope.launch {
             val pool = when (mode) {
@@ -72,6 +73,7 @@ class QuizViewModel(private val repo: ReadItRepository) : ViewModel() {
                     options = opts.first,
                     correctIndex = opts.second,
                     explanation = "${p.english} = ${p.japanese}",
+                    hint = "ヒント: ${p.japanese}",
                 )
             }
             QuizMode.ERROR_ANALYSIS, QuizMode.DOC_READING -> {
@@ -90,7 +92,7 @@ class QuizViewModel(private val repo: ReadItRepository) : ViewModel() {
 
     /** Builds a 4-option list including [correct] and returns (options, correctIndex). */
     private fun optionsFrom(correct: String, others: List<String>): Pair<List<String>, Int> {
-        val distractors = others.filter { it != correct }.distinct().shuffled().take(3)
+        val distractors = others.filter { it != correct }.distinct().shuffled().take(2)
         val all = (distractors + correct).shuffled()
         return all to all.indexOf(correct)
     }

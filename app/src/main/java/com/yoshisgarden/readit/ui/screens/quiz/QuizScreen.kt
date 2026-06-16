@@ -93,6 +93,14 @@ private fun QuestionView(
                 ),
             )
         }
+        if (q.hint.isNotEmpty()) {
+            Spacer(Modifier.height(8.dp))
+            Text(
+                q.hint,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.secondary,
+            )
+        }
         Spacer(Modifier.height(20.dp))
 
         q.options.forEachIndexed { i, opt ->
