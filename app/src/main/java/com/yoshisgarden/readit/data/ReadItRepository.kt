@@ -152,6 +152,9 @@ class ReadItRepository(
     /** Today's date as "yyyy-MM-dd" in the device's zone (matches study-log keys). */
     fun today(): String = LocalDate.now(ZoneId.systemDefault()).toString()
 
+    /** Local epoch-day (rolls over at local midnight, not UTC) — for day-based picks. */
+    fun todayEpochDay(): Long = LocalDate.now(ZoneId.systemDefault()).toEpochDay()
+
     /** Records study activity for today and recomputes streak / phase. */
     suspend fun recordStudy(durationMin: Int, phrasesStudied: Int) {
         val zone = ZoneId.systemDefault()

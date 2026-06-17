@@ -32,12 +32,16 @@ class HomeViewModel(private val repo: ReadItRepository) : ViewModel() {
             repo.allPhrases(),
         ) { progress, due, logs, phrases ->
             val p = progress ?: UserProgress()
+            // Pick by *local* epoch-day so it rolls over at local midnight (not UTC 0:00).
             val pod = if (phrases.isEmpty()) null
-            else phrases[(System.currentTimeMillis() / 86_400_000L % phrases.size).toInt()]
+            else phrases[(repo.todayEpochDay() % phrases.size).toInt()]
+            // Only count today's log as "今日の学習" — otherwise the most recent (e.g.
+            // yesterday's) row would show under today's label after midnight.
+            val today = repo.today()
             HomeUiState(
                 progress = p,
                 dueCount = due,
-                todayLog = logs.firstOrNull(),
+                todayLog = logs.firstOrNull()?.takeIf { it.date == today },
                 phaseProgress = Phases.progressInPhase(p.totalPhrases),
                 phaseLabel = "Phase ${p.currentPhase}",
                 phaseGoal = phaseGoal(p),
