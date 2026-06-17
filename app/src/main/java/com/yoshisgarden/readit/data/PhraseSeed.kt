@@ -18,6 +18,13 @@ data class PhraseJson(
 object PhraseSeed {
     private val json = Json { ignoreUnknownKeys = true }
 
+    /**
+     * Bump this whenever the *content* of phrases_v1.json changes without the entry
+     * count changing. Existing installs re-import the bundled phrases when their stored
+     * seed version is older than this (favorites & SRS progress are preserved).
+     */
+    const val SEED_VERSION = 2
+
     /** Reads and parses the bundled seed phrases. */
     fun load(context: Context): List<Phrase> {
         val text = context.assets.open("phrases_v1.json")

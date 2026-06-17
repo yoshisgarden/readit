@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.HelpOutline
 import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.filled.Insights
 import androidx.compose.material.icons.filled.Menu
@@ -44,6 +45,7 @@ import com.yoshisgarden.readit.ui.screens.dictionary.DictionaryScreen
 import com.yoshisgarden.readit.ui.screens.dictionary.DictionaryViewModel
 import com.yoshisgarden.readit.ui.screens.dictionary.PhraseDetailScreen
 import com.yoshisgarden.readit.ui.screens.flashcard.FlashcardScreen
+import com.yoshisgarden.readit.ui.screens.help.HelpScreen
 import com.yoshisgarden.readit.ui.screens.home.HomeScreen
 import com.yoshisgarden.readit.ui.screens.progress.ProgressScreen
 import com.yoshisgarden.readit.ui.screens.quiz.QuizScreen
@@ -91,6 +93,16 @@ fun ReadItRoot() {
                     onClick = {
                         scope.launch { drawerState.close() }
                         navController.navigate(Routes.SETTINGS)
+                    },
+                    modifier = Modifier.padding(horizontal = 12.dp),
+                )
+                NavigationDrawerItem(
+                    icon = { Icon(Icons.AutoMirrored.Filled.HelpOutline, null) },
+                    label = { Text("ヘルプ") },
+                    selected = currentRoute == Routes.HELP,
+                    onClick = {
+                        scope.launch { drawerState.close() }
+                        navController.navigate(Routes.HELP)
                     },
                     modifier = Modifier.padding(horizontal = 12.dp),
                 )
@@ -209,6 +221,9 @@ fun ReadItRoot() {
                         vm = viewModel(factory = ReadItViewModels.Factory),
                         onBack = { navController.popBackStack() },
                     )
+                }
+                composable(Routes.HELP) {
+                    HelpScreen(onBack = { navController.popBackStack() })
                 }
             }
         }

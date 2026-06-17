@@ -698,7 +698,7 @@
  {
   "id": 88,
   "english": "as a fallback",
-  "japanese": "フォールバックとして",
+  "japanese": "フォールバックとして（うまくいかない時の予備手段）",
   "category": "API Docs",
   "example_en": "Polling is provided as a fallback.",
   "example_ja": "ポーリングはフォールバックとして提供されています。"
@@ -1122,7 +1122,7 @@
  {
   "id": 141,
   "english": "decode the token",
-  "japanese": "トークンをデコードする",
+  "japanese": "トークンをデコードする（符号化された文字列を元に戻す）",
   "category": "API Docs",
   "example_en": "Decode the token to read its claims.",
   "example_ja": "クレームを読むにはトークンをデコードします。"
@@ -1666,7 +1666,7 @@
  {
   "id": 209,
   "english": "timed out",
-  "japanese": "タイムアウトした",
+  "japanese": "タイムアウトした（制限時間を超えて打ち切られた）",
   "category": "Error Messages",
   "example_en": "The request timed out after 30 seconds.",
   "example_ja": "リクエストは30秒でタイムアウトしました。"
@@ -1858,7 +1858,7 @@
  {
   "id": 233,
   "english": "internal server error",
-  "japanese": "サーバー内部エラー",
+  "japanese": "サーバー内部エラー（サーバー側で起きた想定外のエラー。HTTP 500）",
   "category": "Error Messages",
   "example_en": "500 Internal Server Error.",
   "example_ja": "500 サーバー内部エラー。"
@@ -2114,7 +2114,7 @@
  {
   "id": 265,
   "english": "lock wait timeout",
-  "japanese": "ロック待ちタイムアウト",
+  "japanese": "ロック待ちタイムアウト（他の処理のロック解放を待ちきれず中断）",
   "category": "Error Messages",
   "example_en": "Lock wait timeout exceeded.",
   "example_ja": "ロック待ちのタイムアウトを超過しました。"
@@ -2162,7 +2162,7 @@
  {
   "id": 271,
   "english": "indentation error",
-  "japanese": "インデントエラー",
+  "japanese": "インデントエラー（字下げの不一致による構文エラー）",
   "category": "Error Messages",
   "example_en": "IndentationError: unexpected indent.",
   "example_ja": "インデントエラー: 予期しないインデント。"
@@ -2178,7 +2178,7 @@
  {
   "id": 273,
   "english": "key error",
-  "japanese": "キーエラー",
+  "japanese": "キーエラー（存在しないキーを参照した）",
   "category": "Error Messages",
   "example_en": "KeyError: 'user_id'.",
   "example_ja": "キーエラー: 'user_id'。"
@@ -2186,7 +2186,7 @@
  {
   "id": 274,
   "english": "value error",
-  "japanese": "値エラー",
+  "japanese": "値エラー（値の形式や範囲が正しくない）",
   "category": "Error Messages",
   "example_en": "ValueError: invalid literal for int().",
   "example_ja": "値エラー: int() に無効なリテラルです。"
@@ -2202,7 +2202,7 @@
  {
   "id": 276,
   "english": "assertion failed",
-  "japanese": "アサーション失敗",
+  "japanese": "アサーション失敗（想定した条件が満たされなかった）",
   "category": "Error Messages",
   "example_en": "AssertionError: expected true.",
   "example_ja": "アサーション失敗: true を期待しました。"
@@ -2266,7 +2266,7 @@
  {
   "id": 284,
   "english": "version conflict",
-  "japanese": "バージョン競合",
+  "japanese": "バージョン競合（必要なバージョンが食い違う）",
   "category": "Error Messages",
   "example_en": "Dependency version conflict detected.",
   "example_ja": "依存関係のバージョン競合を検出しました。"
@@ -2354,7 +2354,7 @@
  {
   "id": 295,
   "english": "timeout exceeded",
-  "japanese": "タイムアウト超過",
+  "japanese": "タイムアウト超過（制限時間を超えた）",
   "category": "Error Messages",
   "example_en": "Test timeout exceeded after 5000ms.",
   "example_ja": "テストが5000ms でタイムアウトを超過しました。"
@@ -2450,7 +2450,7 @@
  {
   "id": 307,
   "english": "borrow checker error",
-  "japanese": "借用チェッカーのエラー",
+  "japanese": "借用チェッカーのエラー（Rust が参照の安全性を検査して出すエラー）",
   "category": "Error Messages",
   "example_en": "error: cannot borrow `x` as mutable more than once.",
   "example_ja": "エラー: `x` を可変として二重に借用できません。"
@@ -2522,7 +2522,7 @@
  {
   "id": 316,
   "english": "manifest merger failed",
-  "japanese": "マニフェストのマージ失敗",
+  "japanese": "マニフェストのマージ失敗（Android の設定ファイル統合に失敗）",
   "category": "Error Messages",
   "example_en": "Manifest merger failed: duplicate permission.",
   "example_ja": "マニフェストのマージ失敗: 権限の重複。"
@@ -2642,7 +2642,7 @@
  {
   "id": 331,
   "english": "connection pool exhausted",
-  "japanese": "コネクションプール枯渇",
+  "japanese": "コネクションプール枯渇（再利用する接続の在庫を使い切った）",
   "category": "Error Messages",
   "example_en": "Connection pool exhausted.",
   "example_ja": "コネクションプールが枯渇しました。"
@@ -2682,7 +2682,7 @@
  {
   "id": 336,
   "english": "mixed content",
-  "japanese": "混在コンテンツ",
+  "japanese": "混在コンテンツ（HTTPS ページ内に HTTP の要素が混ざる状態）",
   "category": "Error Messages",
   "example_en": "Mixed content: HTTPS page loaded HTTP resource.",
   "example_ja": "混在コンテンツ: HTTPS ページが HTTP リソースを読み込みました。"
@@ -2994,7 +2994,7 @@
  {
   "id": 375,
   "english": "exit status",
-  "japanese": "終了ステータス",
+  "japanese": "終了ステータス（プログラム終了時の結果コード。0 は成功）",
   "category": "CLI / Terminal",
   "example_en": "Check the exit status with echo $?.",
   "example_ja": "echo $? で終了ステータスを確認します。"
@@ -3042,7 +3042,7 @@
  {
   "id": 381,
   "english": "working tree clean",
-  "japanese": "作業ツリーはクリーン",
+  "japanese": "作業ツリーはクリーン（未コミットの変更がない状態）",
   "category": "CLI / Terminal",
   "example_en": "nothing to commit, working tree clean.",
   "example_ja": "コミットするものはなく、作業ツリーはクリーンです。"
@@ -3258,7 +3258,7 @@
  {
   "id": 408,
   "english": "global install",
-  "japanese": "グローバルインストール",
+  "japanese": "グローバルインストール（システム全体で使えるよう導入）",
   "category": "CLI / Terminal",
   "example_en": "npm install -g installs globally.",
   "example_ja": "npm install -g はグローバルにインストールします。"
@@ -3266,7 +3266,7 @@
  {
   "id": 409,
   "english": "clean install",
-  "japanese": "クリーンインストール",
+  "japanese": "クリーンインストール（既存を消して新規に導入）",
   "category": "CLI / Terminal",
   "example_en": "npm ci does a clean install.",
   "example_ja": "npm ci はクリーンインストールを行います。"
@@ -3274,7 +3274,7 @@
  {
   "id": 410,
   "english": "build the image",
-  "japanese": "イメージをビルドする",
+  "japanese": "イメージをビルドする（コンテナの元になるひな型を作る）",
   "category": "CLI / Terminal",
   "example_en": "docker build -t app . builds the image.",
   "example_ja": "docker build -t app . はイメージをビルドします。"
@@ -3322,7 +3322,7 @@
  {
   "id": 416,
   "english": "current directory",
-  "japanese": "カレントディレクトリ",
+  "japanese": "カレントディレクトリ（今いるフォルダ）",
   "category": "CLI / Terminal",
   "example_en": "The dot means the current directory.",
   "example_ja": "ドットはカレントディレクトリを意味します。"
@@ -3330,7 +3330,7 @@
  {
   "id": 417,
   "english": "parent directory",
-  "japanese": "親ディレクトリ",
+  "japanese": "親ディレクトリ（1つ上のフォルダ）",
   "category": "CLI / Terminal",
   "example_en": "Two dots mean the parent directory.",
   "example_ja": "ドット2つは親ディレクトリを意味します。"
@@ -3338,7 +3338,7 @@
  {
   "id": 418,
   "english": "home directory",
-  "japanese": "ホームディレクトリ",
+  "japanese": "ホームディレクトリ（ユーザー専用の基点フォルダ）",
   "category": "CLI / Terminal",
   "example_en": "The tilde stands for the home directory.",
   "example_ja": "チルダはホームディレクトリを表します。"
@@ -3714,7 +3714,7 @@
  {
   "id": 465,
   "english": "bring to foreground",
-  "japanese": "フォアグラウンドに戻す",
+  "japanese": "フォアグラウンドに戻す（操作対象として画面の手前に戻す）",
   "category": "CLI / Terminal",
   "example_en": "fg brings a job to the foreground.",
   "example_ja": "fg はジョブをフォアグラウンドに戻します。"
@@ -3834,7 +3834,7 @@
  {
   "id": 480,
   "english": "silent mode",
-  "japanese": "サイレントモード",
+  "japanese": "サイレントモード（メッセージを出さない動作）",
   "category": "CLI / Terminal",
   "example_en": "curl -s runs in silent mode.",
   "example_ja": "curl -s はサイレントモードで実行します。"
@@ -3850,7 +3850,7 @@
  {
   "id": 482,
   "english": "check connectivity",
-  "japanese": "疎通を確認する",
+  "japanese": "疎通を確認する（通信が届くか確かめる）",
   "category": "CLI / Terminal",
   "example_en": "ping checks connectivity to a host.",
   "example_ja": "ping はホストへの疎通を確認します。"
@@ -3882,7 +3882,7 @@
  {
   "id": 486,
   "english": "the shell prompt",
-  "japanese": "シェルのプロンプト",
+  "japanese": "シェルのプロンプト（コマンド入力を待つ記号）",
   "category": "CLI / Terminal",
   "example_en": "The dollar sign is the shell prompt.",
   "example_ja": "ドル記号はシェルのプロンプトです。"
@@ -3890,7 +3890,7 @@
  {
   "id": 487,
   "english": "escape the space",
-  "japanese": "スペースをエスケープする",
+  "japanese": "スペースをエスケープする（特殊文字を普通の文字として扱わせる）",
   "category": "CLI / Terminal",
   "example_en": "Escape the space with a backslash.",
   "example_ja": "バックスラッシュでスペースをエスケープします。"
@@ -3986,7 +3986,7 @@
  {
   "id": 499,
   "english": "background job",
-  "japanese": "バックグラウンドジョブ",
+  "japanese": "バックグラウンドジョブ（裏で動かす処理）",
   "category": "CLI / Terminal",
   "example_en": "List background jobs with jobs.",
   "example_ja": "jobs でバックグラウンドジョブを一覧表示します。"
@@ -4138,7 +4138,7 @@
  {
   "id": 518,
   "english": "clone the repository",
-  "japanese": "リポジトリをクローンする",
+  "japanese": "リポジトリをクローンする（複製して手元に取得する）",
   "category": "GitHub",
   "example_en": "Clone the repository to get started.",
   "example_ja": "まずリポジトリをクローンします。"
@@ -4162,7 +4162,7 @@
  {
   "id": 521,
   "english": "branch protection rule",
-  "japanese": "ブランチ保護ルール",
+  "japanese": "ブランチ保護ルール（特定ブランチへの直接変更を制限する設定）",
   "category": "GitHub",
   "example_en": "A branch protection rule requires reviews.",
   "example_ja": "ブランチ保護ルールがレビューを必須にしています。"
@@ -4234,7 +4234,7 @@
  {
   "id": 530,
   "english": "mention a user",
-  "japanese": "ユーザーにメンションする",
+  "japanese": "ユーザーにメンションする（@ で相手に通知する）",
   "category": "GitHub",
   "example_en": "Mention the maintainer to get attention.",
   "example_ja": "注意を引くためメンテナにメンションします。"
@@ -4250,7 +4250,7 @@
  {
   "id": 532,
   "english": "watch the repository",
-  "japanese": "リポジトリをウォッチする",
+  "japanese": "リポジトリをウォッチする（更新通知を受け取る登録）",
   "category": "GitHub",
   "example_en": "Watch the repository to get notifications.",
   "example_ja": "通知を受け取るためリポジトリをウォッチします。"
@@ -4266,7 +4266,7 @@
  {
   "id": 534,
   "english": "open source",
-  "japanese": "オープンソース",
+  "japanese": "オープンソース（ソースコードが公開され誰でも利用・改変できる）",
   "category": "GitHub",
   "example_en": "The project is fully open source.",
   "example_ja": "このプロジェクトは完全にオープンソースです。"
@@ -4642,7 +4642,7 @@
  {
   "id": 581,
   "english": "license",
-  "japanese": "ライセンス",
+  "japanese": "ライセンス（利用条件を定めた許諾）",
   "category": "GitHub",
   "example_en": "The project uses the MIT license.",
   "example_ja": "このプロジェクトは MIT ライセンスです。"
@@ -4658,7 +4658,7 @@
  {
   "id": 583,
   "english": "discussions",
-  "japanese": "ディスカッション",
+  "japanese": "ディスカッション（GitHub の話し合い用の場）",
   "category": "GitHub",
   "example_en": "Ask questions in Discussions.",
   "example_ja": "質問は Discussions でどうぞ。"
@@ -4802,7 +4802,7 @@
  {
   "id": 601,
   "english": "archive the repository",
-  "japanese": "リポジトリをアーカイブする",
+  "japanese": "リポジトリをアーカイブする（読み取り専用にして保管する）",
   "category": "GitHub",
   "example_en": "Archive the repository when it's no longer maintained.",
   "example_ja": "保守しなくなったらリポジトリをアーカイブします。"
@@ -4866,7 +4866,7 @@
  {
   "id": 609,
   "english": "contribution graph",
-  "japanese": "コントリビューショングラフ",
+  "japanese": "コントリビューショングラフ（活動量を日々の升目で示す図）",
   "category": "GitHub",
   "example_en": "The contribution graph shows your activity.",
   "example_ja": "コントリビューショングラフは活動を表示します。"
@@ -5154,7 +5154,7 @@
  {
   "id": 645,
   "english": "memory leak",
-  "japanese": "メモリリーク",
+  "japanese": "メモリリーク（使い終えたメモリを解放せず消費し続ける不具合）",
   "category": "PR Review",
   "example_en": "This listener could cause a memory leak.",
   "example_ja": "このリスナーはメモリリークを起こす可能性があります。"
@@ -5162,7 +5162,7 @@
  {
   "id": 646,
   "english": "magic number",
-  "japanese": "マジックナンバー",
+  "japanese": "マジックナンバー（意味の分からない直書きの数値）",
   "category": "PR Review",
   "example_en": "Extract this magic number into a constant.",
   "example_ja": "このマジックナンバーを定数に切り出してください。"
@@ -5378,7 +5378,7 @@
  {
   "id": 673,
   "english": "as a follow-up",
-  "japanese": "フォローアップとして",
+  "japanese": "フォローアップとして（あとで対応する追加作業として）",
   "category": "PR Review",
   "example_en": "We can do this as a follow-up.",
   "example_ja": "これはフォローアップとして対応できます。"
@@ -5458,7 +5458,7 @@
  {
   "id": 683,
   "english": "accidental commit",
-  "japanese": "誤コミット",
+  "japanese": "誤コミット（あやまって記録してしまった変更）",
   "category": "PR Review",
   "example_en": "Looks like an accidental commit of a log file.",
   "example_ja": "ログファイルの誤コミットのようです。"
@@ -5474,7 +5474,7 @@
  {
   "id": 685,
   "english": "commented-out code",
-  "japanese": "コメントアウトされたコード",
+  "japanese": "コメントアウトされたコード（注釈にして無効化した未使用コード）",
   "category": "PR Review",
   "example_en": "Delete this commented-out code.",
   "example_ja": "このコメントアウトされたコードを削除してください。"
@@ -5514,7 +5514,7 @@
  {
   "id": 690,
   "english": "test coverage",
-  "japanese": "テストカバレッジ",
+  "japanese": "テストカバレッジ（テストがコードを網羅している割合）",
   "category": "PR Review",
   "example_en": "Test coverage dropped by 3%.",
   "example_ja": "テストカバレッジが3%下がりました。"
@@ -5826,7 +5826,7 @@
  {
   "id": 729,
   "english": "prefer composition",
-  "japanese": "コンポジションを優先",
+  "japanese": "コンポジションを優先（継承より部品の組み合わせで設計する）",
   "category": "PR Review",
   "example_en": "Prefer composition over inheritance here.",
   "example_ja": "ここは継承よりコンポジションを優先してください。"
@@ -6554,7 +6554,7 @@
  {
   "id": 820,
   "english": "the trade-off is",
-  "japanese": "トレードオフは〜",
+  "japanese": "トレードオフは〜（何かを得る代わりに何かを失う関係）",
   "category": "Claude Code",
   "example_en": "The trade-off is slightly more memory.",
   "example_ja": "トレードオフはメモリが少し増えることです。"

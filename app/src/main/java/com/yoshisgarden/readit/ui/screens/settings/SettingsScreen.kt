@@ -1,7 +1,6 @@
 package com.yoshisgarden.readit.ui.screens.settings
 
 import android.app.TimePickerDialog
-import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -22,10 +21,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -45,14 +42,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.core.net.toUri
-import com.yoshisgarden.readit.BuildConfig
 import com.yoshisgarden.readit.notif.ReminderScheduler
 import com.yoshisgarden.readit.ui.theme.AppTheme
 import com.yoshisgarden.readit.ui.theme.DarkModePref
 import com.yoshisgarden.readit.ui.theme.colorSchemeFor
-
-private const val STRIPE_URL = "https://buy.stripe.com/6oU7sEgo3ehH01F2kO8g002"
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -164,32 +157,9 @@ fun SettingsScreen(
                 }
             }
 
-            Spacer(Modifier.height(20.dp))
-            SectionTitle("開発支援（任意）")
-            Text(
-                "ReadIT は個人が無料・広告なしで開発・配布しています。応援いただける方は下記から支援できます。金額は自由・完全に任意で、アプリの機能には一切影響しません。",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-            Spacer(Modifier.height(12.dp))
-            FilledTonalButton(
-                onClick = { context.openUrl(STRIPE_URL) },
-                modifier = Modifier.fillMaxWidth(),
-            ) {
-                Icon(Icons.Filled.Favorite, null)
-                Spacer(Modifier.size(8.dp))
-                Text("☕ 開発を支援する（Stripe）")
-            }
-            Text(
-                "カード / Google Pay 対応",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.outline,
-                modifier = Modifier.padding(top = 4.dp),
-            )
-
             Spacer(Modifier.height(24.dp))
             Text(
-                "ReadIT v${BuildConfig.VERSION_NAME}  ·  Yoshi's Garden",
+                "使い方・バージョン情報・開発支援は、メニューの「ヘルプ」にあります。",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.outline,
                 modifier = Modifier.fillMaxWidth(),
@@ -274,10 +244,4 @@ private fun darkLabel(mode: DarkModePref) = when (mode) {
     DarkModePref.SYSTEM -> "端末に従う"
     DarkModePref.LIGHT -> "ライト"
     DarkModePref.DARK -> "ダーク"
-}
-
-private fun android.content.Context.openUrl(url: String) {
-    runCatching {
-        startActivity(Intent(Intent.ACTION_VIEW, url.toUri()).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
-    }
 }

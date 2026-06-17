@@ -63,13 +63,18 @@ class ReadItRepository(
     suspend fun ensureSeeded() {
         val bundled = PhraseSeed.load(context)
         val current = phraseDao.count()
-        // Re-seed when the bundled phrase set changes (e.g. app update adds phrases).
-        // Favorites are carried over by matching the English text.
-        if (current != bundled.size) {
+        val prefs = context.getSharedPreferences("seed", Context.MODE_PRIVATE)
+        val storedSeed = prefs.getInt("seed_version", 0)
+        // Re-seed when the bundled phrase set changes — either the entry count changed
+        // (app update adds phrases) OR the content was revised (SEED_VERSION bumped).
+        // Favorites are carried over by matching the English text; phrase ids are stable
+        // so flashcard/SRS progress (keyed by id) is preserved.
+        if (current != bundled.size || storedSeed < PhraseSeed.SEED_VERSION) {
             val favorites = if (current > 0) phraseDao.favoriteEnglishes() else emptyList()
             phraseDao.clearAll()
             phraseDao.insertAll(bundled)
             if (favorites.isNotEmpty()) phraseDao.markFavoritesByEnglish(favorites)
+            prefs.edit().putInt("seed_version", PhraseSeed.SEED_VERSION).apply()
         }
         if (progressDao.get() == null) {
             progressDao.upsert(

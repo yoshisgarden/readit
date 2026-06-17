@@ -16,6 +16,7 @@ object Routes {
     const val FLASHCARD = "flashcard"
     const val PROGRESS = "progress"
     const val SETTINGS = "settings"
+    const val HELP = "help"
 
     fun detail(id: Long) = "$DETAIL/$id"
     fun quiz(mode: String) = "$QUIZ/$mode"
