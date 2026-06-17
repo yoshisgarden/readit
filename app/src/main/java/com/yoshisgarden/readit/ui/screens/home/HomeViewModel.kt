@@ -65,10 +65,10 @@ class HomeViewModel(private val repo: ReadItRepository) : ViewModel() {
     private fun phaseGoal(p: UserProgress): String = when (p.currentPhase) {
         1 -> "Claude Code のメッセージ・エラー文を即読み（あと ${
             (Phases.PHASE_2_THRESHOLD - p.totalPhrases).coerceAtLeast(0)
-        } フレーズで Phase 2）"
+        } で Phase 2）"
         2 -> "README・API ドキュメントを辞書なしで理解（あと ${
             (Phases.PHASE_3_THRESHOLD - p.totalPhrases).coerceAtLeast(0)
-        } フレーズで Phase 3）"
+        } で Phase 3）"
         else -> "実務直結で読む — 到達おめでとうございます！"
     }
 }

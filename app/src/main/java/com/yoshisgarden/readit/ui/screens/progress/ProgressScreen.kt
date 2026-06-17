@@ -84,7 +84,7 @@ fun ProgressScreen(
             Spacer(Modifier.height(12.dp))
             BarChart(s.logs, s.dailyGoalMin)
             Spacer(Modifier.height(24.dp))
-            Text("習得フレーズ: ${s.progress.totalPhrases}", style = MaterialTheme.typography.bodyLarge)
+            Text("のべ学習量: ${s.progress.totalPhrases}", style = MaterialTheme.typography.bodyLarge)
         }
     }
 }

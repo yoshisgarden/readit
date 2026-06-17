@@ -74,7 +74,7 @@ fun HomeScreen(
             )
             StatPill(
                 value = "${s.progress.totalPhrases}",
-                label = "習得フレーズ",
+                label = "のべ学習量",
                 modifier = Modifier.weight(1f),
             )
             StatPill(
