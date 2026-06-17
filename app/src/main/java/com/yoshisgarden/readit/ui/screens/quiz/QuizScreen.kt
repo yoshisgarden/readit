@@ -27,8 +27,15 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
+
+// Result colors — kept independent of the (often pink) theme so 正解/不正解 read at a glance.
+private val CorrectGreen = Color(0xFF2E7D32)
+private val CorrectContainer = Color(0xFFC8E6C9)
+private val WrongRed = Color(0xFFC62828)
+private val WrongContainer = Color(0xFFFFCDD2)
 
 @Composable
 fun QuizScreen(
@@ -124,9 +131,15 @@ private fun QuestionView(
         q.options.forEachIndexed { i, opt ->
             val container = when {
                 !s.answered -> MaterialTheme.colorScheme.surface
-                i == q.correctIndex -> MaterialTheme.colorScheme.primaryContainer
-                i == s.selected -> MaterialTheme.colorScheme.errorContainer
+                i == q.correctIndex -> CorrectContainer
+                i == s.selected -> WrongContainer
                 else -> MaterialTheme.colorScheme.surface
+            }
+            val content = when {
+                !s.answered -> MaterialTheme.colorScheme.onSurface
+                i == q.correctIndex -> CorrectGreen
+                i == s.selected -> WrongRed
+                else -> MaterialTheme.colorScheme.onSurface
             }
             OutlinedButton(
                 onClick = { onSelect(i) },
@@ -134,6 +147,9 @@ private fun QuestionView(
                 modifier = Modifier.fillMaxWidth().padding(vertical = 5.dp),
                 colors = androidx.compose.material3.ButtonDefaults.outlinedButtonColors(
                     containerColor = container,
+                    contentColor = content,
+                    disabledContainerColor = container,
+                    disabledContentColor = content,
                 ),
             ) {
                 Text(
@@ -147,20 +163,30 @@ private fun QuestionView(
         if (s.answered) {
             val correct = s.selected == q.correctIndex
             Spacer(Modifier.height(14.dp))
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(
-                    if (correct) Icons.Filled.CheckCircle else Icons.Filled.Cancel,
-                    contentDescription = null,
-                    tint = if (correct) MaterialTheme.colorScheme.primary
-                    else MaterialTheme.colorScheme.error,
-                )
-                Spacer(Modifier.size(8.dp))
-                Text(
-                    if (correct) "正解！" else "不正解",
-                    style = MaterialTheme.typography.titleMedium,
-                    color = if (correct) MaterialTheme.colorScheme.primary
-                    else MaterialTheme.colorScheme.error,
-                )
+            // Filled banner so the result reads at a glance: green = correct, red = wrong.
+            Card(
+                Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(14.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = if (correct) CorrectGreen else WrongRed,
+                ),
+            ) {
+                Row(
+                    Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Icon(
+                        if (correct) Icons.Filled.CheckCircle else Icons.Filled.Cancel,
+                        contentDescription = null,
+                        tint = androidx.compose.ui.graphics.Color.White,
+                    )
+                    Spacer(Modifier.size(8.dp))
+                    Text(
+                        if (correct) "正解！" else "不正解",
+                        style = MaterialTheme.typography.titleMedium,
+                        color = androidx.compose.ui.graphics.Color.White,
+                    )
+                }
             }
             Spacer(Modifier.height(10.dp))
             Card(

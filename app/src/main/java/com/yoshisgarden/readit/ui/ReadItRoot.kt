@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.HelpOutline
 import androidx.compose.material.icons.automirrored.filled.MenuBook
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Insights
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.PlayArrow
@@ -51,6 +52,7 @@ import com.yoshisgarden.readit.ui.screens.progress.ProgressScreen
 import com.yoshisgarden.readit.ui.screens.quiz.QuizScreen
 import com.yoshisgarden.readit.ui.screens.quiz.QuizSelectScreen
 import com.yoshisgarden.readit.ui.screens.settings.SettingsScreen
+import com.yoshisgarden.readit.ui.screens.version.VersionScreen
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -103,6 +105,16 @@ fun ReadItRoot() {
                     onClick = {
                         scope.launch { drawerState.close() }
                         navController.navigate(Routes.HELP)
+                    },
+                    modifier = Modifier.padding(horizontal = 12.dp),
+                )
+                NavigationDrawerItem(
+                    icon = { Icon(Icons.Filled.Info, null) },
+                    label = { Text("バージョン情報") },
+                    selected = currentRoute == Routes.VERSION,
+                    onClick = {
+                        scope.launch { drawerState.close() }
+                        navController.navigate(Routes.VERSION)
                     },
                     modifier = Modifier.padding(horizontal = 12.dp),
                 )
@@ -224,6 +236,9 @@ fun ReadItRoot() {
                 }
                 composable(Routes.HELP) {
                     HelpScreen(onBack = { navController.popBackStack() })
+                }
+                composable(Routes.VERSION) {
+                    VersionScreen(onBack = { navController.popBackStack() })
                 }
             }
         }

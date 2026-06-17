@@ -17,6 +17,7 @@ object Routes {
     const val PROGRESS = "progress"
     const val SETTINGS = "settings"
     const val HELP = "help"
+    const val VERSION = "version"
 
     fun detail(id: Long) = "$DETAIL/$id"
     fun quiz(mode: String) = "$QUIZ/$mode"

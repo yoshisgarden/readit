@@ -24,8 +24,8 @@ android {
         applicationId = "com.yoshisgarden.readit"
         minSdk = 31
         targetSdk = 35
-        versionCode = 16
-        versionName = "1.1.14"
+        versionCode = 17
+        versionName = "1.1.15"
         vectorDrawables { useSupportLibrary = true }
     }
 

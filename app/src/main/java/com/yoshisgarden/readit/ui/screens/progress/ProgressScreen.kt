@@ -80,7 +80,7 @@ fun ProgressScreen(
                 recordedDays = s.recordedDays,
             )
             Spacer(Modifier.height(24.dp))
-            Text("学習時間（分・直近14日）", style = MaterialTheme.typography.titleMedium)
+            Text("学習時間（直近14日）", style = MaterialTheme.typography.titleMedium)
             Spacer(Modifier.height(12.dp))
             BarChart(s.logs, s.dailyGoalMin)
             Spacer(Modifier.height(24.dp))
@@ -164,6 +164,12 @@ private fun BarChart(logs: List<StudyLog>, goalMin: Int) {
         val days = logs.takeLast(14)
 
         Column(Modifier.padding(16.dp)) {
+            Text(
+                "（分）",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.outline,
+            )
+            Spacer(Modifier.height(2.dp))
             Row(Modifier.fillMaxWidth().height(chartHeight)) {
                 // Y axis: minute labels at each gridline
                 Box(Modifier.fillMaxHeight().width(28.dp)) {
@@ -248,7 +254,7 @@ private fun BarChart(logs: List<StudyLog>, goalMin: Int) {
             }
             Spacer(Modifier.height(10.dp))
             Text(
-                "赤線＝目標 ${goalMin}分／日（縦軸の数字は分）",
+                "赤線＝目標",
                 style = MaterialTheme.typography.bodyMedium,
                 color = goalColor,
             )

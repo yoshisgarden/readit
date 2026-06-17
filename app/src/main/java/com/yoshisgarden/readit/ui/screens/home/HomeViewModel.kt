@@ -7,9 +7,12 @@ import com.yoshisgarden.readit.data.Phrase
 import com.yoshisgarden.readit.data.ReadItRepository
 import com.yoshisgarden.readit.data.StudyLog
 import com.yoshisgarden.readit.data.UserProgress
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
 
 data class HomeUiState(
@@ -24,13 +27,23 @@ data class HomeUiState(
 
 class HomeViewModel(private val repo: ReadItRepository) : ViewModel() {
 
+    // Re-emits the local date every minute so date-derived fields (today's study,
+    // phrase of the day) refresh when the day rolls over even while the app stays open.
+    private val dayTick: Flow<Long> = flow {
+        while (true) {
+            emit(repo.todayEpochDay())
+            delay(60_000L)
+        }
+    }
+
     val state: StateFlow<HomeUiState> =
         combine(
             repo.progress(),
             repo.studyableCount(),
             repo.recentLogs(1),
             repo.allPhrases(),
-        ) { progress, due, logs, phrases ->
+            dayTick,
+        ) { progress, due, logs, phrases, _ ->
             val p = progress ?: UserProgress()
             // Pick by *local* epoch-day so it rolls over at local midnight (not UTC 0:00).
             val pod = if (phrases.isEmpty()) null

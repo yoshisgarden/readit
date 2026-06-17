@@ -23,7 +23,7 @@ object PhraseSeed {
      * count changing. Existing installs re-import the bundled phrases when their stored
      * seed version is older than this (favorites & SRS progress are preserved).
      */
-    const val SEED_VERSION = 2
+    const val SEED_VERSION = 3
 
     /** Reads and parses the bundled seed phrases. */
     fun load(context: Context): List<Phrase> {

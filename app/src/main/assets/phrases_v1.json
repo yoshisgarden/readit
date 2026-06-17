@@ -117,7 +117,7 @@
   "japanese": "何度実行しても結果が同じ（べき等）",
   "category": "API Docs",
   "example_en": "This operation is idempotent.",
-  "example_ja": "この操作は冪等です。"
+  "example_ja": "この操作はべき等です。"
  },
  {
   "id": 16,
@@ -1069,7 +1069,7 @@
   "japanese": "べき等キー（再送しても二重に処理されないようにする識別子）",
   "category": "API Docs",
   "example_en": "Pass an idempotency key to avoid duplicates.",
-  "example_ja": "重複を避けるには冪等キーを渡します。"
+  "example_ja": "重複を避けるにはべき等キーを渡します。"
  },
  {
   "id": 135,
