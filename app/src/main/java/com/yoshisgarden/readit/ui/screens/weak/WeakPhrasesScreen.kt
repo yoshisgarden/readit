@@ -36,7 +36,7 @@ import com.yoshisgarden.readit.data.WeakPhrase
 import com.yoshisgarden.readit.ui.components.splitMeaning
 
 /**
- * Phrases the user has answered 知らない / うっすら at least once, most-missed first,
+ * Phrases the user has missed at least once, most-missed first,
  * with a shortcut to run a flashcard session over the worst offenders.
  */
 @OptIn(ExperimentalMaterial3Api::class)

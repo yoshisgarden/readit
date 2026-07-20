@@ -6,12 +6,14 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -33,7 +35,12 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.yoshisgarden.readit.data.FlashcardMode
 import com.yoshisgarden.readit.srs.Sm2Rating
+import com.yoshisgarden.readit.ui.components.CorrectContainer
+import com.yoshisgarden.readit.ui.components.CorrectGreen
+import com.yoshisgarden.readit.ui.components.WrongContainer
+import com.yoshisgarden.readit.ui.components.WrongRed
 import com.yoshisgarden.readit.ui.components.splitMeaning
 
 @Composable
@@ -106,13 +113,22 @@ private fun CardView(s: FlashcardUiState, vm: FlashcardViewModel) {
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             PhaseChip(item.phase, s.phaseLabel)
-            Text(
-                "${s.index + 1} / ${s.queue.size}",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.outline,
-            )
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                ModeToggle(s.mode) { vm.setMode(it) }
+                Spacer(Modifier.width(10.dp))
+                Text(
+                    "${s.index + 1} / ${s.queue.size}",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.outline,
+                )
+            }
         }
         Spacer(Modifier.height(8.dp))
+
+        if (s.mode == FlashcardMode.CHOICE && s.choice != null) {
+            ChoiceView(s, s.choice, card, vm)
+            return@Column
+        }
 
         Box(Modifier.weight(1f).fillMaxWidth(), contentAlignment = Alignment.Center) {
             // key(index): reset the flip animation per card so the next card's
@@ -183,19 +199,190 @@ private fun CardView(s: FlashcardUiState, vm: FlashcardViewModel) {
                     Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
-                    RateButton("知らない", MaterialTheme.colorScheme.error, Modifier.weight(1f)) {
+                    RateButton("知らない", WrongRed, Modifier.weight(1f)) {
                         vm.rate(Sm2Rating.UNKNOWN)
                     }
-                    RateButton("うっすら", MaterialTheme.colorScheme.tertiary, Modifier.weight(1f)) {
-                        vm.rate(Sm2Rating.VAGUE)
-                    }
-                    RateButton("知ってる", MaterialTheme.colorScheme.primary, Modifier.weight(1f)) {
+                    RateButton("知ってる", CorrectGreen, Modifier.weight(1f)) {
                         vm.rate(Sm2Rating.KNOWN)
                     }
                 }
             }
         }
         Spacer(Modifier.height(8.dp))
+    }
+}
+
+/**
+ * Choice mode: the English phrase on top, three Japanese meanings below.
+ *
+ * A tapped option flips to reveal ○ / ✕ along with its own gloss and the English
+ * it belongs to — so picking wrong teaches that phrase too. Wrong picks stay open
+ * while the user keeps trying; the question ends only on the correct one.
+ */
+@Composable
+private fun ColumnScope.ChoiceView(
+    s: FlashcardUiState,
+    choice: ChoiceState,
+    card: com.yoshisgarden.readit.data.Phrase,
+    vm: FlashcardViewModel,
+) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(20.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
+        ),
+    ) {
+        Text(
+            card.english,
+            style = MaterialTheme.typography.titleLarge.copy(fontFamily = FontFamily.Monospace),
+            color = MaterialTheme.colorScheme.onPrimaryContainer,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 28.dp),
+        )
+    }
+
+    Spacer(Modifier.height(6.dp))
+    Text(
+        if (choice.solved) "正解！" else "意味はどれ？",
+        style = MaterialTheme.typography.bodyMedium,
+        color = if (choice.solved) CorrectGreen else MaterialTheme.colorScheme.outline,
+        modifier = Modifier.fillMaxWidth(),
+        textAlign = TextAlign.Center,
+    )
+    Spacer(Modifier.height(10.dp))
+
+    Column(
+        Modifier.weight(1f).fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(10.dp),
+    ) {
+        choice.options.forEachIndexed { i, option ->
+            ChoiceCard(
+                option = option,
+                revealed = i in choice.revealed,
+                correct = i == choice.correctIndex,
+                enabled = !choice.solved && i !in choice.revealed,
+                onClick = { vm.selectChoice(i) },
+            )
+        }
+    }
+
+    Spacer(Modifier.height(12.dp))
+    Box(Modifier.fillMaxWidth().height(56.dp), contentAlignment = Alignment.Center) {
+        if (choice.solved) {
+            Button(onClick = { vm.nextCard() }, modifier = Modifier.fillMaxWidth()) {
+                Text(if (s.index + 1 >= s.queue.size) "結果を見る" else "次へ")
+            }
+        } else if (choice.revealed.isNotEmpty()) {
+            Text(
+                "もう一度えらんでください",
+                style = MaterialTheme.typography.bodyMedium,
+                color = WrongRed,
+            )
+        }
+    }
+    Spacer(Modifier.height(8.dp))
+}
+
+@Composable
+private fun ChoiceCard(
+    option: com.yoshisgarden.readit.data.Phrase,
+    revealed: Boolean,
+    correct: Boolean,
+    enabled: Boolean,
+    onClick: () -> Unit,
+) {
+    val (term, meaning) = splitMeaning(option.japanese)
+    val container = when {
+        !revealed -> MaterialTheme.colorScheme.surfaceVariant
+        correct -> CorrectContainer
+        else -> WrongContainer
+    }
+    val accent = when {
+        !revealed -> MaterialTheme.colorScheme.onSurfaceVariant
+        correct -> CorrectGreen
+        else -> WrongRed
+    }
+
+    Card(
+        onClick = onClick,
+        enabled = enabled,
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = container,
+            disabledContainerColor = container,
+        ),
+    ) {
+        Row(
+            Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 14.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            if (revealed) {
+                Text(
+                    if (correct) "○" else "✕",
+                    style = MaterialTheme.typography.headlineSmall,
+                    color = accent,
+                )
+                Spacer(Modifier.width(12.dp))
+            }
+            Column(Modifier.weight(1f)) {
+                Text(
+                    term,
+                    style = MaterialTheme.typography.titleMedium,
+                    color = if (revealed) accent else MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+                // Revealing shows what this option actually is: its parenthetical gloss
+                // and, when it was the wrong pick, the English phrase it belongs to.
+                if (revealed) {
+                    if (meaning.isNotEmpty()) {
+                        Spacer(Modifier.height(4.dp))
+                        Text(
+                            meaning,
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = accent,
+                        )
+                    }
+                    if (!correct) {
+                        Spacer(Modifier.height(4.dp))
+                        Text(
+                            "= ${option.english}",
+                            style = MaterialTheme.typography.bodyMedium.copy(
+                                fontFamily = FontFamily.Monospace,
+                            ),
+                            color = accent,
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+/** Switches between めくり式 and 選択式; the choice is remembered across sessions. */
+@Composable
+private fun ModeToggle(mode: FlashcardMode, onChange: (FlashcardMode) -> Unit) {
+    Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+        ModeChip("めくり", mode == FlashcardMode.FLIP) { onChange(FlashcardMode.FLIP) }
+        ModeChip("3択", mode == FlashcardMode.CHOICE) { onChange(FlashcardMode.CHOICE) }
+    }
+}
+
+@Composable
+private fun ModeChip(label: String, selected: Boolean, onClick: () -> Unit) {
+    Surface(
+        onClick = onClick,
+        shape = RoundedCornerShape(8.dp),
+        color = if (selected) MaterialTheme.colorScheme.primary
+        else MaterialTheme.colorScheme.surfaceVariant,
+    ) {
+        Text(
+            label,
+            style = MaterialTheme.typography.labelMedium,
+            color = if (selected) MaterialTheme.colorScheme.onPrimary
+            else MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
+        )
     }
 }
 

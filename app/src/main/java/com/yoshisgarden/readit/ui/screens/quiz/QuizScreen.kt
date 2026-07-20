@@ -27,15 +27,15 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
+import com.yoshisgarden.readit.ui.components.CorrectContainer
+import com.yoshisgarden.readit.ui.components.CorrectGreen
+import com.yoshisgarden.readit.ui.components.WrongContainer
+import com.yoshisgarden.readit.ui.components.WrongRed
 
-// Result colors — kept independent of the (often pink) theme so 正解/不正解 read at a glance.
-private val CorrectGreen = Color(0xFF2E7D32)
-private val CorrectContainer = Color(0xFFC8E6C9)
-private val WrongRed = Color(0xFFC62828)
-private val WrongContainer = Color(0xFFFFCDD2)
+// Result colors now live in ui/components/ResultColors.kt, shared with the
+// flashcard choice mode so both screens signal 正解/不正解 identically.
 
 @Composable
 fun QuizScreen(

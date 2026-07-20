@@ -73,7 +73,7 @@ interface PhraseDao {
     suspend fun getByIds(ids: List<Long>): List<Phrase>
 
     /**
-     * Due cards, weakest first (rating 0 = 知らない, 1 = うっすら, 2 = 知ってる),
+     * Due cards, weakest first (rating 0 = 知らない, 1 = legacy うっすら, 2 = 知ってる),
      * then soonest-due. Joining here keeps the ordering, which `getByIds` loses.
      */
     @Query(
@@ -153,7 +153,8 @@ interface ReviewLogDao {
     suspend fun countAnswers(sessionId: Long, phraseId: Long): Int
 
     /**
-     * Phrases whose *final* answer in [sessionId] was 知らない / うっすら, weakest first.
+     * Phrases whose *final* answer in [sessionId] was 知らない (or legacy うっすら),
+     * weakest first.
      * The `MAX(id)` sub-select picks the last answer so a card retried until 知ってる
      * is not dragged into the next session's review phase.
      */

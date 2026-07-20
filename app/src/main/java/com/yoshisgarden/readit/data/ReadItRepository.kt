@@ -121,7 +121,8 @@ class ReadItRepository(
     fun newSessionId(): Long = System.currentTimeMillis()
 
     /**
-     * Phrases the user's *last* session ended on 知らない / うっすら — the review block.
+     * Phrases the user's *last* session ended on 知らない — the review block.
+     * (Legacy うっすら answers count too; see [Sm2Rating.VAGUE].)
      *
      * Must be read before the new session writes its first answer, otherwise
      * `latestSessionId` returns the session in progress.
@@ -199,6 +200,14 @@ class ReadItRepository(
 
     /** Phrases missed at least once, most-missed first. */
     fun weakPhrases(): Flow<List<WeakPhrase>> = reviewLogDao.observeWeakPhrases()
+
+    /**
+     * A pool to draw multiple-choice distractors from, fetched once per session.
+     *
+     * Same approach as the quiz: pull a large random sample up front and pick
+     * same-category entries from it in memory, rather than querying per card.
+     */
+    suspend fun distractorPool(n: Int = 200): List<Phrase> = phraseDao.randomPhrases(n)
 
     // ---- quiz -------------------------------------------------------------
     suspend fun quizPhrases(n: Int): List<Phrase> = phraseDao.randomPhrases(n)

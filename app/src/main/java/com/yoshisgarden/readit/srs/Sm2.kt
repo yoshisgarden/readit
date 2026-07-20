@@ -5,10 +5,13 @@ import com.yoshisgarden.readit.data.Flashcard
 /**
  * SM-2 spaced-repetition scheduler.
  *
- * The flashcard UI exposes 3 buttons; they map to SM-2 quality scores:
- *   UNKNOWN ("知らない") -> q = 1  (reset)
- *   VAGUE   ("うっすら") -> q = 3
- *   KNOWN   ("知ってる") -> q = 5
+ * Answers map to SM-2 quality scores:
+ *   UNKNOWN ("知らない" / a missed choice) -> q = 1  (reset)
+ *   KNOWN   ("知ってる" / first-try hit)   -> q = 5
+ *
+ * [VAGUE] is no longer produced — both flashcard modes settle on a plain
+ * known/unknown answer. It is kept because rows written before that change still
+ * carry `rating = 1`, and the review queue and weak list read those values.
  */
 enum class Sm2Rating(val quality: Int, val storedValue: Int) {
     UNKNOWN(1, 0),

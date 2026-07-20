@@ -15,6 +15,15 @@ import kotlinx.coroutines.flow.map
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
+/** How the flashcard screen asks a question. */
+enum class FlashcardMode {
+    /** Flip the card yourself, then answer 知らない / 知ってる. */
+    FLIP,
+
+    /** Pick the meaning from 3 choices; the rating comes from whether you got it first try. */
+    CHOICE,
+}
+
 data class AppSettings(
     val theme: AppTheme = AppTheme.SAKURA,
     val darkMode: DarkModePref = DarkModePref.SYSTEM,
@@ -23,6 +32,7 @@ data class AppSettings(
     val reminderHour: Int = 21,
     val reminderMinute: Int = 0,
     val dailyGoalMin: Int = 10,
+    val flashcardMode: FlashcardMode = FlashcardMode.FLIP,
 )
 
 class SettingsStore(private val context: Context) {
@@ -34,6 +44,7 @@ class SettingsStore(private val context: Context) {
         val REMINDER_HOUR = intPreferencesKey("reminder_hour")
         val REMINDER_MIN = intPreferencesKey("reminder_minute")
         val DAILY_GOAL = intPreferencesKey("daily_goal_min")
+        val FLASHCARD_MODE = stringPreferencesKey("flashcard_mode")
     }
 
     val settings: Flow<AppSettings> = context.dataStore.data.map { p ->
@@ -46,6 +57,8 @@ class SettingsStore(private val context: Context) {
             reminderHour = p[Keys.REMINDER_HOUR] ?: 21,
             reminderMinute = p[Keys.REMINDER_MIN] ?: 0,
             dailyGoalMin = p[Keys.DAILY_GOAL] ?: 10,
+            flashcardMode = runCatching { FlashcardMode.valueOf(p[Keys.FLASHCARD_MODE] ?: "FLIP") }
+                .getOrDefault(FlashcardMode.FLIP),
         )
     }
 
@@ -67,4 +80,7 @@ class SettingsStore(private val context: Context) {
 
     suspend fun setDailyGoal(min: Int) =
         context.dataStore.edit { it[Keys.DAILY_GOAL] = min }
+
+    suspend fun setFlashcardMode(mode: FlashcardMode) =
+        context.dataStore.edit { it[Keys.FLASHCARD_MODE] = mode.name }
 }
