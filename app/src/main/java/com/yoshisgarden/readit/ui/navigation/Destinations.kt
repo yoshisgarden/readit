@@ -14,6 +14,13 @@ object Routes {
     const val QUIZ_SELECT = "quiz_select"
     const val QUIZ = "quiz"                // quiz/{mode}
     const val FLASHCARD = "flashcard"
+
+    /**
+     * Focused review of an explicit phrase list (from the weak-phrase screen).
+     * Kept separate from [FLASHCARD] so that route stays an exact bottom-tab match.
+     */
+    const val FLASHCARD_LIST = "flashcard_list"   // flashcard_list/{ids}
+    const val WEAK = "weak"
     const val PROGRESS = "progress"
     const val SETTINGS = "settings"
     const val HELP = "help"
@@ -21,6 +28,7 @@ object Routes {
 
     fun detail(id: Long) = "$DETAIL/$id"
     fun quiz(mode: String) = "$QUIZ/$mode"
+    fun flashcardList(ids: List<Long>) = "$FLASHCARD_LIST/${ids.joinToString(",")}"
 }
 
 enum class BottomTab(val route: String, val label: String, val icon: ImageVector) {

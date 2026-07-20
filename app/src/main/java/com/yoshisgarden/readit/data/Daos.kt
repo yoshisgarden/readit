@@ -1,6 +1,7 @@
 package com.yoshisgarden.readit.data
 
 import androidx.room.Dao
+import androidx.room.Embedded
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -70,9 +71,46 @@ interface PhraseDao {
 
     @Query("SELECT * FROM phrases WHERE id IN (:ids)")
     suspend fun getByIds(ids: List<Long>): List<Phrase>
+
+    /**
+     * Due cards, weakest first (rating 0 = 知らない, 1 = うっすら, 2 = 知ってる),
+     * then soonest-due. Joining here keeps the ordering, which `getByIds` loses.
+     */
+    @Query(
+        "SELECT p.* FROM phrases p " +
+            "INNER JOIN flashcards f ON f.phraseId = p.id " +
+            "WHERE f.dueDate <= :now " +
+            "ORDER BY f.rating, f.dueDate LIMIT :limit",
+    )
+    suspend fun dueWeakestFirst(now: Long, limit: Int): List<Phrase>
+
+    /** Phrases that have never been rated — the real "new cards" pool. */
+    @Query(
+        "SELECT * FROM phrases WHERE id NOT IN (SELECT phraseId FROM flashcards) " +
+            "ORDER BY RANDOM() LIMIT :n",
+    )
+    suspend fun randomUnstudied(n: Int): List<Phrase>
+
+    /** Not due yet — last-resort filler once everything has been studied. */
+    @Query(
+        "SELECT p.* FROM phrases p " +
+            "INNER JOIN flashcards f ON f.phraseId = p.id " +
+            "WHERE f.dueDate > :now " +
+            "ORDER BY f.rating, f.dueDate LIMIT :n",
+    )
+    suspend fun upcomingSoonest(now: Long, n: Int): List<Phrase>
 }
 
 data class CategoryCount(val category: String, val cnt: Int)
+
+/** A phrase the user has missed at least once, with its answer tallies. */
+data class WeakPhrase(
+    @Embedded val phrase: Phrase,
+    val unknownCount: Int,
+    val vagueCount: Int,
+    val knownCount: Int,
+    val lastReviewed: Long,
+)
 
 @Dao
 interface FlashcardDao {
@@ -97,6 +135,50 @@ interface FlashcardDao {
 
     @Query("SELECT COUNT(*) FROM flashcards WHERE reviewCount > 0")
     fun observeStudiedCount(): Flow<Int>
+}
+
+@Dao
+interface ReviewLogDao {
+    @Insert
+    suspend fun insert(log: ReviewLog)
+
+    /**
+     * Id of the most recent session. Call this *before* writing any answer of the
+     * new session, otherwise it returns the session in progress.
+     */
+    @Query("SELECT MAX(sessionId) FROM review_logs")
+    suspend fun latestSessionId(): Long?
+
+    @Query("SELECT COUNT(*) FROM review_logs WHERE sessionId = :sessionId AND phraseId = :phraseId")
+    suspend fun countAnswers(sessionId: Long, phraseId: Long): Int
+
+    /**
+     * Phrases whose *final* answer in [sessionId] was 知らない / うっすら, weakest first.
+     * The `MAX(id)` sub-select picks the last answer so a card retried until 知ってる
+     * is not dragged into the next session's review phase.
+     */
+    @Query(
+        "SELECT r.phraseId FROM review_logs r " +
+            "WHERE r.sessionId = :sessionId AND r.rating < 2 " +
+            "AND r.id = (SELECT MAX(id) FROM review_logs " +
+            "WHERE sessionId = :sessionId AND phraseId = r.phraseId) " +
+            "ORDER BY r.rating, r.id LIMIT :limit",
+    )
+    suspend fun weakPhraseIdsInSession(sessionId: Long, limit: Int): List<Long>
+
+    /** Every phrase missed at least once, most-missed first. */
+    @Query(
+        "SELECT p.*, " +
+            "SUM(CASE WHEN r.rating = 0 THEN 1 ELSE 0 END) AS unknownCount, " +
+            "SUM(CASE WHEN r.rating = 1 THEN 1 ELSE 0 END) AS vagueCount, " +
+            "SUM(CASE WHEN r.rating = 2 THEN 1 ELSE 0 END) AS knownCount, " +
+            "MAX(r.answeredAt) AS lastReviewed " +
+            "FROM review_logs r INNER JOIN phrases p ON p.id = r.phraseId " +
+            "GROUP BY r.phraseId " +
+            "HAVING unknownCount + vagueCount > 0 " +
+            "ORDER BY unknownCount DESC, vagueCount DESC, lastReviewed DESC",
+    )
+    fun observeWeakPhrases(): Flow<List<WeakPhrase>>
 }
 
 @Dao

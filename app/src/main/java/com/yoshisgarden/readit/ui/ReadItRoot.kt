@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.HelpOutline
 import androidx.compose.material.icons.automirrored.filled.MenuBook
+import androidx.compose.material.icons.filled.ErrorOutline
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Insights
 import androidx.compose.material.icons.filled.Menu
@@ -53,6 +54,7 @@ import com.yoshisgarden.readit.ui.screens.quiz.QuizScreen
 import com.yoshisgarden.readit.ui.screens.quiz.QuizSelectScreen
 import com.yoshisgarden.readit.ui.screens.settings.SettingsScreen
 import com.yoshisgarden.readit.ui.screens.version.VersionScreen
+import com.yoshisgarden.readit.ui.screens.weak.WeakPhrasesScreen
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -85,6 +87,16 @@ fun ReadItRoot() {
                     onClick = {
                         scope.launch { drawerState.close() }
                         navController.navigate(Routes.PROGRESS)
+                    },
+                    modifier = Modifier.padding(horizontal = 12.dp),
+                )
+                NavigationDrawerItem(
+                    icon = { Icon(Icons.Filled.ErrorOutline, null) },
+                    label = { Text("苦手フレーズ") },
+                    selected = currentRoute == Routes.WEAK,
+                    onClick = {
+                        scope.launch { drawerState.close() }
+                        navController.navigate(Routes.WEAK)
                     },
                     modifier = Modifier.padding(horizontal = 12.dp),
                 )
@@ -181,6 +193,7 @@ fun ReadItRoot() {
                         onOpenDictionary = { navController.navigate(Routes.DICTIONARY) },
                         onOpenPhrase = { navController.navigate(Routes.detail(it)) },
                         onOpenProgress = { navController.navigate(Routes.PROGRESS) },
+                        onOpenWeak = { navController.navigate(Routes.WEAK) },
                     )
                 }
                 composable(Routes.DICTIONARY) {
@@ -220,6 +233,28 @@ fun ReadItRoot() {
                     FlashcardScreen(
                         vm = viewModel(factory = ReadItViewModels.Factory),
                         onExit = { navController.popBackStack(Routes.HOME, false) },
+                    )
+                }
+                composable(
+                    route = "${Routes.FLASHCARD_LIST}/{ids}",
+                    arguments = listOf(navArgument("ids") { type = NavType.StringType }),
+                ) { entry ->
+                    val ids = entry.arguments?.getString("ids")
+                        ?.split(",")
+                        ?.mapNotNull { it.toLongOrNull() }
+                        .orEmpty()
+                    FlashcardScreen(
+                        vm = viewModel(factory = ReadItViewModels.Factory),
+                        onExit = { navController.popBackStack() },
+                        phraseIds = ids,
+                    )
+                }
+                composable(Routes.WEAK) {
+                    WeakPhrasesScreen(
+                        vm = viewModel(factory = ReadItViewModels.Factory),
+                        onBack = { navController.popBackStack() },
+                        onReview = { navController.navigate(Routes.flashcardList(it)) },
+                        onOpenPhrase = { navController.navigate(Routes.detail(it)) },
                     )
                 }
                 composable(Routes.PROGRESS) {

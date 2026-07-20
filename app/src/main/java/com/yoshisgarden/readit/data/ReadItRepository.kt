@@ -55,6 +55,7 @@ class ReadItRepository(
 ) {
     val phraseDao = db.phraseDao()
     private val flashcardDao = db.flashcardDao()
+    private val reviewLogDao = db.reviewLogDao()
     private val quizDao = db.quizResultDao()
     private val studyLogDao = db.studyLogDao()
     private val progressDao = db.userProgressDao()
@@ -104,26 +105,100 @@ class ReadItRepository(
         flashcardDao.observeStudyableCount(System.currentTimeMillis()).map { it.coerceAtMost(limit) }
     fun studiedCount(): Flow<Int> = flashcardDao.observeStudiedCount()
 
-    /** Returns due cards' phrases, topping up with new phrases when few are due. */
-    suspend fun reviewQueue(limit: Int = 20): List<Phrase> {
-        val now = System.currentTimeMillis()
-        val due = flashcardDao.due(now, limit)
-        val phrases = phraseDao.getByIds(due.map { it.phraseId }).toMutableList()
-        if (phrases.size < limit) {
-            val have = phrases.map { it.id }.toSet()
-            phraseDao.randomPhrases(limit - phrases.size)
-                .filter { it.id !in have }
-                .forEach { phrases.add(it) }
-        }
-        return phrases
+    /**
+     * One study session's worth of cards, split into the leading "review what you
+     * missed last time" block and the rest of the session.
+     */
+    data class ReviewQueue(
+        val review: List<Phrase> = emptyList(),
+        val fresh: List<Phrase> = emptyList(),
+    ) {
+        val all: List<Phrase> get() = review + fresh
+        val isEmpty: Boolean get() = review.isEmpty() && fresh.isEmpty()
     }
 
-    suspend fun rateCard(phraseId: Long, rating: Sm2Rating) {
+    /** A new session id; every answer of one sitting is logged under it. */
+    fun newSessionId(): Long = System.currentTimeMillis()
+
+    /**
+     * Phrases the user's *last* session ended on 知らない / うっすら — the review block.
+     *
+     * Must be read before the new session writes its first answer, otherwise
+     * `latestSessionId` returns the session in progress.
+     */
+    suspend fun lastSessionWeakPhrases(limit: Int): List<Phrase> {
+        val sessionId = reviewLogDao.latestSessionId() ?: return emptyList()
+        return phrasesInOrder(reviewLogDao.weakPhraseIdsInSession(sessionId, limit))
+    }
+
+    /**
+     * Builds the session queue: last session's misses first, then due cards weakest
+     * first, then genuinely new phrases.
+     *
+     * Ordering matters — the old version fed ids through `getByIds`, which drops the
+     * `ORDER BY dueDate` and returns phrase-id order, and topped up from *all*
+     * phrases at random, so cards answered minutes ago could crowd out the ones the
+     * user actually missed.
+     */
+    suspend fun reviewQueue(limit: Int = 20): ReviewQueue {
         val now = System.currentTimeMillis()
+        val review = lastSessionWeakPhrases(limit)
+        val taken = review.mapTo(mutableSetOf()) { it.id }
+        val fresh = mutableListOf<Phrase>()
+
+        fun fill(candidates: List<Phrase>) {
+            for (p in candidates) {
+                if (review.size + fresh.size >= limit) return
+                if (taken.add(p.id)) fresh.add(p)
+            }
+        }
+
+        fill(phraseDao.dueWeakestFirst(now, limit))
+        fill(phraseDao.randomUnstudied(limit))
+        // Everything studied and nothing due: pull the soonest-upcoming cards rather
+        // than random ones, so an extra session still practises the weakest material.
+        fill(phraseDao.upcomingSoonest(now, limit))
+
+        return ReviewQueue(review = review, fresh = fresh)
+    }
+
+    /** A session built from an explicit phrase list (the weak-phrase list's 復習 button). */
+    suspend fun queueFromIds(ids: List<Long>): ReviewQueue =
+        ReviewQueue(review = phrasesInOrder(ids))
+
+    /** `getByIds` returns rows in id order; this restores the caller's ordering. */
+    private suspend fun phrasesInOrder(ids: List<Long>): List<Phrase> {
+        if (ids.isEmpty()) return emptyList()
+        val byId = phraseDao.getByIds(ids).associateBy { it.id }
+        return ids.mapNotNull { byId[it] }
+    }
+
+    /**
+     * Applies an answer: schedules the card and appends it to the answer history.
+     *
+     * [sessionId] groups the answers of one sitting so the next session can replay
+     * the misses. [isRetry] is derived rather than trusted, so an interrupted
+     * session that re-shows a card still schedules it correctly.
+     */
+    suspend fun rateCard(phraseId: Long, rating: Sm2Rating, sessionId: Long) {
+        val now = System.currentTimeMillis()
+        val isRetry = reviewLogDao.countAnswers(sessionId, phraseId) > 0
         val card = flashcardDao.getByPhrase(phraseId)
             ?: Flashcard(phraseId = phraseId, dueDate = now)
-        flashcardDao.upsert(Sm2.schedule(card, rating, now))
+        flashcardDao.upsert(Sm2.schedule(card, rating, now, isRetry))
+        reviewLogDao.insert(
+            ReviewLog(
+                phraseId = phraseId,
+                rating = rating.storedValue,
+                answeredAt = now,
+                sessionId = sessionId,
+                isRetry = isRetry,
+            ),
+        )
     }
+
+    /** Phrases missed at least once, most-missed first. */
+    fun weakPhrases(): Flow<List<WeakPhrase>> = reviewLogDao.observeWeakPhrases()
 
     // ---- quiz -------------------------------------------------------------
     suspend fun quizPhrases(n: Int): List<Phrase> = phraseDao.randomPhrases(n)

@@ -12,6 +12,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.MenuBook
+import androidx.compose.material.icons.filled.ErrorOutline
 import androidx.compose.material.icons.filled.LocalFireDepartment
 import androidx.compose.material.icons.filled.Quiz
 import androidx.compose.material.icons.filled.Style
@@ -38,6 +39,7 @@ fun HomeScreen(
     onOpenDictionary: () -> Unit,
     onOpenPhrase: (Long) -> Unit,
     onOpenProgress: () -> Unit,
+    onOpenWeak: () -> Unit,
 ) {
     val s by vm.state.collectAsState()
 
@@ -124,6 +126,7 @@ fun HomeScreen(
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             HomeAction("辞書", Icons.AutoMirrored.Filled.MenuBook, Modifier.weight(1f), onOpenDictionary)
             HomeAction("クイズ", Icons.Filled.Quiz, Modifier.weight(1f), onOpenQuiz)
+            HomeAction("苦手", Icons.Filled.ErrorOutline, Modifier.weight(1f), onOpenWeak)
             HomeAction("進捗", Icons.Filled.LocalFireDepartment, Modifier.weight(1f), onOpenProgress)
         }
 

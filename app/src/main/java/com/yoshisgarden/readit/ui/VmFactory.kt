@@ -13,6 +13,7 @@ import com.yoshisgarden.readit.ui.screens.home.HomeViewModel
 import com.yoshisgarden.readit.ui.screens.progress.ProgressViewModel
 import com.yoshisgarden.readit.ui.screens.quiz.QuizViewModel
 import com.yoshisgarden.readit.ui.screens.settings.SettingsViewModel
+import com.yoshisgarden.readit.ui.screens.weak.WeakPhrasesViewModel
 
 private fun CreationExtras.app(): ReadItApp =
     (this[APPLICATION_KEY] as ReadItApp)
@@ -25,5 +26,6 @@ object ReadItViewModels {
         initializer { FlashcardViewModel(app().container.repository) }
         initializer { ProgressViewModel(app().container.repository, app().container.settingsStore) }
         initializer { SettingsViewModel(app().container.settingsStore) }
+        initializer { WeakPhrasesViewModel(app().container.repository) }
     }
 }

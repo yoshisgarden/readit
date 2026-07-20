@@ -40,16 +40,34 @@ import com.yoshisgarden.readit.ui.components.splitMeaning
 fun FlashcardScreen(
     vm: FlashcardViewModel,
     onExit: () -> Unit,
+    phraseIds: List<Long> = emptyList(),
 ) {
     val s by vm.state.collectAsState()
-    LaunchedEffect(Unit) { vm.load() }
+    LaunchedEffect(phraseIds) { vm.load(phraseIds = phraseIds) }
 
     when {
         s.loading -> Centered { Text("カードを準備中…") }
+        s.finished && s.queue.isEmpty() -> Centered {
+            Text("今日のカードは完了！🎉", style = MaterialTheme.typography.titleLarge)
+            Spacer(Modifier.height(8.dp))
+            Text("また明日、復習カードが届きます")
+            Spacer(Modifier.height(24.dp))
+            Button(onClick = onExit, modifier = Modifier.fillMaxWidth().padding(horizontal = 32.dp)) {
+                Text("ホームへ戻る")
+            }
+        }
         s.finished -> Centered {
             Text("お疲れさまでした！", style = MaterialTheme.typography.titleLarge)
             Spacer(Modifier.height(8.dp))
             Text("${s.reviewedCount} 枚を復習しました 🌸")
+            if (s.retryCount > 0) {
+                Spacer(Modifier.height(4.dp))
+                Text(
+                    "うち ${s.retryCount} 回は「知らない」からのもう一度でした",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.outline,
+                )
+            }
             Spacer(Modifier.height(24.dp))
             Button(onClick = onExit, modifier = Modifier.fillMaxWidth().padding(horizontal = 32.dp)) {
                 Text("ホームへ戻る")
@@ -61,7 +79,8 @@ fun FlashcardScreen(
 
 @Composable
 private fun CardView(s: FlashcardUiState, vm: FlashcardViewModel) {
-    val card = s.cards[s.index]
+    val item = s.queue[s.index]
+    val card = item.phrase
 
     val front: String
     val back: String
@@ -77,15 +96,22 @@ private fun CardView(s: FlashcardUiState, vm: FlashcardViewModel) {
 
     Column(Modifier.fillMaxSize().padding(20.dp)) {
         LinearProgressIndicator(
-            progress = { (s.index + 1f) / s.cards.size },
+            progress = { (s.index + 1f) / s.queue.size },
             modifier = Modifier.fillMaxWidth(),
         )
         Spacer(Modifier.height(6.dp))
-        Text(
-            "${s.index + 1} / ${s.cards.size}",
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.outline,
-        )
+        Row(
+            Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+            PhaseChip(item.phase, s.phaseLabel)
+            Text(
+                "${s.index + 1} / ${s.queue.size}",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.outline,
+            )
+        }
         Spacer(Modifier.height(8.dp))
 
         Box(Modifier.weight(1f).fillMaxWidth(), contentAlignment = Alignment.Center) {
@@ -170,6 +196,24 @@ private fun CardView(s: FlashcardUiState, vm: FlashcardViewModel) {
             }
         }
         Spacer(Modifier.height(8.dp))
+    }
+}
+
+/** Tells the user which block of the session they are in (復習 / 新規 / もう一度). */
+@Composable
+private fun PhaseChip(phase: CardPhase, label: String) {
+    val color = when (phase) {
+        CardPhase.REVIEW -> MaterialTheme.colorScheme.tertiary
+        CardPhase.RETRY -> MaterialTheme.colorScheme.error
+        CardPhase.NEW -> MaterialTheme.colorScheme.primary
+    }
+    Surface(shape = RoundedCornerShape(8.dp), color = color.copy(alpha = 0.14f)) {
+        Text(
+            label,
+            style = MaterialTheme.typography.labelMedium,
+            color = color,
+            modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
+        )
     }
 }
 

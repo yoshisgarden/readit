@@ -41,6 +41,29 @@ data class Flashcard(
     val reviewCount: Int = 0,
 )
 
+/**
+ * Append-only record of every flashcard answer.
+ *
+ * [Flashcard] only keeps the *latest* rating (SM-2 overwrites it each time), so it
+ * cannot answer "which phrases did I keep missing?" or "what was I weak on last
+ * time?". This table keeps the full history for the review phase and the weak list.
+ */
+@Entity(
+    tableName = "review_logs",
+    indices = [Index("phraseId"), Index("sessionId")],
+)
+data class ReviewLog(
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    val phraseId: Long,
+    /** 0 = 知らない, 1 = うっすら, 2 = 知ってる (matches Sm2Rating.storedValue). */
+    val rating: Int,
+    val answeredAt: Long,
+    /** Groups answers into one study session (session start, epoch millis). */
+    val sessionId: Long,
+    /** True when this is a same-session re-show of a card the user just missed. */
+    val isRetry: Boolean = false,
+)
+
 @Entity(tableName = "quiz_results")
 data class QuizResult(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
